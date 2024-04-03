@@ -5,3 +5,5 @@ export type ComponentVariants =
   | 'outline'
   | 'ghost'
   | 'link'
+
+export type ComponentSizes = 'small' | 'medium' | 'large' | 'icon'

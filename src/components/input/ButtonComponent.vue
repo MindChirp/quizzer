@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import type { ComponentVariants } from '@/types/component.ts'
+import type { ComponentSizes, ComponentVariants } from '@/types/component.ts'
 
 interface ButtonProps {
   variant?: ComponentVariants
+  size?: ComponentSizes
 }
 
 const props = defineProps<ButtonProps>()
 </script>
 <template>
-  <button class="button roboto-medium" :class="variant ?? 'primary'">
+  <button class="button roboto-medium" :class="[variant ?? 'primary', size ?? 'medium']">
     <slot></slot>
   </button>
 </template>
@@ -21,6 +22,25 @@ const props = defineProps<ButtonProps>()
   border: none;
   font-size: 0.875rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.small {
+  padding: 0.25rem 0.5rem;
+}
+
+.medium {
+  padding: 0.5rem 1rem;
+}
+
+.large {
+  padding: 0.75rem 1.5rem;
+}
+
+.icon {
+  padding: 0.5rem;
 }
 
 .primary {
