@@ -1,16 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-interface ImportMeta {
-  readonly env: {
-    readonly BASE_URL: string
-  }
-}
-
-const importMeta = import.meta as unknown as ImportMeta
+// ????? This should be fixed in the future
+//const BASE_URL = import.meta.env.BASE_URL
 
 const router = createRouter({
-  history: createWebHistory(importMeta.env.BASE_URL),
+  history: createWebHistory('/'),
   routes: [
     {
       path: '/',

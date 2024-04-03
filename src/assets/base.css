@@ -68,11 +68,15 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family: 'Roboto';
+  font-family: 'Roboto', serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body * {
+  font-font: "Roboto", serif;
 }
 
 .roboto-thin {
