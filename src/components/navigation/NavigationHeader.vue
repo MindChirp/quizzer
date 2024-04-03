@@ -12,9 +12,9 @@ const props = defineProps<{
   <div id="wrapper">
     <QuizzerLogo style="max-height: 100%; height: 60%; width: auto;" />
     <div class="buttons">
-      <NavigationButton :selected="currentRoute === '/'">Home</NavigationButton>
-      <NavigationButton :selected="currentRoute === '/discover'">Discover</NavigationButton>
-      <NavigationButton :selected="currentRoute === '/about'">About</NavigationButton>
+      <NavigationButton :selected="currentRoute === '/'"><RouterLink to="/" class="link">Home</RouterLink></NavigationButton>
+      <NavigationButton :selected="currentRoute === '/discover'"><RouterLink to="/discover" class="link">Discover</RouterLink></NavigationButton>
+      <NavigationButton :selected="currentRoute === '/about'"><RouterLink to="/about" class="link">About</RouterLink></NavigationButton>
     </div>
     <div class="user-section">
       <ButtonComponent variant="ghost">Logg ut</ButtonComponent>
@@ -52,5 +52,10 @@ const props = defineProps<{
   gap: 0;
   align-items: center;
   justify-content: center;
+}
+.link {
+  text-decoration: unset;
+  color: unset;
+  font: unset;
 }
 </style>
