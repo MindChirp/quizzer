@@ -25,7 +25,7 @@
 
 <script>
 
-import ButtonComponent from './input/ButtonComponent.vue'
+import ButtonComponent from '../input/ButtonComponent.vue'
 
 
 export default {
