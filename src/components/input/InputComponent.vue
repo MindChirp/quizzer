@@ -1,3 +1,5 @@
+<!-- This component will probably be deprecated. Use formkit's implementation instead. -->
+
 <script setup lang="ts">
 import { useSlots } from 'vue'
 
@@ -8,30 +10,43 @@ type Context = {
   _value: any
 }
 
-const props = defineProps<{
+export interface InputProps {
   context?: Context
-}>()
+  label?: string
+  help?: string
+}
+
+const props = defineProps<InputProps>()
 
 const handleInput = (event: any) => {
   props?.context?.node.input(event?.target?.value)
 }
 
 const slots = useSlots()
-const hasSlot = (name: string) => {
-  return !!slots[name]
+const hasSlot = () => {
+  return !!slots['default']
 }
 </script>
 <template>
   <div class="wrapper">
-    <div class="icon" v-if="hasSlot('icon')">
-      <slot name="icon" style="height: 1rem"></slot>
+    <div class="label">
+      <label>{{ props.label }}</label>
     </div>
-    <input
-      @input="handleInput"
-      :value="props?.context?._value"
-      class="input"
-      :class="[hasSlot('icon') ? 'with-icon' : undefined]"
-    />
+    <div class="inner">
+      <div class="icon" v-if="hasSlot()">
+        <slot style="height: 1rem"></slot>
+      </div>
+      <input
+        @input="handleInput"
+        :value="props?.context?._value"
+        class="input"
+        :class="[hasSlot() ? 'with-icon' : undefined]"
+        v-bind="$attrs"
+      />
+    </div>
+    <div class="help">
+      <label>{{ props.help }}</label>
+    </div>
   </div>
 </template>
 <style scoped>
@@ -40,6 +55,20 @@ const hasSlot = (name: string) => {
   width: fit-content;
   height: fit-content;
   color: #8590a2;
+}
+
+.inner {
+  position: relative;
+  height: fit-content;
+}
+
+.label {
+  margin-bottom: 0.1rem;
+}
+
+.help {
+  margin-top: 0.1rem;
+  font-size: 0.7rem;
 }
 
 .icon {
@@ -60,10 +89,11 @@ const hasSlot = (name: string) => {
   padding: 0.5rem 1rem;
   outline: none;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .input.with-icon {
-  padding-left: 2rem;
+  padding-left: 2.3rem;
 }
 
 .input:focus {
