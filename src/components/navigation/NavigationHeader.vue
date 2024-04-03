@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import QuizzerLogo from '@/components/icons/QuizzerLogo.vue'
 import NavigationButton from '@/components/navigation/NavigationButton.vue'
+import UserSection from '@/components/navigation/UserSection.vue'
+import ButtonComponent from '@/components/input/ButtonComponent.vue'
+
 </script>
 <template>
   <div id="wrapper">
@@ -9,7 +12,10 @@ import NavigationButton from '@/components/navigation/NavigationButton.vue'
       <NavigationButton selected>Discover</NavigationButton>
       <NavigationButton>About</NavigationButton>
     </div>
-    <div class="user-section">asddasd</div>
+    <div class="user-section">
+      <ButtonComponent variant="ghost">Logg ut</ButtonComponent>
+      <UserSection />
+    </div>
   </div>
 </template>
 <style scoped>
@@ -37,7 +43,10 @@ import NavigationButton from '@/components/navigation/NavigationButton.vue'
 
 .user-section {
   width: fit-content;
-  background: red;
   height: 100%;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
 }
 </style>

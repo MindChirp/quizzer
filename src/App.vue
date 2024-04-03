@@ -5,7 +5,7 @@ import type ButtonComponent from './components/input/ButtonComponent.vue'
 </script>
 <template>
   <NavigationHeader />
-  <!-- <RouterView /> -->
+  <RouterView />
 </template>
 <style scoped></style>
 @/v1
