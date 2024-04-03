@@ -1,31 +1,54 @@
 <template>
-  <div class="register-container">
     <h1>Register</h1>
-    <form @submit.prevent="register">
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" v-model="user.name" required>
-      </div>
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" v-model="user.email" required>
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="user.password" required>
-      </div>
-      <div>
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" v-model="user.confirmPassword" required>
-      </div>
-      <ButtonComponent type="submit">Register</ButtonComponent>
-    </form>
-  </div>
+
+    <Formkit type="form" @submit="registerUser">
+      <Formkit
+        type="text"
+        name="name"
+        id="name"
+        v-model="user.fullName"
+        validation="required"
+        label="Full Name"
+        placeholder="Steve Craft"
+        />
+
+      <Formkit
+          type="username"
+          name="username"
+          id="username"
+          v-model="user.username"
+          validation="required"
+          label="Username"
+          placeholder="SteveCraft123"
+      />
+
+      <Formkit
+          type="mail"
+          name="email"
+          id="email"
+          v-model="user.email"
+          validation="required"
+          label="Email"
+          placeholder="SteveCraft@mail.com"
+      />
+
+      <Formkit
+          type="password"
+          name="password"
+          id="password"
+          v-model="user.password"
+          validation="required"
+          label="Password"
+      />
+    </Formkit>
+
 </template>
 
 <script>
+import axios from 'axios';
 
 import ButtonComponent from '../input/ButtonComponent.vue'
+
 
 
 export default {
@@ -37,48 +60,27 @@ export default {
   data() {
     return {
       user: {
-        name: '',
+        username: '',
+        fullName: '',
         email: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
       }
     }
   },
   methods: {
-    register() {
-      //TODO: Check if user exists
-      //TODO: Handle registration
-      console.log("Registration attempt with:", this.user);
-    }
+    registerUser() {
+      axios.post('http://localhost:8080/api/users/register', this.user)
+          .then(response => {
+            console.log("User registered: " + response);
+          })
+          .catch(error => {
+            console.log("There was an error: " + error);
+          })
+    },
   }
 }
 </script>
 
 <style scoped>
-.register-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
-label {
-  display: block;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-}
-
-button {
-  width: 100%;
-  padding: 0.5rem;
-  background-color: #0c66e4;
-  border: none;
-  color: white;
-}
 </style>
