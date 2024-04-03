@@ -1,86 +1,67 @@
-<template>
-    <h1>Register</h1>
+<script setup lang="ts">
+import axios from 'axios'
 
-    <Formkit type="form" @submit="registerUser">
-      <Formkit
-        type="text"
-        name="name"
-        id="name"
-        v-model="user.fullName"
-        validation="required"
-        label="Full Name"
-        placeholder="Steve Craft"
-        />
+const props = defineProps<{
+  user?: User
+}>()
+interface User { // <= Dette er typen til User. Den kan brukes der du trenger den
+  username: string;
+  fullName: string;
+  email: string;
+  password: string;
+}
 
-      <Formkit
-          type="username"
-          name="username"
-          id="username"
-          v-model="user.username"
-          validation="required"
-          label="Username"
-          placeholder="SteveCraft123"
-      />
-
-      <Formkit
-          type="mail"
-          name="email"
-          id="email"
-          v-model="user.email"
-          validation="required"
-          label="Email"
-          placeholder="SteveCraft@mail.com"
-      />
-
-      <Formkit
-          type="password"
-          name="password"
-          id="password"
-          v-model="user.password"
-          validation="required"
-          label="Password"
-      />
-    </Formkit>
-
-</template>
-
-<script>
-import axios from 'axios';
-
-import ButtonComponent from '../input/ButtonComponent.vue'
-
-
-
-export default {
-
-  components: {
-    ButtonComponent
-  },
-
-  data() {
-    return {
-      user: {
-        username: '',
-        fullName: '',
-        email: '',
-        password: ''
-      }
-    }
-  },
-  methods: {
-    registerUser() {
-      axios.post('http://localhost:8080/api/users/register', this.user)
-          .then(response => {
-            console.log("User registered: " + response);
-          })
-          .catch(error => {
-            console.log("There was an error: " + error);
-          })
-    },
-  }
+const registerUser = () => {
+  axios.post('http://localhost:8080/api/users/register', {}/*this.user*/)
+    .then(response => {
+      console.log("User registered: " + response);
+    })
+    .catch(error => {
+      console.log("There was an error: " + error);
+    })
 }
 </script>
+<template>
+  <h1>Register</h1>
 
+  <FormKit type="form" @submit="registerUser">
+    <FormKit
+      type="text"
+      name="name"
+      id="name"
+      validation="required"
+      label="Full Name"
+      placeholder="Steve Craft"
+    />
+
+    <FormKit
+      type="text"
+      name="username"
+      id="username"
+      validation="required"
+      label="Username"
+      placeholder="SteveCraft123"
+    />
+
+    <FormKit
+      type="email"
+      name="email"
+      id="email"
+      validation="required"
+      label="Email"
+      placeholder="SteveCraft@mail.com"
+    />
+
+    <FormKit
+      type="password"
+      name="password"
+      id="password"
+      validation="required"
+      label="Password"
+    />
+  </FormKit>
+
+</template>
 <style scoped>
 
 </style>
