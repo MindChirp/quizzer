@@ -6,10 +6,17 @@ interface ButtonProps {
   size?: ComponentSizes
 }
 
-const props = defineProps<ButtonProps>()
+defineOptions({
+  inheritAttrs: false
+})
+
+const props = withDefaults(defineProps<ButtonProps>(), {
+  size: 'medium',
+  variant: 'primary'
+})
 </script>
 <template>
-  <button class="button roboto-medium" :class="[variant ?? 'primary', size ?? 'medium']">
+  <button class="button roboto-medium" :class="[variant, size]" v-bind="$attrs">
     <slot></slot>
   </button>
 </template>
@@ -25,6 +32,15 @@ const props = defineProps<ButtonProps>()
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
+  height: fit-content;
+  width: fit-content;
+  box-sizing: border-box;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .small {

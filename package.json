@@ -14,9 +14,12 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "api:types-generate": "npx openapi-typescript ./schema.yml -o ./src/lib/api/v1.d.ts"
+    "api:types-generate": "npx openapi-typescript http://localhost:8080/v3/api-docs -o ./src/lib/api/v1.d.ts"
   },
   "dependencies": {
+    "@formkit/core": "^1.6.1",
+    "@formkit/icons": "^1.6.1",
+    "@formkit/vue": "^1.6.1",
     "lucide-vue-next": "^0.364.0",
     "openapi-fetch": "^0.9.3",
     "openapi-typescript-fetch": "^2.0.0",
