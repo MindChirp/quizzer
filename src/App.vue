@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import InputComponent from './components/input/InputComponent.vue'
+import { Search } from 'lucide-vue-next'
 import ButtonComponent from './components/input/ButtonComponent.vue'
-import { Camera } from 'lucide-vue-next'
 </script>
 
 <template>
-  <ButtonComponent>Dette er kjempekult</ButtonComponent>
+  <ButtonComponent variant="primary">Create</ButtonComponent>
+  <InputComponent type="email" label="hhshshs">
+    <template #icon>
+      <Search style="height: 1.2rem" />
+    </template>
+  </InputComponent>
   <!-- <RouterView /> -->
 </template>
-
+W
 <style scoped></style>

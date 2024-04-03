@@ -25,6 +25,9 @@ const props = defineProps<ButtonProps>()
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
+  height: fit-content;
+  width: fit-content;
 }
 
 .small {

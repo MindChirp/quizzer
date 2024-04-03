@@ -1,0 +1,72 @@
+<script setup lang="ts">
+import { useSlots } from 'vue'
+
+type Context = {
+  node: {
+    input: (value: string) => void
+  }
+  _value: any
+}
+
+const props = defineProps<{
+  context?: Context
+}>()
+
+const handleInput = (event: any) => {
+  props?.context?.node.input(event?.target?.value)
+}
+
+const slots = useSlots()
+const hasSlot = (name: string) => {
+  return !!slots[name]
+}
+</script>
+<template>
+  <div class="wrapper">
+    <div class="icon" v-if="hasSlot('icon')">
+      <slot name="icon" style="height: 1rem"></slot>
+    </div>
+    <input
+      @input="handleInput"
+      :value="props?.context?._value"
+      class="input"
+      :class="[hasSlot('icon') ? 'with-icon' : undefined]"
+    />
+  </div>
+</template>
+<style scoped>
+.wrapper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  color: #8590a2;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  color: inherit;
+}
+
+.input {
+  border: 2px solid #8590a2;
+  border-radius: 0.19rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  font-size: 1rem;
+}
+
+.input.with-icon {
+  padding-left: 2rem;
+}
+
+.input:focus {
+  border-color: #0c66e4;
+}
+</style>
