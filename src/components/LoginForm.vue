@@ -10,7 +10,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" v-model="credentials.password" required>
       </div>
-      <Button variant="primary" size="medium" type="submit">Login</Button>
+      <ButtonComponent size="medium" type="submit">Login</ButtonComponent>
     </form>
   </div>
 </template>
@@ -18,8 +18,13 @@
 
 <script>
 
+import ButtonComponent from './input/ButtonComponent.vue'
 
 export default {
+  components: {
+    ButtonComponent
+  },
+
   data() {
     return {
       credentials: {

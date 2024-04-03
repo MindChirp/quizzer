@@ -18,13 +18,22 @@
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required>
       </div>
-      <button type="submit">Register</button>
+      <ButtonComponent type="submit">Register</ButtonComponent>
     </form>
   </div>
 </template>
 
 <script>
+
+import ButtonComponent from './input/ButtonComponent.vue'
+
+
 export default {
+
+  components: {
+    ButtonComponent
+  },
+
   data() {
     return {
       user: {
