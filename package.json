@@ -17,6 +17,7 @@
     "api:types-generate": "npx openapi-typescript ./schema.yml -o ./src/api/v1.d.ts"
   },
   "dependencies": {
+    "@formkit/vue": "^1.6.1",
     "openapi-fetch": "^0.9.3",
     "openapi-typescript-fetch": "^2.0.0",
     "pinia": "^2.1.7",
