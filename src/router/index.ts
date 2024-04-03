@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LandingView from '@/views/LandingView.vue'
 
 // ????? This should be fixed in the future
 //const BASE_URL = import.meta.env.BASE_URL
@@ -10,7 +10,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'landing',
-      component: HomeView
+      component: LandingView
     },
     {
       path: '/about',

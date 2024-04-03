@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import NavigationHeader from './components/navigation/NavigationHeader.vue'
-import type ButtonComponent from './components/input/ButtonComponent.vue'
+const router = useRouter();
+console.log(router.currentRoute.value.path);
+
 </script>
 <template>
-  <NavigationHeader />
+  <NavigationHeader :current-route="router.currentRoute.value.path" />
   <RouterView />
 </template>
 <style scoped></style>

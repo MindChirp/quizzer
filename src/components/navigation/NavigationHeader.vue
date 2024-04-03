@@ -4,13 +4,17 @@ import NavigationButton from '@/components/navigation/NavigationButton.vue'
 import UserSection from '@/components/navigation/UserSection.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 
+const props = defineProps<{
+  currentRoute: string
+}>()
 </script>
 <template>
   <div id="wrapper">
     <QuizzerLogo style="max-height: 100%; height: 60%; width: auto;" />
     <div class="buttons">
-      <NavigationButton selected>Discover</NavigationButton>
-      <NavigationButton>About</NavigationButton>
+      <NavigationButton :selected="currentRoute === '/'">Home</NavigationButton>
+      <NavigationButton :selected="currentRoute === '/discover'">Discover</NavigationButton>
+      <NavigationButton :selected="currentRoute === '/about'">About</NavigationButton>
     </div>
     <div class="user-section">
       <ButtonComponent variant="ghost">Logg ut</ButtonComponent>
