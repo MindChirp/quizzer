@@ -23,3 +23,4 @@ import ButtonComponent from './components/input/ButtonComponent.vue'
   <!-- <RouterView /> -->
 </template>
 <style scoped></style>
+@/v1
