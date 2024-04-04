@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export type TToastStatus = "success" | "warning" | "error";
+export type TToastStatus = "success" | "warning" | "error" | "default";
 
 interface IToast {
   title: string;
@@ -47,5 +47,9 @@ export default defineStore("toaster-store", {
     error(payload: ToastPayload) {
       this.updateState(payload, "error");
     },
+
+    default(payload: ToastPayload) {
+      this.updateState(payload, "default")
+    }
   },
 });

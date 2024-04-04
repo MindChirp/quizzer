@@ -1,12 +1,12 @@
 
 <script setup lang="ts">
 import toaster, { type TToastStatus } from '@/stores/toaster.ts'
-import { Info } from "lucide-vue-next";
 
 const toastClassMap: Record<TToastStatus, string> = {
   warning: "warning",
   error: "error",
   success: "success",
+  default: "default"
 };
 
 const toastStore = toaster();
@@ -19,6 +19,7 @@ const toastStore = toaster();
         v-for="toast in toastStore.toasts"
         :class="['inner', toastClassMap[toast.status]]"
         :key="toast.description"
+        class="shadow-5"
       >
         <h2 class="title roboto-bold">{{toast.title}}</h2>
         <span class="description roboto-light">
@@ -79,13 +80,18 @@ const toastStore = toaster();
   }
 
   .inner.warning {
-    background-color: white;
-    color: black;
+    background-color: var(--warning-fg);
+    color: var(--warning-fg-text);
   }
 
   .inner.error {
     background-color: var(--destructive-fg);
     color: var(--destructive-fg-text);
+  }
+
+  .inner.default {
+    background-color: var(--default-fg);
+    color: var(--default-fg-text);
   }
 
   @media screen and (max-width: 1000px) {

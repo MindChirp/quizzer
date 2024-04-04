@@ -2,6 +2,7 @@
 import { RouterView, useRouter } from 'vue-router'
 import NavigationHeader from './components/navigation/NavigationHeader.vue'
 import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
+import ToasterComponent from '@/components/layout/ToasterComponent.vue'
 const router = useRouter()
 console.log(router.currentRoute.value.path)
 
@@ -17,6 +18,8 @@ const routeButtons: RouteButton[] = [
 ]
 </script>
 <template>
+  <!-- Leave this alone, it should be here to enable the toaster function -->
+  <ToasterComponent />
   <NavigationHeader :current-route="router.currentRoute.value.path" :route-buttons="routeButtons" />
   <RouterView />
 </template>

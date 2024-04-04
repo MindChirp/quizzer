@@ -29,6 +29,23 @@
   --success-bg-text: black;
   --success-active: #248f24;
   --success-active-text: white;
+
+  --default-fg: white;
+  --default-bg: white;
+  --default-active: #ccc;
+  --default-fg-text: black;
+  --default-bg-text: black;
+  --default-active-text: black;
+
+  --warning-fg: #ffd11a;
+  --warning-bg: #ffd11a33;
+  --warning-active: #e6e600;
+  --warning-fg-text: #665200;
+  --warning-bg-text: black;
+  --warning-active-text: black;
+
+
+
 }
 
 

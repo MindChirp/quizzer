@@ -4,10 +4,9 @@ import NavigationButton from '@/components/navigation/NavigationButton.vue'
 import UserSection from '@/components/navigation/UserSection.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SideBar from '@/components/navigation/SideBar.vue'
-import { Menu } from "lucide-vue-next"
+import { Menu } from 'lucide-vue-next'
 import { ref } from 'vue'
 import toaster from '@/stores/toaster.ts'
-import ToasterComponent from '@/components/layout/ToasterComponent.vue'
 
 const sidebarOpen = ref(false);
 
@@ -28,9 +27,6 @@ const error = () => toasterStore.error({
 })
 </script>
 <template>
-  <!-- Leave this alone, it should be here to enable the toaster function -->
-  <ToasterComponent />
-
   <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
   <div id="wrapper">
     <!-- Below is the header designated for small devices -->
