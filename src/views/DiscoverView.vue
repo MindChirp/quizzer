@@ -4,9 +4,12 @@ import PageWrapper from '@/components/layout/PageWrapper.vue'
 import DiscoverHero from '@/components/layout/DiscoverHero.vue'
 import DividerLine from '@/components/layout/DividerLine.vue'
 import { useQuizzes } from '@/stores/quizzes.ts'
+import { computed, onMounted } from 'vue'
+import QuizCard from '@/components/data/QuizCard.vue'
 
 const { get, data, error } = useQuizzes();
-get({});
+
+onMounted(() => get({}))
 
 </script>
 <template>
@@ -16,8 +19,10 @@ get({});
       <div id="quizzes">
         <div class="title">
           <h2 class="roboto-medium section-title" style="text-transform: capitalize;">Curated quizzes</h2>
-          <p v-for="(item, number) in data" :key="number">{{item.title}}</p>
           <DividerLine />
+          <div class="grid">
+            <QuizCard v-for="(item, number) in data" :key="number" :quiz="item" />
+          </div>
         </div>
 
       </div>
@@ -29,6 +34,14 @@ get({});
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 0;
+  grid-template-columns: repeat(3, 1fr);
+  box-sizing: border-box;
 }
 
 #quizzes {

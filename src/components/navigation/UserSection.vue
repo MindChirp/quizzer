@@ -4,7 +4,7 @@ import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 </script>
 <template>
   <div class="wrapper">
-    <ProfilePicture full-name="Andreas Gjersøe" number-of-initials="2"/>
+    <ProfilePicture full-name="Isabella Møyland" number-of-initials="2"/>
   </div>
 </template>
 <style scoped>

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { nextTick, reactive, ref } from 'vue'
 import type { QuizDto } from '@/lib/api'
 import { ApiError, QuizControllerService } from '@/lib/api'
 
@@ -12,7 +12,7 @@ export const useQuizzes = defineStore("quizzes", () => {
         page: page,
       }).then(res => {
         error.value = undefined;
-        data.value = res as QuizDto[];
+        data.value = res["content"] as QuizDto[];
       }).catch(err => {
         error.value = err;
       })
