@@ -1,8 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+interface ImportMeta {
+  readonly env: {
+    readonly BASE_URL: string
+  }
+}
+
+const importMeta = import.meta as unknown as ImportMeta
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(importMeta.env.BASE_URL),
   routes: [
     {
       path: '/',
