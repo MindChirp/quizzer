@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import axios from 'axios'
+import router from '@/router'
 
 interface User {
   username: string;
@@ -19,6 +20,8 @@ const registerUser = (data:User) => {
   axios.post('http://localhost:8080/api/users/register', newUser)
       .then(response => {
         console.log("Register status: ", response.data);
+        router.push("/login")
+        //TODO: add toaster to show successful registration
       })
       .catch(error => {
         console.log("There was an error:", error);
@@ -27,7 +30,11 @@ const registerUser = (data:User) => {
 </script>
 <template>
 
-  <FormKit type="form" @submit="registerUser">
+  <FormKit
+    type="form"
+    @submit="registerUser"
+    submit-label="Register"
+  >
     <FormKit
       type="text"
       name="fullName"
@@ -63,7 +70,7 @@ const registerUser = (data:User) => {
       label="Password"
     />
   </FormKit>
-
+  <p>Do you already have a user? <router-link to="/login">Log in here!</router-link></p>
 </template>
 <style scoped>
 
