@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import axios from 'axios'
-import { ref } from 'vue'
 
 interface User {
   username: string;
@@ -9,18 +8,12 @@ interface User {
   password: string;
 }
 
-// Initialize refs for form fields
-const usernameField = ref('')
-const fullNameField = ref('')
-const emailField = ref('')
-const passwordField = ref('')
-
-const registerUser = () => {
+const registerUser = (data:User) => {
   const newUser: User = {
-    username: usernameField.value,
-    fullName: fullNameField.value,
-    email: emailField.value,
-    password: passwordField.value,
+    username: data.username,
+    fullName: data.fullName,
+    email: data.email,
+    password: data.password,
   }
 
   console.log(newUser);
@@ -41,12 +34,11 @@ const registerUser = () => {
   <FormKit type="form" @submit="registerUser">
     <FormKit
       type="text"
-      name="name"
-      id="name"
+      name="fullName"
+      id="fullName"
       validation="required"
       label="Full Name"
       placeholder="Steve Craft"
-      v-model="fullNameField"
     />
 
     <FormKit
@@ -56,7 +48,6 @@ const registerUser = () => {
       validation="required"
       label="Username"
       placeholder="SteveCraft123"
-      v-model="usernameField"
     />
 
     <FormKit
@@ -66,7 +57,6 @@ const registerUser = () => {
       validation="required"
       label="Email"
       placeholder="SteveCraft@mail.com"
-      v-model="emailField"
     />
 
     <FormKit
@@ -75,7 +65,6 @@ const registerUser = () => {
       id="password"
       validation="required"
       label="Password"
-      v-model="passwordField"
     />
   </FormKit>
 
