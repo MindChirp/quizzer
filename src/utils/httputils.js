@@ -2,15 +2,6 @@ import axios from "axios";
 
 const baseurl = "http://localhost:8080";
 
-export const loginRequest = (user) => {
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-    },
-  };
-  return axios.get(baseurl + "/api/users/login", config)
-}
-
 export const getJwtToken = (username, password) => {
   const config = {
     headers: {
