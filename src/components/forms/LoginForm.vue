@@ -1,19 +1,15 @@
 <script setup lang="ts">
 import axios from 'axios'
-import { ref } from 'vue'
 
 interface User {
   username: string;
   password: string;
 }
 
-const usernameField = ref('')
-const passwordField = ref('')
-
-const loginUser = () => {
+const loginUser = (data:User) => {
   const newUser: User = {
-    username: usernameField.value,
-    password: passwordField.value,
+    username: data.username,
+    password: data.password,
   }
 
   console.log(newUser);
@@ -39,7 +35,6 @@ const loginUser = () => {
         validation="required"
         label="Username"
         placeholder="SteveCraft123"
-        v-model="usernameField"
     />
 
     <FormKit
@@ -48,7 +43,6 @@ const loginUser = () => {
         id="password"
         validation="required"
         label="Password"
-        v-model="passwordField"
     />
   </FormKit>
 
