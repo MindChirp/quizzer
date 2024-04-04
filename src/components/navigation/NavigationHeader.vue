@@ -21,7 +21,7 @@ const props = defineProps<{
 }>()
 
 const toasterStore = toaster()
-const error = () => toasterStore.error({
+const error = () => toasterStore.default({
   title: "Could not sign out",
   description: "This is not implemented yet!",
 })

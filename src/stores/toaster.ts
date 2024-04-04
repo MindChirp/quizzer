@@ -36,7 +36,6 @@ export default defineStore("toaster-store", {
       }, timeout ?? defaultTimeout);
     },
     success(payload: ToastPayload) {
-      console.log(payload)
       this.updateState(payload, "success");
     },
 
