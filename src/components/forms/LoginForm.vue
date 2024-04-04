@@ -22,8 +22,6 @@ const loginUser = (data:User) => {
 }
 </script>
 <template>
-
-  <h1>Log in</h1>
   <FormKit type="form" @submit="loginUser">
     <FormKit
         type="text"
