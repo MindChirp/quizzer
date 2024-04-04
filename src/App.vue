@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { onMounted, ref } from 'vue'
-import { getNode } from '@formkit/core'
 import { Trash } from 'lucide-vue-next'
 import ButtonComponent from './components/input/ButtonComponent.vue'
+import toaster from '@/stores/toaster.ts'
+import ToasterComponent from '@/components/layout/ToasterComponent.vue'
+
+const store = toaster();
+const success = () => store.success({
+  text: "Yesyesyes"
+})
 </script>
 <template>
+  <ToasterComponent />
   <div
     style="
       display: flex;
@@ -15,10 +20,11 @@ import ButtonComponent from './components/input/ButtonComponent.vue'
       width: fit-content;
     "
   >
+
     <FormKit type="range" name="range_value" style="margin: 0" />
-    <ButtonComponent variant="destructive" size="icon" style="flex: 0"
-      ><Trash style="height: 1rem; width: 1rem"
-    /></ButtonComponent>
+    <ButtonComponent @click="success" variant="ghost" style="flex: 0">
+      <Trash style="height: 1rem; width: 1rem" />
+    </ButtonComponent>
   </div>
   <!-- <RouterView /> -->
 </template>

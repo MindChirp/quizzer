@@ -34,6 +34,7 @@ export default defineStore("toaster-store", {
       }, timeout ?? defaultTimeout);
     },
     success(payload: ToastPayload) {
+      console.log(payload)
       this.updateState(payload, "success");
     },
 
@@ -45,9 +46,4 @@ export default defineStore("toaster-store", {
       this.updateState(payload, "error");
     },
   },
-});
-
-export const useToasterStore = defineStore("toaster-store", {
-  state: () => ({}),
-  actions: {},
 });

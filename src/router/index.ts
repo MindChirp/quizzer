@@ -10,7 +10,7 @@ interface ImportMeta {
 const importMeta = import.meta as unknown as ImportMeta
 
 const router = createRouter({
-  history: createWebHistory(importMeta.env.BASE_URL),
+  history: createWebHistory("/"),
   routes: [
     {
       path: '/',

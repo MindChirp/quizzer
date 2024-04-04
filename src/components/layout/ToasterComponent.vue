@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { type TToastStatus, useToasterStore } from '@/stores/toaster.ts'
+import toaster, { type TToastStatus } from '@/stores/toaster.ts'
 import { computed } from 'vue'
 
 const toastClassMap: Record<TToastStatus, string> = {
@@ -14,24 +14,20 @@ const toastIconMap: Record<TToastStatus, string> = {
   warning: "toast-warning",
   success: "toast-success",
 };
-const toastStore = useToasterStore();
-
-const thing = computed(() => {
-  return "";
-})
+const toastStore = toaster();
 </script>
 
 <template>
   <Teleport to="body">
-    <ul v-if="toastStore.toasts.length" class="toaster__wrapper">
+    <ul v-if="toastStore.toasts.length" class="wrapper">
       <li
         v-for="toast in toastStore.toasts"
-        :class="['toaster__inner', toastClassMap[toast.status]]"
+        :class="['inner', toastClassMap[toast.status]]"
         :key="toast.text"
       >
         <div />
 
-        <span class="toaster__inner-text">
+        <span class="inner-text">
               {{ toast.text }}
             </span>
       </li>
@@ -40,9 +36,8 @@ const thing = computed(() => {
 </template>
 
 
-<style scoped lang="scss">
-.toaster {
-  &__wrapper {
+<style scoped>
+  .wrapper {
     position: fixed;
     bottom: 3%;
     right: 5%;
@@ -54,7 +49,7 @@ const thing = computed(() => {
     gap: 1rem;
   }
 
-  &__inner {
+  .inner {
     --color: black;
     display: flex;
     align-items: center;
@@ -70,32 +65,29 @@ const thing = computed(() => {
 
     border-color: var(--color);
     color: var(--color);
+
+
     svg {
       fill: var(--color);
       stroke: var(--color);
     }
 
-    &.success {
+    .success {
       --color: green;
     }
 
-    &.warning {
+    .warning {
       --color: orange;
     }
 
-    &.error {
+    .error {
       --color: red;
     }
 
-    &-icon {
-      width: 1.8rem;
-      aspect-ratio: 1/1;
-    }
-
-    &-text {
+    text {
       font-size: 1.6rem;
       font-weight: 600;
     }
   }
-}
+
 </style>
