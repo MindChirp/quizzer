@@ -1,26 +1,41 @@
 <script setup lang="ts">
 import axios from 'axios'
+import { ref } from 'vue'
 
-const props = defineProps<{
-  user?: User
-}>()
-interface User { // <= Dette er typen til User. Den kan brukes der du trenger den
+// Define the interface for a User
+interface User {
   username: string;
   fullName: string;
   email: string;
   password: string;
 }
 
+// Initialize refs for form fields
+const usernameField = ref('')
+const fullNameField = ref('')
+const emailField = ref('')
+const passwordField = ref('')
+
 const registerUser = () => {
-  axios.post('http://localhost:8080/api/users/register', {}/*this.user*/)
-    .then(response => {
-      console.log("User registered: " + response);
-    })
-    .catch(error => {
-      console.log("There was an error: " + error);
-    })
+  const newUser: User = {
+    username: usernameField.value,
+    fullName: fullNameField.value,
+    email: emailField.value,
+    password: passwordField.value,
+  }
+
+  console.log(newUser);
+
+  axios.post('http://localhost:8080/api/users/register', newUser)
+      .then(response => {
+        console.log("Register status: ", response.data);
+      })
+      .catch(error => {
+        console.log("There was an error:", error);
+      })
 }
 </script>
+
 <template>
   <h1>Register</h1>
 
@@ -32,6 +47,7 @@ const registerUser = () => {
       validation="required"
       label="Full Name"
       placeholder="Steve Craft"
+      v-model="fullNameField"
     />
 
     <FormKit
@@ -41,6 +57,7 @@ const registerUser = () => {
       validation="required"
       label="Username"
       placeholder="SteveCraft123"
+      v-model="usernameField"
     />
 
     <FormKit
@@ -50,6 +67,7 @@ const registerUser = () => {
       validation="required"
       label="Email"
       placeholder="SteveCraft@mail.com"
+      v-model="emailField"
     />
 
     <FormKit
@@ -58,6 +76,7 @@ const registerUser = () => {
       id="password"
       validation="required"
       label="Password"
+      v-model="passwordField"
     />
   </FormKit>
 
