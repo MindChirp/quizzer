@@ -1,20 +1,31 @@
 <script setup lang="ts">
 
+import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
+
 const props = withDefaults(defineProps<{
-  open?: boolean
+  open?: boolean,
+  routeButtons?: RouteButton[],
+  currentRoute: string
 }>(), {
   open: false
 })
 
 import { X } from 'lucide-vue-next'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import SidebarButton from '@/components/navigation/SidebarButton.vue'
 
 </script>
 <template>
   <div class="sidebar" :class="{open: open}">
     <div class="header">
       <ButtonComponent size="icon" variant="ghost" style="flex: 0" @click="$emit('closeTrigger')"><X /></ButtonComponent>
-
+    </div>
+    <div class="actions">
+      <template v-for="(button, number) in routeButtons" :key="number">
+        <RouterLink :to="button.path">
+          <SidebarButton :selected="currentRoute === button.path">{{button.label}}</SidebarButton>
+        </RouterLink>
+      </template>
     </div>
   </div>
 </template>
@@ -23,7 +34,6 @@ import ButtonComponent from '@/components/input/ButtonComponent.vue'
   width: 80%;
   background: white;
   height: 100vh;
-  padding: 1rem;
   top: 0;
   left: 0;
   position: fixed;
@@ -49,5 +59,12 @@ import ButtonComponent from '@/components/input/ButtonComponent.vue'
   width: 100%;
   align-items: center;
   place-content: end;
+  padding: 1rem;
+
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
 }
 </style>

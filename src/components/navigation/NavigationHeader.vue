@@ -21,7 +21,7 @@ const props = defineProps<{
 </script>
 <template>
 
-  <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen"/>
+  <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
   <div id="wrapper">
     <!-- Below is the header designated for small devices -->
     <div class="mobile-header">
@@ -33,7 +33,9 @@ const props = defineProps<{
 
     <!-- Below is the usual desktop header -->
     <div class="header-content">
-      <QuizzerLogo style="max-height: 100%; height: 60%; width: auto;" />
+      <RouterLink to="/" style="height: 60%;">
+        <QuizzerLogo style="height: 100%; width: auto;" />
+      </RouterLink>
       <div class="buttons">
         <template v-for="(button, number) in routeButtons" :key="number">
           <RouterLink :to="button.path" class="link">
