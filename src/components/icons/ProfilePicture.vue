@@ -22,7 +22,6 @@ const initials = computed(() => {
 const colors = computed(() => {
   const color = stringToColor(props.fullName, '1');
   const border = stringToColor(props.fullName, '0.5');
-  console.log(border)
   return {backgroundColor: `background-color: ${color}`, borderBackground: `background-color: ${border}`}
 })
 

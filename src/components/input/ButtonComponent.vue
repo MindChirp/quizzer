@@ -61,42 +61,45 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 .primary {
   & {
-    background: #0c66e4;
-    color: white;
+    background: var(--primary-fg);
+    color: var(--primary-fg-text);
   }
 
   &:hover {
-    background: #0055cc;
+    background: var(--primary-active);
+    color: var(--primary-active-text)
   }
 }
 
 .secondary {
   & {
-    background: #c8c8c8;
-    color: #4f5a6c;
+    background: var(--secondary-fg);
+    color: var(--secondary-fg-text);
   }
 
   &:hover {
-    background: #9e9e9e;
+    background: var(--secondary-active);
+    color: var(--secondary-active-text);
   }
 }
 
 .destructive {
   & {
-    background: #e60000;
-    color: white;
+    background: var(--destructive-fg);
+    color: var(--destructive-fg-text);
   }
 
   &:hover {
-    background: #990000;
+    background: var(--destructive-active);
+    color: var(--destructive-active-text)
   }
 }
 
 .outline {
   & {
     background: transparent;
-    border: solid 2px #999999;
-    color: #999999;
+    border: solid 2px var(--secondary-fg-text);
+    color: var(--secondary-fg-text);
   }
 
   &:hover {
@@ -107,11 +110,12 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 .ghost {
   & {
     background: transparent;
-    color: #999999;
+    color: var(--secondary-fg-text);
   }
 
   &:hover {
-    background: #9e9e9e33;
+    background: var(--secondary-bg);
+    color: var(--secondary-bg-text)
   }
 }
 </style>
