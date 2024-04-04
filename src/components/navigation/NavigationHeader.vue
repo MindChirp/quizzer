@@ -3,32 +3,54 @@ import QuizzerLogo from '@/components/icons/QuizzerLogo.vue'
 import NavigationButton from '@/components/navigation/NavigationButton.vue'
 import UserSection from '@/components/navigation/UserSection.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import SideBar from '@/components/navigation/SideBar.vue'
+import { Menu } from "lucide-vue-next"
+import { ref } from 'vue'
+
+const sidebarOpen = ref(false);
+
+export interface RouteButton {
+  label: string,
+  path: string,
+}
 
 const props = defineProps<{
-  currentRoute: string
+  currentRoute: string,
+  routeButtons?: RouteButton[]
 }>()
 </script>
 <template>
+
+  <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen"/>
   <div id="wrapper">
-    <QuizzerLogo style="max-height: 100%; height: 60%; width: auto;" />
-    <div class="buttons">
-      <RouterLink to="/" class="link">
-        <NavigationButton :selected="currentRoute === '/'">Home</NavigationButton>
-      </RouterLink>
-      <RouterLink to="/discover" class="link">
-        <NavigationButton :selected="currentRoute === '/discover'">Discover</NavigationButton>
-      </RouterLink>
-      <RouterLink to="/about" class="link">
-        <NavigationButton :selected="currentRoute === '/about'">About</NavigationButton>
+    <!-- Below is the header designated for small devices -->
+    <div class="mobile-header">
+      <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => sidebarOpen = !sidebarOpen"><Menu /></ButtonComponent>
+      <RouterLink to="/">
+        <QuizzerLogo class="logo"/>
       </RouterLink>
     </div>
-    <div class="user-section">
-      <ButtonComponent variant="ghost">Logg ut</ButtonComponent>
-      <UserSection />
+
+    <!-- Below is the usual desktop header -->
+    <div class="header-content">
+      <QuizzerLogo style="max-height: 100%; height: 60%; width: auto;" />
+      <div class="buttons">
+        <template v-for="(button, number) in routeButtons" :key="number">
+          <RouterLink :to="button.path" class="link">
+            <NavigationButton :selected="currentRoute === button.path">{{ button.label }}</NavigationButton>
+          </RouterLink>
+        </template>
+      </div>
+      <div class="user-section">
+        <ButtonComponent variant="ghost">Logg ut</ButtonComponent>
+        <UserSection />
+      </div>
     </div>
   </div>
 </template>
 <style scoped>
+
+
 #wrapper {
   gap: 1.5rem;
   padding: 0 1rem;
@@ -42,6 +64,15 @@ const props = defineProps<{
   background: white;
   border: 0px solid #ccc;
   border-bottom-width: 1px;
+}
+
+.header-content {
+  display: flex;
+  width: 100%;
+  gap: 1.5rem;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .buttons {
@@ -65,4 +96,38 @@ const props = defineProps<{
   font: unset;
   height: 100%;
 }
+
+.mobile-header {
+  display: none;
+  height: 100%;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  position: relative;
+}
+
+.mobile-header .logo {
+  height: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+}
+
+@media screen and (max-width: 1000px) {
+  .header-content {
+    display: none;
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  #wrapper {
+    height: 5rem;
+  }
+}
+
+
 </style>
