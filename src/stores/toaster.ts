@@ -10,7 +10,7 @@ interface IToast {
 }
 type ToastPayload = { timeout?: number; title: string; description: string };
 
-const defaultTimeout = 2000;
+const defaultTimeout = 5000;
 
 const createToast = (title: string, description: string, status: TToastStatus): IToast => ({
   title,

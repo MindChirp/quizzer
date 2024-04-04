@@ -6,6 +6,8 @@ import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SideBar from '@/components/navigation/SideBar.vue'
 import { Menu } from "lucide-vue-next"
 import { ref } from 'vue'
+import toaster from '@/stores/toaster.ts'
+import ToasterComponent from '@/components/layout/ToasterComponent.vue'
 
 const sidebarOpen = ref(false);
 
@@ -18,8 +20,16 @@ const props = defineProps<{
   currentRoute: string,
   routeButtons?: RouteButton[]
 }>()
+
+const toasterStore = toaster()
+const error = () => toasterStore.error({
+  title: "Could not sign out",
+  description: "This is not implemented yet!",
+})
 </script>
 <template>
+  <!-- Leave this alone, it should be here to enable the toaster function -->
+  <ToasterComponent />
 
   <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
   <div id="wrapper">
@@ -44,7 +54,7 @@ const props = defineProps<{
         </template>
       </div>
       <div class="user-section">
-        <ButtonComponent variant="ghost">Logg ut</ButtonComponent>
+        <ButtonComponent variant="ghost" @click="error">Sign out</ButtonComponent>
         <UserSection />
       </div>
     </div>
