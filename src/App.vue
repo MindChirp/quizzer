@@ -2,7 +2,7 @@
 import { RouterView, useRouter } from 'vue-router'
 import NavigationHeader from './components/navigation/NavigationHeader.vue'
 import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
-import ToasterComponent from '@/components/layout/ToasterComponent.vue'
+import ToasterComponent from '@/components/data/ToasterComponent.vue'
 const router = useRouter()
 
 const routeButtons: RouteButton[] = [

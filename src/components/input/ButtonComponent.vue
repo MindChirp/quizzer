@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ComponentSizes, ComponentVariants } from '@/types/component.ts'
-import ToasterComponent from '@/components/layout/ToasterComponent.vue'
 
 interface ButtonProps {
   variant?: ComponentVariants
