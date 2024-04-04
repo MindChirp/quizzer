@@ -27,8 +27,6 @@ const registerUser = (data:User) => {
 </script>
 <template>
 
-  <h1>Register</h1>
-
   <FormKit type="form" @submit="registerUser">
     <FormKit
       type="text"
