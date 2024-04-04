@@ -1,72 +1,58 @@
-<template>
-  <div class="login-container">
-    <h1>Login</h1>
-    <form @submit.prevent="login">
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" v-model="credentials.email" required>
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="credentials.password" required>
-      </div>
-      <ButtonComponent size="medium" type="submit">Login</ButtonComponent>
-    </form>
-  </div>
-</template>
+<script setup lang="ts">
+import axios from 'axios'
+import { ref } from 'vue'
 
+interface User {
+  username: string;
+  password: string;
+}
 
-<script>
+const usernameField = ref('')
+const passwordField = ref('')
 
-import ButtonComponent from '../input/ButtonComponent.vue'
-
-export default {
-  components: {
-    ButtonComponent
-  },
-
-  data() {
-    return {
-      credentials: {
-        email: '',
-        password: ''
-      }
-    }
-  },
-  methods: {
-    login() {
-      // TODO: Fiks log-in logic her
-      console.log("Login info:", this.credentials);
-    }
+const loginUser = () => {
+  const newUser: User = {
+    username: usernameField.value,
+    password: passwordField.value,
   }
+
+  console.log(newUser);
+
+  axios.post('http://localhost:8080/api/users/login', newUser)
+      .then(response => {
+        console.log("Login status: ", response.data);
+      })
+      .catch(error => {
+        console.log("There was an error:", error);
+      })
 }
 </script>
 
+<template>
+  <h1>Log in</h1>
+
+  <FormKit type="form" @submit="loginUser">
+    <FormKit
+        type="text"
+        name="username"
+        id="username"
+        validation="required"
+        label="Username"
+        placeholder="SteveCraft123"
+        v-model="usernameField"
+    />
+
+    <FormKit
+        type="password"
+        name="password"
+        id="password"
+        validation="required"
+        label="Password"
+        v-model="passwordField"
+    />
+  </FormKit>
+
+</template>
 <style scoped>
-.login-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  display: block;
-}
-
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-}
-
-button {
-  width: 100%;
-  padding: 0.5rem;
-  background-color: #0c66e4;
-  border: none;
-  color: white;
-}
 
 </style>

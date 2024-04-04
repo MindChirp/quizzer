@@ -2,7 +2,6 @@
 import axios from 'axios'
 import { ref } from 'vue'
 
-// Define the interface for a User
 interface User {
   username: string;
   fullName: string;
