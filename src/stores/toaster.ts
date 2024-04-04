@@ -3,16 +3,18 @@ import { defineStore } from "pinia";
 export type TToastStatus = "success" | "warning" | "error";
 
 interface IToast {
-  text: string;
+  title: string;
+  description: string;
   status: TToastStatus;
   id: number;
 }
-type ToastPayload = { timeout?: number; text: string };
+type ToastPayload = { timeout?: number; title: string; description: string };
 
 const defaultTimeout = 2000;
 
-const createToast = (text: string, status: TToastStatus): IToast => ({
-  text,
+const createToast = (title: string, description: string, status: TToastStatus): IToast => ({
+  title,
+  description,
   status,
   id: Math.random() * 1000,
 });
@@ -23,9 +25,9 @@ export default defineStore("toaster-store", {
   }),
   actions: {
     updateState(payload: ToastPayload, status: TToastStatus) {
-      const { text, timeout } = payload;
+      const { title, description, timeout } = payload;
 
-      const toast = createToast(text, status);
+      const toast = createToast(title, description, status);
 
       this.toasts.push(toast);
 

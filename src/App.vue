@@ -6,7 +6,9 @@ import ToasterComponent from '@/components/layout/ToasterComponent.vue'
 
 const store = toaster();
 const success = () => store.success({
-  text: "Yesyesyes"
+  title: "Din ting ble lagt til!",
+  description: "Morra di er mann forresten",
+  timeout: 10000
 })
 </script>
 <template>
