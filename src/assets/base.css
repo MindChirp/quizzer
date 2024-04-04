@@ -48,6 +48,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body * {
+  font-font: "Roboto", serif;
+}
+
 .roboto-thin {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
