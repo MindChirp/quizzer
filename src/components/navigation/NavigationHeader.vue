@@ -55,6 +55,7 @@ const props = defineProps<{
 
 #wrapper {
   gap: 1.5rem;
+  box-sizing: border-box;
   padding: 0 1rem;
   display: flex;
   align-items: center;
