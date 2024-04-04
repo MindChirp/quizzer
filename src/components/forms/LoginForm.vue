@@ -18,7 +18,7 @@ const loginUser = async (data: User) => {
 
   await tokenStore.getTokenAndSaveInStore(newUser.username, newUser.password);
   if (tokenStore.jwtToken) {
-    console.log("Log in sucess")
+    console.log("Log in success")
     router.push("/");
   } else {
     console.log("Log in failed!")
@@ -27,14 +27,18 @@ const loginUser = async (data: User) => {
 }
 </script>
 <template>
-  <FormKit type="form" @submit="loginUser">
+  <FormKit
+    type="form"
+    @submit="loginUser"
+    submit-label="Log in"
+  >
+
     <FormKit
         type="text"
         name="username"
         id="username"
         validation="required"
         label="Username"
-        placeholder="SteveCraft123"
     />
 
     <FormKit
@@ -45,6 +49,7 @@ const loginUser = async (data: User) => {
         label="Password"
     />
   </FormKit>
+  <p>Are you a new user? <router-link to="/register">Register here!</router-link></p>
 
 </template>
 <style scoped>
