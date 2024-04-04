@@ -18,7 +18,7 @@ const loginUser = async (data: User) => {
 
   await tokenStore.getTokenAndSaveInStore(newUser.username, newUser.password);
   if (tokenStore.jwtToken) {
-    console.log("logg inn yeahaahhh<!!!!")
+    console.log("Log in sucess")
     router.push("/");
   } else {
     console.log("Log in failed!")

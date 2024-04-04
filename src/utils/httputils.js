@@ -25,7 +25,6 @@ export const getJwtToken = (username, password) => {
 }
 
 export const getUserInfo = (username, token) => {
-  console.log("Fetching user info...");
   const config = {
     headers: {
       "Authorization" : "Bearer " + token
