@@ -31,6 +31,7 @@ import SidebarButton from '@/components/navigation/SidebarButton.vue'
 </template>
 <style scoped>
 .sidebar {
+  box-sizing: border-box;
   width: 80%;
   background: white;
   height: 100vh;
@@ -43,6 +44,10 @@ import SidebarButton from '@/components/navigation/SidebarButton.vue'
   display: flex;
   flex-direction: column;
   transition: transform 250ms ease-in-out;
+}
+
+.sidebar * {
+  box-sizing: border-box;
 }
 
 .sidebar:not(.open) {

@@ -4,8 +4,9 @@ import NavigationButton from '@/components/navigation/NavigationButton.vue'
 import UserSection from '@/components/navigation/UserSection.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SideBar from '@/components/navigation/SideBar.vue'
-import { Menu } from "lucide-vue-next"
+import { Menu } from 'lucide-vue-next'
 import { ref } from 'vue'
+import toaster from '@/stores/toaster.ts'
 
 const sidebarOpen = ref(false);
 
@@ -18,9 +19,14 @@ const props = defineProps<{
   currentRoute: string,
   routeButtons?: RouteButton[]
 }>()
+
+const toasterStore = toaster()
+const error = () => toasterStore.default({
+  title: "Could not sign out",
+  description: "This is not implemented yet!",
+})
 </script>
 <template>
-
   <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
   <div id="wrapper">
     <!-- Below is the header designated for small devices -->
@@ -44,7 +50,7 @@ const props = defineProps<{
         </template>
       </div>
       <div class="user-section">
-        <ButtonComponent variant="ghost">Logg ut</ButtonComponent>
+        <ButtonComponent variant="ghost" @click="error">Sign out</ButtonComponent>
         <UserSection />
       </div>
     </div>
@@ -55,6 +61,7 @@ const props = defineProps<{
 
 #wrapper {
   gap: 1.5rem;
+  box-sizing: border-box;
   padding: 0 1rem;
   display: flex;
   align-items: center;
