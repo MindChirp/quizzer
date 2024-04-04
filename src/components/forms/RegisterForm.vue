@@ -16,8 +16,6 @@ const registerUser = (data:User) => {
     password: data.password,
   }
 
-  console.log(newUser);
-
   axios.post('http://localhost:8080/api/users/register', newUser)
       .then(response => {
         console.log("Register status: ", response.data);
@@ -27,8 +25,8 @@ const registerUser = (data:User) => {
       })
 }
 </script>
-
 <template>
+
   <h1>Register</h1>
 
   <FormKit type="form" @submit="registerUser">

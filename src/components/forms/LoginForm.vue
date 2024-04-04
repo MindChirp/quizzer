@@ -12,8 +12,6 @@ const loginUser = (data:User) => {
     password: data.password,
   }
 
-  console.log(newUser);
-
   axios.post('http://localhost:8080/api/users/login', newUser)
       .then(response => {
         console.log("Login status: ", response.data);
@@ -23,10 +21,9 @@ const loginUser = (data:User) => {
       })
 }
 </script>
-
 <template>
-  <h1>Log in</h1>
 
+  <h1>Log in</h1>
   <FormKit type="form" @submit="loginUser">
     <FormKit
         type="text"
