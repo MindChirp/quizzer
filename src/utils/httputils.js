@@ -8,6 +8,7 @@ export const getJwtToken = (username, password) => {
       "Content-Type": "application/json",
     },
   };
+
   const body = {
     username: username,
     password: password,
