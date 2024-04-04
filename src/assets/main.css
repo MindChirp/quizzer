@@ -20,3 +20,7 @@ body {
   0 16px 16px rgba(0,0,0,0.05);
 }
 
+hr {
+  background: var(--secondary-bg);
+}
+
