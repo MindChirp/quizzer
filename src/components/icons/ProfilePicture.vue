@@ -5,6 +5,7 @@ import { stringToColor } from '@/lib/utils/colors.ts'
 const props = withDefaults(defineProps<{
   fullName?: string,
   numberOfInitials?: string,
+  disableHover?: boolean,
 }>(), {
   fullName: '',
   numberOfInitials: '2',
@@ -28,7 +29,7 @@ const colors = computed(() => {
 </script>
 <template>
   <div class="wrapper">
-  <div class="border" :style="colors.borderBackground"/>
+  <div class="border" :style="colors.borderBackground" v-if="!disableHover"/>
   <div class="profile-picture" :style="[colors.backgroundColor]">
     <!-- User initials -->
       <span class="initials roboto-bold">{{initials}}</span>
