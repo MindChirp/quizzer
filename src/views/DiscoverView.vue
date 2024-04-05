@@ -7,19 +7,20 @@ import { useQuizzes } from '@/stores/quizzes.ts'
 import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
 import { Search } from "lucide-vue-next"
+import { ref } from 'vue'
 const quizzes = useQuizzes();
+const search = ref<string>();
 
 </script>
 <template>
   <PageWrapper>
     <div class="content">
       <DiscoverHero style="margin-bottom: 2rem;"/>
-
       <div id="quizzes">
         <div class="title">
           <h2 class="roboto-medium section-title" style="text-transform: capitalize;">Curated quizzes</h2>
           <div class="filters">
-            <FormKit type="text" suffix-icon="search" placeholder="Look for anything ✨" />
+            <FormKit type="text" suffix-icon="search" placeholder="Look for anything ✨" @input="e => search = e"/>
           </div>
         </div>
         <DividerLine />
