@@ -16,8 +16,8 @@ export class UserControllerService {
      * @throws ApiError
      */
     public static updateUserPassword(
-        username: string,
-        requestBody: UserDto,
+      username: UnwrapRef<UserDto['username']> | undefined,
+      requestBody: UserDto
     ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',

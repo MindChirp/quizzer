@@ -27,6 +27,19 @@
       </ModalButtons>
     </ModalComponent>
 
+    <ModalComponent :open="openPassword" @close-trigger="() => openPassword = !openPassword">
+      <ModalHeader>
+        <ModalTitle>Change password</ModalTitle>
+      </ModalHeader>
+      <ModalBody>
+        <FormKit v-model="newPassword" validation="required" type="password" label="New Password" class="input"/>
+        <FormKit v-model="confirmPassword" validation="required" type="password" label="Confirm Password" class="input"/>
+      </ModalBody>
+      <ModalButtons>
+        <ButtonComponent variant="secondary" @click="() => openPassword = false">Cancel</ButtonComponent>
+        <ButtonComponent variant="primary" @click=updatePassword>Save changes</ButtonComponent>
+      </ModalButtons>
+    </ModalComponent>
 
     <div class="container">
       <div class="profile">
@@ -72,6 +85,7 @@ import ModalComponent from '@/components/data/ModalComponent.vue'
 import ModalHeader from '@/components/data/ModalHeader.vue'
 import { ref } from 'vue'
 import { UserControllerService } from '@/lib/api/services/UserControllerService.ts';
+import toaster from '@/stores/toaster.ts'
 
 const openFullName = ref(false);
 const openEmail = ref(false);
@@ -79,10 +93,19 @@ const openPassword = ref(false);
 
 const newFullName = ref('');
 const newEmail = ref('');
+const newPassword = ref('');
+const confirmPassword = ref('');
 
 const user = useUser();
 const userId = localStorage.getItem("username") ?? "";
 user.get({username: userId})
+
+const toast = toaster();
+
+const showPasswordMismatch = () => toast.error({
+  title: "Could not update password!",
+  description: "Passwords are not matching."
+})
 
 const updateFullName = async () => {
   openFullName.value = false;
@@ -116,6 +139,28 @@ const updateEmail = async () => {
   }
 };
 
+const updatePassword = async () => {
+
+  if (newPassword.value !== confirmPassword.value) {
+    openPassword.value = false;
+    showPasswordMismatch();
+    return;
+  }
+
+  openPassword.value = false;
+
+  const requestBody = {
+    password: newPassword.value,
+  };
+
+  try {
+    const response = await UserControllerService.updateUserPassword(user.data?.username, requestBody);
+    console.log(response);
+    location.reload();
+  } catch (error) {
+    console.error("Failed to update user's password:", error);
+  }
+};
 
 </script>
 
