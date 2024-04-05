@@ -23,8 +23,8 @@ const loginUser = async (data: User) => {
   } else {
     showError();
   }
-
 }
+
 </script>
 <template>
   <FormKit

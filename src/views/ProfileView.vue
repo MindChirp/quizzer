@@ -1,5 +1,20 @@
 <template>
   <PageWrapper>
+
+    <ModalComponent :open="openFullName" @close-trigger="() => openFullName = !openFullName">
+      <ModalHeader>
+        <ModalTitle>Change full name</ModalTitle>
+      </ModalHeader>
+      <ModalBody>
+        <FormKit v-model="newFullName" validation="required" type="text" label="New full name" class="input"/>
+      </ModalBody>
+      <ModalButtons>
+        <ButtonComponent variant="secondary" @click="() => openFullName = false">Cancel</ButtonComponent>
+        <ButtonComponent variant="primary" @click=updateFullName>Save changes</ButtonComponent>
+      </ModalButtons>
+    </ModalComponent>
+
+
     <div class="container">
       <div class="profile">
         <div class="profile-picture">
@@ -9,22 +24,21 @@
         <div class="info-row">
           <span class="label">Username:</span>
           <span class="value">{{ user.data?.username }}</span>
-          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
         </div>
         <div class="info-row">
           <span class="label">Full Name:</span>
           <span class="value">{{ user.data?.fullName }}</span>
-          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
+          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openFullName = !openFullName">···</ButtonComponent>
         </div>
         <div class="info-row">
           <span class="label">Email:</span>
           <span class="value">{{ user.data?.email }}</span>
-          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
+          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openEmail = !openEmail">···</ButtonComponent>
         </div>
         <div class="info-row">
           <span class="label">Password:</span>
           <span class="value">**********</span>
-          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
+          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openPassword = !openPassword">···</ButtonComponent>
         </div>
       </div>
     </div>
@@ -37,15 +51,44 @@ import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useUser } from '@/stores/user.ts'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import ModalButtons from '@/components/data/ModalButtons.vue'
+import ModalTitle from '@/components/data/ModalTitle.vue'
+import ModalBody from '@/components/data/ModalBody.vue'
+import { FormKit } from '@formkit/vue'
+import ModalComponent from '@/components/data/ModalComponent.vue'
+import ModalHeader from '@/components/data/ModalHeader.vue'
+import { ref } from 'vue'
+import { UserControllerService } from '@/lib/api/services/UserControllerService.ts';
+
+const openEmail = ref(false);
+const openFullName = ref(false);
+const openPassword = ref(false);
+
+const newFullName = ref('');
 
 const user = useUser();
 // Get the user id from token
 const userId = localStorage.getItem("username") ?? "";
 user.get({username: userId})
 
-const logTest = () => {
-  console.log('test');
+const updateFullName = async () => {
+  openFullName.value = false;
+
+  const requestBody = {
+    username: userId,
+    fullName: newFullName.value,
+  };
+
+  try {
+    const response = await UserControllerService.updateUserFullName(user.data?.username, requestBody);
+    console.log(response);
+    location.reload();
+  } catch (error) {
+    console.error("Failed to update user's full name:", error);
+  }
 };
+
+
 </script>
 
 <style scoped>

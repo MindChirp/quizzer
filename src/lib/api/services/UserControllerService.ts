@@ -7,7 +7,68 @@ import type { UserDto } from '../models/UserDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
+import type { UnwrapRef } from 'vue'
 export class UserControllerService {
+    /**
+     * @param username
+     * @param requestBody
+     * @returns string OK
+     * @throws ApiError
+     */
+    public static updateUserPassword(
+        username: string,
+        requestBody: UserDto,
+    ): CancelablePromise<string> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/users/{username}/update-password',
+            path: {
+                'username': username,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param username
+     * @param requestBody
+     * @returns string OK
+     * @throws ApiError
+     */
+    public static updateUserFullName(
+      username: UnwrapRef<UserDto['username']> | undefined,
+      requestBody: UserDto
+    ): CancelablePromise<string> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/users/{username}/update-fullname',
+            path: {
+                'username': username,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param username
+     * @param requestBody
+     * @returns string OK
+     * @throws ApiError
+     */
+    public static updateUserEmail(
+        username: string,
+        requestBody: UserDto,
+    ): CancelablePromise<string> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/users/{username}/update-email',
+            path: {
+                'username': username,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
     /**
      * @param requestBody
      * @returns UserDto OK
