@@ -13,6 +13,10 @@ const routeButtons: RouteButton[] = [
   {
     label: 'Discover',
     path: '/discover'
+  },
+  {
+    label: 'Profile',
+    path: '/profile'
   }
 ]
 </script>
