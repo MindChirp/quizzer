@@ -12,6 +12,7 @@ export const useUser = defineStore('user', () => {
 
 
   const get = async ({ username }: {username: string}) => {
+    OpenAPI.TOKEN = sessionStorage.getItem("JWT") ?? '';
     try {
       data.value = await UserControllerService.getUser(username);
       error.value = undefined;

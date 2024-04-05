@@ -10,12 +10,12 @@ import { request as __request } from '../core/request';
 export class UserControllerService {
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns UserDto OK
      * @throws ApiError
      */
     public static createUser(
         requestBody: UserDto,
-    ): CancelablePromise<Record<string, any>> {
+    ): CancelablePromise<UserDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/users/register',
@@ -25,12 +25,12 @@ export class UserControllerService {
     }
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns string OK
      * @throws ApiError
      */
     public static loginUser(
         requestBody: LoginDto,
-    ): CancelablePromise<Record<string, any>> {
+    ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/users/login',
@@ -40,12 +40,12 @@ export class UserControllerService {
     }
     /**
      * @param username
-     * @returns any OK
+     * @returns UserDto OK
      * @throws ApiError
      */
     public static getUser(
         username: string,
-    ): CancelablePromise<Record<string, any>> {
+    ): CancelablePromise<UserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/users/{username}',

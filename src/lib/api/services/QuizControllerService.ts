@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Pageable } from '../models/Pageable';
+import type { PageQuizDto } from '../models/PageQuizDto';
 import type { QuizDto } from '../models/QuizDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -10,12 +11,12 @@ import { request as __request } from '../core/request';
 export class QuizControllerService {
     /**
      * @param pageable
-     * @returns any OK
+     * @returns PageQuizDto OK
      * @throws ApiError
      */
     public static getPageOfQuizzes(
         pageable: Pageable,
-    ): CancelablePromise<Record<string, any>> {
+    ): CancelablePromise<PageQuizDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/quizzes',
@@ -26,12 +27,12 @@ export class QuizControllerService {
     }
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns QuizDto OK
      * @throws ApiError
      */
     public static createQuiz(
         requestBody: QuizDto,
-    ): CancelablePromise<Record<string, any>> {
+    ): CancelablePromise<QuizDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/quizzes',
@@ -41,12 +42,12 @@ export class QuizControllerService {
     }
     /**
      * @param quizId
-     * @returns any OK
+     * @returns QuizDto OK
      * @throws ApiError
      */
     public static getQuiz(
         quizId: string,
-    ): CancelablePromise<Record<string, any>> {
+    ): CancelablePromise<QuizDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/quizzes/{quizId}',
