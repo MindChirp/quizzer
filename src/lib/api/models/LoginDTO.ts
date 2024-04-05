@@ -2,10 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type LoginDTO = {
+export type LoginDto = {
     username?: string;
-    fullName?: string;
-    email?: string;
     password?: string;
 };
 

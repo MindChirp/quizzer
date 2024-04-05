@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import LoginComponent from '../components/forms/LoginForm.vue';
+import LoginComponent from '../components/forms/LoginForm.vue'
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 </script>
 

@@ -3,22 +3,22 @@
     <div class="container">
       <div class="profile">
         <div class="profile-picture">
-          <ProfilePicture disable-hover :full-name="userInfo.fullName" style="font-size: 4rem" >
+          <ProfilePicture disable-hover :full-name="user.data?.fullName" style="font-size: 4rem" >
           </ProfilePicture>
         </div>
         <div class="info-row">
           <span class="label">Username:</span>
-          <span class="value">{{ userInfo.username }}</span>
+          <span class="value">{{ user.data?.username }}</span>
           <span class="button" @click="logTest"> ···· </span>
         </div>
         <div class="info-row">
           <span class="label">Full Name:</span>
-          <span class="value">{{ userInfo.fullName }}</span>
+          <span class="value">{{ user.data?.fullName }}</span>
           <span class="button" @click="logTest"> ···· </span>
         </div>
         <div class="info-row">
           <span class="label">Email:</span>
-          <span class="value">{{ userInfo.email }}</span>
+          <span class="value">{{ user.data?.email }}</span>
           <span class="button" @click="logTest"> ···· </span>
         </div>
         <div class="info-row">
@@ -34,31 +34,13 @@
 
 <script setup lang="ts">
 import ProfilePicture from '@/components/icons/ProfilePicture.vue'
-import { ref, onMounted } from 'vue';
-import PageWrapper from '@/components/layout/PageWrapper.vue';
-import { useTokenStore } from '@/stores/token';
+import PageWrapper from '@/components/layout/PageWrapper.vue'
+import { useUser } from '@/stores/user.ts'
 
-type UserInfo = {
-  username: string;
-  fullName: string;
-  email: string;
-};
-
-const userInfo = ref<UserInfo>({ username: '', fullName: '', email: '' });
-
-const tokenStore = useTokenStore();
-
-onMounted(() => {
-  const user = tokenStore.loggedInUser;
-
-  if (user) {
-    userInfo.value = {
-      username: user.username,
-      fullName: user.fullName,
-      email: user.email
-    };
-  }
-});
+const user = useUser();
+// Get the user id from token
+const userId = localStorage.getItem("username") ?? "";
+user.get({username: userId})
 
 const logTest = () => {
   console.log('test');

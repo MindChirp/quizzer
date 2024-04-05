@@ -1,21 +1,18 @@
 <script setup lang="ts">
 
-import { useTokenStore } from '@/stores/token.ts'
-import  router  from '@/router'
+import { useToken } from '@/stores/token.ts'
+import router from '@/router'
+import type { UserDto } from '@/lib/api'
 
-const tokenStore = useTokenStore();
+const token = useToken();
 
-interface User {
-  username: string;
-  password: string;
-}
+type User = Pick<UserDto, "username" | "password">
 
 const loginUser = async (data: User) => {
 
-  await tokenStore.getTokenAndSaveInStore(data.username, data.password);
+  await token.get({ username: data.username as string, password: data.password as string });
   if (sessionStorage.getItem("JWT")) {
-    console.log("Log in success")
-    router.push("/");
+      router.push("/");
   } else {
     console.log("Log in failed!")
   }

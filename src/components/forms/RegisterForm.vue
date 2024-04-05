@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import axios from 'axios'
 import router from '@/router'
+import { UserControllerService } from '@/lib/api'
+import toaster from '@/stores/toaster.ts'
 
 interface User {
   username: string;
@@ -9,17 +11,27 @@ interface User {
   password: string;
 }
 
+const toast = toaster();
+const showSuccess = () => toast.success({
+  title: "Congratulations!",
+  description: "The account has been created!"
+})
+
+const showError = () => toast.error({
+  title: "An error occurred.",
+  description: "Could not create account. Please try again."
+})
+
 const registerUser = (data:User) => {
 
-  axios.post('http://localhost:8080/api/users/register', data)
-      .then(response => {
-        console.log("Register status: ", response.data);
-        router.push("/login")
-        //TODO: add toaster to show successful registration
-      })
-      .catch(error => {
-        console.log("There was an error:", error);
-      })
+  try {
+    UserControllerService.createUser(data)
+    showSuccess();
+    router.push("/login");
+  } catch (err) {
+    console.log("There was an error: ", err)
+    showError();
+  }
 }
 </script>
 <template>
