@@ -243,6 +243,7 @@ const updatePassword = async () => {
   flex: 1;
   white-space: nowrap;
   gap: .5rem;
+  align-items: center;
 }
 
 .value {
