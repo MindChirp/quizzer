@@ -112,7 +112,7 @@ const logTest = () => {
 }
 
 .button:hover {
-  border: 1px solid black;
+  border: 1px solid grey;
   border-radius: 20px;
 }
 
@@ -120,8 +120,13 @@ const logTest = () => {
   font-weight: bold;
   color: #0c66e4;
   margin-bottom: 0;
-  /* Aligns text to the right, making the ':' align nicely */
   text-align: right;
+}
+
+@media only screen and (max-width: 900px) {
+  .profile{
+    font-size: 0.8rem;
+  }
 }
 
 </style>
