@@ -1,7 +1,4 @@
-<script setup lang="ts">
-
-import DividerLine from '@/components/layout/DividerLine.vue'
-</script>
+<script setup lang="ts"></script>
 <template>
 <div class="wrapper">
   <h2 class="roboto-medium"><slot /></h2>

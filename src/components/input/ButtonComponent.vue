@@ -10,7 +10,7 @@ defineOptions({
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<ButtonProps>(), {
+withDefaults(defineProps<ButtonProps>(), {
   size: 'medium',
   variant: 'primary'
 })

@@ -6,7 +6,7 @@ import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SidebarButton from '@/components/navigation/SidebarButton.vue'
 
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   open?: boolean,
   routeButtons?: RouteButton[],
   currentRoute: string
