@@ -10,31 +10,32 @@ defineOptions({
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<ButtonProps>(), {
+withDefaults(defineProps<ButtonProps>(), {
   size: 'medium',
   variant: 'primary'
 })
 </script>
 <template>
   <button class="button roboto-medium" :class="[variant, size]" v-bind="$attrs">
-    <slot></slot>
+    <span><slot /></span>
   </button>
 </template>
 
 <style scoped>
 .button {
-  transition: background 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
   padding: 0.5rem 1rem;
   border-radius: 0.19rem;
-  border: none;
+  border: 2px solid transparent;
   font-size: 0.875rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
+  flex: 0;
   height: fit-content;
   width: fit-content;
+  white-space: nowrap;
   box-sizing: border-box;
 }
 
@@ -63,23 +64,27 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   & {
     background: var(--primary-fg);
     color: var(--primary-fg-text);
+    border-color: var(--primary-fg);
   }
 
   &:hover {
     background: var(--primary-active);
-    color: var(--primary-active-text)
+    color: var(--primary-active-text);
+    border-color: var(--primary-active);
   }
 }
 
 .secondary {
   & {
-    background: var(--secondary-fg);
+    background: var(--secondary-bg);
     color: var(--secondary-fg-text);
+    border-color: var(--secondary-bg);
   }
 
   &:hover {
-    background: var(--secondary-active);
-    color: var(--secondary-active-text);
+    background: var(--secondary-fg);
+    color: var(--secondary-fg-text);
+    border-color: var(--secondary-fg);
   }
 }
 
@@ -98,12 +103,12 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 .outline {
   & {
     background: transparent;
-    border: solid 2px var(--secondary-fg-text);
-    color: var(--secondary-fg-text);
+    border: solid 2px var(--secondary-bg-text);
+    color: var(--secondary-bg-text);
   }
 
   &:hover {
-    background: transparent;
+    background: var(--secondary-bg);
   }
 }
 

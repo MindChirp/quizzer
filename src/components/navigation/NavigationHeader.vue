@@ -22,7 +22,7 @@ const hideBorder = computed(() => {
   return !(scroll.y.value > 0);
 })
 
-const props = defineProps<{
+defineProps<{
   currentRoute: string,
   routeButtons?: RouteButton[]
 }>()
