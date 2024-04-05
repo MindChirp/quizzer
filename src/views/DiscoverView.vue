@@ -8,8 +8,15 @@ import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
 import { Search } from "lucide-vue-next"
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 const quizzes = useQuizzes();
 const search = ref<string>();
+
+const router = useRouter();
+
+const goToQuiz = (quizId: string) => {
+  router.push(`/quiz/${quizId}`);
+}
 
 </script>
 <template>
@@ -25,7 +32,7 @@ const search = ref<string>();
         </div>
         <DividerLine />
         <div class="grid">
-          <QuizCard v-for="(item, number) in quizzes.data" :key="number" :quiz="item" />
+            <QuizCard v-for="(item, number) in quizzes.data" :key="number" :quiz="item" @click="() => goToQuiz(item.quizId)" />
         </div>
 
       </div>

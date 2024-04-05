@@ -6,15 +6,15 @@ import type { PageableObject } from './PageableObject';
 import type { QuizDto } from './QuizDto';
 import type { SortObject } from './SortObject';
 export type PageQuizDto = {
-    totalElements?: number;
     totalPages?: number;
+    totalElements?: number;
     size?: number;
     content?: Array<QuizDto>;
     number?: number;
     sort?: SortObject;
+    numberOfElements?: number;
     first?: boolean;
     last?: boolean;
-    numberOfElements?: number;
     pageable?: PageableObject;
     empty?: boolean;
 };
