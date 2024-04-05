@@ -32,9 +32,8 @@ const goToQuiz = (quizId: string) => {
         </div>
         <DividerLine />
         <div class="grid">
-            <QuizCard v-for="(item, number) in quizzes.data" :key="number" :quiz="item" @click="() => goToQuiz(item.quizId)" />
+            <QuizCard v-for="(item, number) in quizzes.data" :key="number" :quiz="item" @click="() => goToQuiz(item.quizId?.toString() ?? '')" />
         </div>
-
       </div>
     </div>
   </PageWrapper>
