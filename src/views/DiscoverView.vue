@@ -15,7 +15,7 @@ const search = ref<string>();
 <template>
   <PageWrapper>
     <div class="content">
-      <DiscoverHero style="margin-bottom: 2rem;"/>
+      <DiscoverHero class="hero" style="margin-bottom: 2rem;"/>
       <div id="quizzes">
         <div class="title">
           <h2 class="roboto-medium section-title" style="text-transform: capitalize;">Curated quizzes</h2>
@@ -37,6 +37,7 @@ const search = ref<string>();
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 2rem 0;
 }
 
 .filters {
@@ -82,6 +83,25 @@ const search = ref<string>();
   font-size: 2rem;
   color: #2c3e50;
   margin: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  #quizzes .title {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .filters {
+    justify-content: center;
+  }
+
+  .hero {
+    display: none;
+  }
 }
 
 </style>

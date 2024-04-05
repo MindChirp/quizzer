@@ -10,7 +10,7 @@
 
 <style scoped>
 .wrapper {
-  margin-top: 2rem;
+  margin: 0;
   height: 20rem;
   width: 100%;
   border-radius: 1rem;
@@ -31,6 +31,12 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+  .title {
+    font-size: 2.5rem;
+  }
 }
 
 </style>
