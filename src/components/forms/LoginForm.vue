@@ -17,7 +17,7 @@ const loginUser = async (data: User) => {
   }
 
   await tokenStore.getTokenAndSaveInStore(newUser.username, newUser.password);
-  if (tokenStore.jwtToken) {
+  if (sessionStorage.getItem("JWT")) {
     console.log("Log in success")
     router.push("/");
   } else {

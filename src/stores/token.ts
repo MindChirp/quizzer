@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { getJwtToken, getUserInfo } from '@/utils/httputils'
 export const useTokenStore = defineStore("token", {
   state: () => ({
-    jwtToken: null,
     loggedInUser: null,
   }),
 
@@ -13,7 +12,7 @@ export const useTokenStore = defineStore("token", {
         let response = await getJwtToken(username, password);
         let token = response.data;
         if (token) {
-          this.jwtToken = token;
+          sessionStorage.setItem("JWT", token);
           let userInfoResponse = await getUserInfo(username, token);
           this.loggedInUser = userInfoResponse.data;
         }

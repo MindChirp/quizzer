@@ -5,7 +5,7 @@ import { useTokenStore } from '@/stores/token.ts'
 
 //eksempel på hvordan hente ut info
 const tokenStore = useTokenStore()
-console.log("Her henter jeg token : " + tokenStore.jwtToken);
+console.log("Her henter jeg token : " + sessionStorage.getItem("JWT"));
 console.log("Her henter jeg user : " + JSON.stringify(tokenStore.loggedInUser));
 
 </script>
