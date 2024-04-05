@@ -103,10 +103,6 @@ const props = defineProps<{
   margin-top: .5rem;
 }
 
-.title {
-
-}
-
 .description {
   max-width: 60%;
 }

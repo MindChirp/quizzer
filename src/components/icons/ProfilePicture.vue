@@ -73,10 +73,6 @@ const colors = computed(() => {
   position: relative;
 }
 
-.profile-picture:hover {
-
-}
-
 .initials {
   color: white;
 }
