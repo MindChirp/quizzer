@@ -7,6 +7,7 @@ const props = defineProps<{
   quiz: QuizDto
 }>();
 
+
 </script>
 <template>
   <div class="card" v-bind="$attrs">
