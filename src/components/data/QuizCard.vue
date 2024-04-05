@@ -32,11 +32,11 @@ defineProps<{
   background: var(--default-bg);
   border-radius: 0.5rem;
   cursor: pointer;
-  border: solid 2px var(--secondary-bg);
   overflow: hidden;
   flex-direction: row;
   position: relative;
   transition: all 150ms ease-in-out;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .text {
