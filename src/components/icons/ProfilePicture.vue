@@ -49,8 +49,8 @@ const colors = computed(() => {
   left: 50%;
   transform: translate(-50%,-50%);
   border-radius: 100%;
-  height: 2rem;
-  width: 2rem;
+  height: 2em;
+  width: 2em;
   z-index: 0;
   transition: transform 300ms cubic-bezier(.17,.67,.36,1.41);
 
@@ -61,8 +61,8 @@ const colors = computed(() => {
 }
 
 .profile-picture {
-  width: 2rem;
-  height: 2rem;
+  width: 2em;
+  height: 2em;
   background: #aaa;
   border-radius: 100%;
   cursor: pointer;
