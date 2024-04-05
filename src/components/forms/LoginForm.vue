@@ -3,18 +3,25 @@
 import { useToken } from '@/stores/token.ts'
 import router from '@/router'
 import type { UserDto } from '@/lib/api'
+import toaster from '@/stores/toaster.ts'
 
 const token = useToken();
 
 type User = Pick<UserDto, "username" | "password">
 
+const toast = toaster();
+
+const showError = () => toast.error({
+  title: "Log in failed!",
+  description: "Wrong username or password."
+})
 const loginUser = async (data: User) => {
 
   await token.get({ username: data.username as string, password: data.password as string });
   if (sessionStorage.getItem("JWT")) {
       router.push("/");
   } else {
-    console.log("Log in failed!")
+    showError();
   }
 
 }
