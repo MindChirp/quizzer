@@ -2,6 +2,7 @@
 
 import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
 
+
 const props = withDefaults(defineProps<{
   open?: boolean,
   routeButtons?: RouteButton[],
@@ -13,6 +14,7 @@ const props = withDefaults(defineProps<{
 import { X } from 'lucide-vue-next'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SidebarButton from '@/components/navigation/SidebarButton.vue'
+import { ref } from 'vue'
 
 </script>
 <template>
@@ -40,7 +42,7 @@ import SidebarButton from '@/components/navigation/SidebarButton.vue'
   position: fixed;
   border: 0px solid #9e9e9e;
   border-right-width: 1px;
-  z-index: 10;
+  z-index: 110;
   display: flex;
   flex-direction: column;
   transition: transform 250ms ease-in-out;

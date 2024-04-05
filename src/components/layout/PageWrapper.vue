@@ -8,7 +8,7 @@
 </template>
 <style scoped>
 .wrapper {
-  width: 80%;
+  width: 80vw;
   height: fit-content;
   margin: auto;
   max-width: 1280px;
