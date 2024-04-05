@@ -6,7 +6,6 @@ import DividerLine from '@/components/layout/DividerLine.vue'
 import { useQuizzes } from '@/stores/quizzes.ts'
 import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
-import { Search } from "lucide-vue-next"
 import { ref } from 'vue'
 import ModalComponent from '@/components/data/ModalComponent.vue'
 import ModalTitle from '@/components/data/ModalTitle.vue'
@@ -15,6 +14,7 @@ import ModalBody from '@/components/data/ModalBody.vue'
 import ModalHeader from '@/components/data/ModalHeader.vue'
 import ModalDescription from '@/components/data/ModalDescription.vue'
 import ModalButtons from '@/components/data/ModalButtons.vue'
+
 const quizzes = useQuizzes();
 const search = ref<string>();
 const open = ref(true);
