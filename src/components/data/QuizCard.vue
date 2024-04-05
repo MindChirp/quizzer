@@ -3,7 +3,7 @@
 import type { QuizDto } from '@/lib/api'
 import TagComponent from '@/components/data/TagComponent.vue'
 
-const props = defineProps<{
+defineProps<{
   quiz: QuizDto
 }>();
 
@@ -20,7 +20,7 @@ const props = defineProps<{
         <TagComponent>Politics</TagComponent>
       </div>
     </div>
-    <div class="background">
+    <div class="background" :style="`background-image: url('${quiz.imageLink}');`">
       <div class="default-gradient gradient" />
       <div class="hover-gradient gradient" />
     </div>
@@ -56,7 +56,6 @@ const props = defineProps<{
 
 .background {
   & {
-    background-image: url("/mountain-landscape-2031539_1280.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

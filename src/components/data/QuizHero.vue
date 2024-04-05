@@ -1,29 +1,30 @@
 <script setup lang="ts">
-
+defineProps<{
+  url: string
+}>()
 </script>
 <template>
-<div class="wrapper shadow-5">
+<div class="wrapper" :style="`background-image: url('${url})`">
   <div class="gradient" />
 </div>
 </template>
 <style scoped>
 .wrapper {
+  top: 0;
+  position: absolute;
   width: 100%;
-  height: 15rem;
-  border-radius: .5rem;
-  background-image: url("/earth-1756274_1920.jpg");
-  background-size: 100% auto;
+  left: 0;
+  height: 30rem;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: left;
-  position: relative;
+  background-position: center;
   overflow: hidden;
 }
 
 .gradient {
-  display: none;
-  width: 70%;
+  width: 100%;
   background: rgb(255,255,255);
-  background: linear-gradient(270deg, var(--default-bg) 10%, color-mix(in srgb, var(--default-bg) 90%, transparent) 40%, rgba(255,255,255,0.0) 100%);
+  background: linear-gradient(0deg, var(--default-bg) 0%, color-mix(in srgb, var(--default-bg) 80%, transparent) 50%, rgba(255,255,255,0.0) 80%);
   position: absolute;
   top: 0;
   right: 0;
