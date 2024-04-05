@@ -9,22 +9,22 @@
         <div class="info-row">
           <span class="label">Username:</span>
           <span class="value">{{ user.data?.username }}</span>
-          <span class="button" @click="logTest"> ···· </span>
+          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
         </div>
         <div class="info-row">
           <span class="label">Full Name:</span>
           <span class="value">{{ user.data?.fullName }}</span>
-          <span class="button" @click="logTest"> ···· </span>
+          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
         </div>
         <div class="info-row">
           <span class="label">Email:</span>
           <span class="value">{{ user.data?.email }}</span>
-          <span class="button" @click="logTest"> ···· </span>
+          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
         </div>
         <div class="info-row">
           <span class="label">Password:</span>
           <span class="value">**********</span>
-          <span class="button" @click="logTest"> ···· </span>
+          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="logTest">···</ButtonComponent>
         </div>
       </div>
     </div>
@@ -36,6 +36,7 @@
 import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useUser } from '@/stores/user.ts'
+import ButtonComponent from '@/components/input/ButtonComponent.vue'
 
 const user = useUser();
 // Get the user id from token
@@ -83,19 +84,6 @@ const logTest = () => {
 
 .label, .value {
   margin-right: auto;
-}
-
-
-.button {
-  margin-left: 0.5rem;
-  cursor: pointer;
-  user-select: none;
-  border: 1px solid transparent;
-}
-
-.button:hover {
-  border: 1px solid grey;
-  border-radius: 20px;
 }
 
 .value {

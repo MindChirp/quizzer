@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { getJwtToken, getUserInfo } from '@/utils/httputils'
 import { ref } from 'vue'
 import { OpenAPI, TokenControllerService } from '@/lib/api'
 
