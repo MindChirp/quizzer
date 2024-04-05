@@ -7,7 +7,6 @@ import type { UserDto } from '../models/UserDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-import type { UnwrapRef } from 'vue'
 export class UserControllerService {
     /**
      * @param username
@@ -16,8 +15,8 @@ export class UserControllerService {
      * @throws ApiError
      */
     public static updateUserPassword(
-      username: UnwrapRef<UserDto['username']> | undefined,
-      requestBody: UserDto
+        username: string,
+        requestBody: UserDto,
     ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -36,8 +35,8 @@ export class UserControllerService {
      * @throws ApiError
      */
     public static updateUserFullName(
-      username: UnwrapRef<UserDto['username']> | undefined,
-      requestBody: UserDto
+        username: string,
+        requestBody: UserDto,
     ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -56,8 +55,8 @@ export class UserControllerService {
      * @throws ApiError
      */
     public static updateUserEmail(
-      username: UnwrapRef<UserDto['username']> | undefined,
-      requestBody: UserDto
+        username: string,
+        requestBody: UserDto,
     ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',

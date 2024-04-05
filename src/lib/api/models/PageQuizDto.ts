@@ -12,10 +12,10 @@ export type PageQuizDto = {
     content?: Array<QuizDto>;
     number?: number;
     sort?: SortObject;
-    pageable?: PageableObject;
     numberOfElements?: number;
     first?: boolean;
     last?: boolean;
+    pageable?: PageableObject;
     empty?: boolean;
 };
 

@@ -48,23 +48,47 @@
           </ProfilePicture>
         </div>
         <div class="info-row">
-          <span class="label">Username:</span>
-          <span class="value">{{ user.data?.username }}</span>
+          <div class="label-wrapper">
+            <span class="label">Username</span>
+          </div>
+          <div class="data">
+            <span class="value">{{ user.data?.username }}</span>
+            <ButtonComponent size="icon" style="opacity: 0; pointer-events: none;">
+              ...
+            </ButtonComponent>
+          </div>
         </div>
         <div class="info-row">
-          <span class="label">Full Name:</span>
-          <span class="value">{{ user.data?.fullName }}</span>
-          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openFullName = !openFullName">···</ButtonComponent>
+          <div class="label-wrapper">
+            <span class="label">Full Name</span>
+          </div>
+
+          <div class="data">
+            <span class="value">{{ user.data?.fullName }}</span>
+            <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openFullName = !openFullName">···</ButtonComponent>
+          </div>
         </div>
         <div class="info-row">
-          <span class="label">Email:</span>
-          <span class="value">{{ user.data?.email }}</span>
-          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openEmail = !openEmail">···</ButtonComponent>
+          <div class="label-wrapper">
+            <span class="label">Email</span>
+          </div>
+
+          <div class="data">
+            <span class="value">{{ user.data?.email }}</span>
+            <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openEmail = !openEmail">···</ButtonComponent>
+          </div>
+
         </div>
+
         <div class="info-row">
-          <span class="label">Password:</span>
-          <span class="value">**********</span>
-          <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openPassword = !openPassword">···</ButtonComponent>
+          <div class="label-wrapper">
+            <span class="label">Password</span>
+          </div>
+
+          <div class="data">
+            <span class="value">**********</span>
+            <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openPassword = !openPassword">···</ButtonComponent>
+          </div>
         </div>
       </div>
     </div>
@@ -115,9 +139,11 @@ const updateFullName = async () => {
   };
 
   try {
-    const response = await UserControllerService.updateUserFullName(user.data?.username, requestBody);
+    const response = await UserControllerService.updateUserFullName(user.data?.username as string, requestBody);
     console.log(response);
-    location.reload();
+    user.get({
+      username: userId
+    })
   } catch (error) {
     console.error("Failed to update user's full name:", error);
   }
@@ -131,9 +157,11 @@ const updateEmail = async () => {
   };
 
   try {
-    const response = await UserControllerService.updateUserEmail(user.data?.username, requestBody);
+    const response = await UserControllerService.updateUserEmail(user.data?.username as string, requestBody);
     console.log(response);
-    location.reload();
+    user.get({
+      username: userId
+    })
   } catch (error) {
     console.error("Failed to update user's email:", error);
   }
@@ -154,9 +182,7 @@ const updatePassword = async () => {
   };
 
   try {
-    const response = await UserControllerService.updateUserPassword(user.data?.username, requestBody);
-    console.log(response);
-    location.reload();
+    const response = await UserControllerService.updateUserPassword(user.data?.username as string, requestBody);
   } catch (error) {
     console.error("Failed to update user's password:", error);
   }
@@ -177,13 +203,14 @@ const updatePassword = async () => {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 5%;
+  margin-bottom: 3rem;
 }
 
 .profile {
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  gap: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   min-width: 50%;
@@ -195,11 +222,27 @@ const updatePassword = async () => {
   display: flex;
   align-items: center;
   width: 100%;
-  margin: 0.8rem 0;
 }
 
-.label, .value {
-  margin-right: auto;
+.label-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.label {
+  width: fit-content;
+  background: var(--secondary-bg);
+  padding: .2rem .7rem;
+  border-radius: 3px;
+  color: var(--secondary-bg-text)
+}
+
+.data {
+  display: flex;
+  width: fit-content;
+  flex: 1;
+  white-space: nowrap;
+  gap: .5rem;
 }
 
 .value {
@@ -209,7 +252,7 @@ const updatePassword = async () => {
   text-align: right;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
   .profile{
     font-size: 0.8rem;
   }
