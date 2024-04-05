@@ -19,7 +19,7 @@ import ModalButtons from '@/components/data/ModalButtons.vue'
 
 const quizzes = useQuizzes();
 const search = ref<string>();
-const open = ref(true);
+const open = ref(false);
 
 const router = useRouter();
 
