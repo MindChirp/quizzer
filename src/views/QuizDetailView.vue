@@ -6,12 +6,14 @@ import { useRoute } from 'vue-router'
 const route = useRoute();
 const quizId = route.params.quizId as string
 
-const quiz = useQuiz(quizId);
-alert(quiz.data);
-
+const quiz = useQuiz();
+quiz.get({
+  quizId
+})
 </script>
 <template>
   <PageWrapper>
+
     <h1>{{quiz.data}}</h1>
   </PageWrapper>
 </template>

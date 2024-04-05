@@ -3,18 +3,19 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { LoginDto } from '../models/LoginDto';
+import type { TokenDto } from '../models/TokenDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class TokenControllerService {
     /**
      * @param requestBody
-     * @returns string Created
+     * @returns TokenDto Created
      * @throws ApiError
      */
     public static generateToken(
         requestBody: LoginDto,
-    ): CancelablePromise<string> {
+    ): CancelablePromise<TokenDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/token',

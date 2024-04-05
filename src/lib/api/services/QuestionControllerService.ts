@@ -9,12 +9,12 @@ import { request as __request } from '../core/request';
 export class QuestionControllerService {
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns QuestionDto OK
      * @throws ApiError
      */
     public static addQuestion(
         requestBody: QuestionDto,
-    ): CancelablePromise<Record<string, any>> {
+    ): CancelablePromise<QuestionDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/questions',
