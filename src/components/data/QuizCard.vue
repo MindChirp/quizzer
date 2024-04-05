@@ -3,7 +3,7 @@
 import type { QuizDto } from '@/lib/api'
 import TagComponent from '@/components/data/TagComponent.vue'
 
-const props = defineProps<{
+defineProps<{
   quiz: QuizDto
 }>();
 

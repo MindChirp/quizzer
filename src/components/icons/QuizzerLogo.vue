@@ -4,7 +4,7 @@ defineOptions({
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   variant?: "primary" | "destructive" | "secondary"
 }>(), {
   variant: 'primary'
