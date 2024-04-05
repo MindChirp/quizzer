@@ -14,6 +14,19 @@
       </ModalButtons>
     </ModalComponent>
 
+    <ModalComponent :open="openEmail" @close-trigger="() => openEmail = !openEmail">
+      <ModalHeader>
+        <ModalTitle>Change email</ModalTitle>
+      </ModalHeader>
+      <ModalBody>
+        <FormKit v-model="newEmail" validation="required" type="email" label="New email" class="input"/>
+      </ModalBody>
+      <ModalButtons>
+        <ButtonComponent variant="secondary" @click="() => openEmail = false">Cancel</ButtonComponent>
+        <ButtonComponent variant="primary" @click=updateEmail>Save changes</ButtonComponent>
+      </ModalButtons>
+    </ModalComponent>
+
 
     <div class="container">
       <div class="profile">
@@ -60,14 +73,14 @@ import ModalHeader from '@/components/data/ModalHeader.vue'
 import { ref } from 'vue'
 import { UserControllerService } from '@/lib/api/services/UserControllerService.ts';
 
-const openEmail = ref(false);
 const openFullName = ref(false);
+const openEmail = ref(false);
 const openPassword = ref(false);
 
 const newFullName = ref('');
+const newEmail = ref('');
 
 const user = useUser();
-// Get the user id from token
 const userId = localStorage.getItem("username") ?? "";
 user.get({username: userId})
 
@@ -75,7 +88,6 @@ const updateFullName = async () => {
   openFullName.value = false;
 
   const requestBody = {
-    username: userId,
     fullName: newFullName.value,
   };
 
@@ -85,6 +97,22 @@ const updateFullName = async () => {
     location.reload();
   } catch (error) {
     console.error("Failed to update user's full name:", error);
+  }
+};
+
+const updateEmail = async () => {
+  openEmail.value = false;
+
+  const requestBody = {
+    email: newEmail.value,
+  };
+
+  try {
+    const response = await UserControllerService.updateUserEmail(user.data?.username, requestBody);
+    console.log(response);
+    location.reload();
+  } catch (error) {
+    console.error("Failed to update user's email:", error);
   }
 };
 
