@@ -8,12 +8,39 @@ import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
 import { Search } from "lucide-vue-next"
 import { ref } from 'vue'
+import ModalComponent from '@/components/data/ModalComponent.vue'
+import ModalTitle from '@/components/data/ModalTitle.vue'
+import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import ModalBody from '@/components/data/ModalBody.vue'
+import ModalHeader from '@/components/data/ModalHeader.vue'
+import ModalDescription from '@/components/data/ModalDescription.vue'
+import ModalButtons from '@/components/data/ModalButtons.vue'
 const quizzes = useQuizzes();
 const search = ref<string>();
+const open = ref(true);
 
 </script>
 <template>
   <PageWrapper>
+
+
+    <ModalComponent :open="open" @close-trigger="() => open = !open">
+      <ModalHeader>
+        <ModalTitle>Hei på deg</ModalTitle>
+        <ModalDescription>Dette er en beskrivelse</ModalDescription>
+      </ModalHeader>
+      <ModalBody>
+        <FormKit type="text" label="Morra di" placeholder="Er mann" class="input"/>
+      </ModalBody>
+      <ModalButtons>
+        <ButtonComponent variant="secondary" @click="() => open = false">Cancel</ButtonComponent>
+        <ButtonComponent variant="primary" @click="() => open = false">Save changes</ButtonComponent>
+      </ModalButtons>
+    </ModalComponent>
+
+
+
+    <ButtonComponent @click="() => open = !open">Toggle</ButtonComponent>
     <div class="content">
       <DiscoverHero class="hero" style="margin-bottom: 2rem;"/>
       <div id="quizzes">

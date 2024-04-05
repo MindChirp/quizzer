@@ -1,6 +1,9 @@
 <script setup lang="ts">
 
 import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
+import { X } from 'lucide-vue-next'
+import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import SidebarButton from '@/components/navigation/SidebarButton.vue'
 
 
 const props = withDefaults(defineProps<{
@@ -10,12 +13,6 @@ const props = withDefaults(defineProps<{
 }>(), {
   open: false
 })
-
-import { X } from 'lucide-vue-next'
-import ButtonComponent from '@/components/input/ButtonComponent.vue'
-import SidebarButton from '@/components/navigation/SidebarButton.vue'
-import { ref } from 'vue'
-
 </script>
 <template>
   <div class="sidebar" :class="{open: open}">
