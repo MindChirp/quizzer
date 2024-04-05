@@ -5,8 +5,9 @@ import UserSection from '@/components/navigation/UserSection.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SideBar from '@/components/navigation/SideBar.vue'
 import { Menu } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import toaster from '@/stores/toaster.ts'
+import useScroll from '@/utils/useScroll.ts'
 
 const sidebarOpen = ref(false);
 
@@ -14,6 +15,12 @@ export interface RouteButton {
   label: string,
   path: string,
 }
+
+const scroll = useScroll();
+
+const hideBorder = computed(() => {
+  return !(scroll.y.value > 0);
+})
 
 const props = defineProps<{
   currentRoute: string,
@@ -28,7 +35,7 @@ const error = () => toasterStore.default({
 </script>
 <template>
   <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
-  <div id="wrapper">
+  <div id="wrapper" :class="{hideBorder: hideBorder}">
     <!-- Below is the header designated for small devices -->
     <div class="mobile-header">
       <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => sidebarOpen = !sidebarOpen"><Menu /></ButtonComponent>
@@ -61,18 +68,24 @@ const error = () => toasterStore.default({
 
 #wrapper {
   gap: 1.5rem;
-  box-sizing: border-box;
   padding: 0 1rem;
   display: flex;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: calc(100% - 2rem);
   height: 3.5rem;
-  background: white;
+  background: color-mix(in srgb, var(--default-bg) 80%, transparent);
+  backdrop-filter: blur(10px);
   border: 0px solid #ccc;
   border-bottom-width: 1px;
+  z-index: 100;
+  transition: border-bottom-width 150ms ease-in-out;
+}
+
+.hideBorder {
+  border-bottom-width: 0 !important;
 }
 
 .header-content {
