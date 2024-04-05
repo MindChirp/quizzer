@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { LoginDTO } from '../models/LoginDTO';
+import type { LoginDto } from '../models/LoginDto';
 import type { UserDto } from '../models/UserDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -29,13 +29,29 @@ export class UserControllerService {
      * @throws ApiError
      */
     public static loginUser(
-        requestBody: LoginDTO,
+        requestBody: LoginDto,
     ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/users/login',
             body: requestBody,
             mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param username
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static getUser(
+        username: string,
+    ): CancelablePromise<Record<string, any>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/users/{username}',
+            path: {
+                'username': username,
+            },
         });
     }
 }

@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserDto } from './UserDto';
 export type QuizDto = {
     quizId?: number;
     title?: string;
     description?: string;
-    owner?: UserDto;
+    imageLink?: string;
+    owner?: string;
 };
 

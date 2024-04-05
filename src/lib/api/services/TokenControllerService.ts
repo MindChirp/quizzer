@@ -2,22 +2,22 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { QuestionDto } from '../models/QuestionDto';
+import type { LoginDto } from '../models/LoginDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-export class QuestionControllerService {
+export class TokenControllerService {
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns string Created
      * @throws ApiError
      */
-    public static addQuestion(
-        requestBody: QuestionDto,
-    ): CancelablePromise<Record<string, any>> {
+    public static generateToken(
+        requestBody: LoginDto,
+    ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/questions',
+            url: '/api/token',
             body: requestBody,
             mediaType: 'application/json',
         });

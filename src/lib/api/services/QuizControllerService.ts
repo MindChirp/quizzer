@@ -9,21 +9,6 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class QuizControllerService {
     /**
-     * @param requestBody
-     * @returns any OK
-     * @throws ApiError
-     */
-    public static createQuiz(
-        requestBody: QuizDto,
-    ): CancelablePromise<Record<string, any>> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/quizzes/create',
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-    /**
      * @param pageable
      * @returns any OK
      * @throws ApiError
@@ -33,9 +18,40 @@ export class QuizControllerService {
     ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/quizzes/getPage',
+            url: '/api/quizzes',
             query: {
                 'pageable': pageable,
+            },
+        });
+    }
+    /**
+     * @param requestBody
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static createQuiz(
+        requestBody: QuizDto,
+    ): CancelablePromise<Record<string, any>> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/quizzes',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param quizId
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static getQuiz(
+        quizId: string,
+    ): CancelablePromise<Record<string, any>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/quizzes/{quizId}',
+            path: {
+                'quizId': quizId,
             },
         });
     }
