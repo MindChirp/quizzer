@@ -11,12 +11,8 @@ interface User {
 }
 
 const loginUser = async (data: User) => {
-  const newUser: User = {
-    username: data.username,
-    password: data.password,
-  }
 
-  await tokenStore.getTokenAndSaveInStore(newUser.username, newUser.password);
+  await tokenStore.getTokenAndSaveInStore(data.username, data.password);
   if (sessionStorage.getItem("JWT")) {
     console.log("Log in success")
     router.push("/");

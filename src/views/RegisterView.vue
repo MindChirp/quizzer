@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import RegisterComponent from '../components/forms/RegisterForm.vue';
+import RegisterComponent from '@/components/forms/RegisterForm.vue';
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 </script>
 

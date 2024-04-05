@@ -10,14 +10,8 @@ interface User {
 }
 
 const registerUser = (data:User) => {
-  const newUser: User = {
-    username: data.username,
-    fullName: data.fullName,
-    email: data.email,
-    password: data.password,
-  }
 
-  axios.post('http://localhost:8080/api/users/register', newUser)
+  axios.post('http://localhost:8080/api/users/register', data)
       .then(response => {
         console.log("Register status: ", response.data);
         router.push("/login")
