@@ -3,7 +3,7 @@
     <div class="container">
       <div class="profile">
         <div class="profile-picture">
-          <ProfilePicture :full-name="userInfo.username" style="font-size: 4rem" >
+          <ProfilePicture disable-hover :full-name="userInfo.fullName" style="font-size: 4rem" >
           </ProfilePicture>
         </div>
         <div class="info-row">
