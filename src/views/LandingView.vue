@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import QuizzerLogo from '@/components/icons/QuizzerLogo.vue'
+import { useTokenStore } from '@/stores/token.ts'
+
+//eksempel på hvordan hente ut info
+const tokenStore = useTokenStore()
+console.log("Her henter jeg token : " + sessionStorage.getItem("JWT"));
+console.log("Her henter jeg user : " + JSON.stringify(tokenStore.loggedInUser));
+
 </script>
 <template>
   <PageWrapper>
