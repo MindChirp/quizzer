@@ -11,7 +11,7 @@ export const useQuizzes = defineStore("quizzes", () => {
     try {
       const res = await QuizControllerService.getPageOfQuizzes({ page });
       error.value = undefined;
-      data.value = res.content;
+      data.value = res.content ?? [];
     } catch (err) {
       error.value = err as ApiError;
     }

@@ -9,6 +9,66 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class UserControllerService {
     /**
+     * @param username
+     * @param requestBody
+     * @returns string OK
+     * @throws ApiError
+     */
+    public static updateUserPassword(
+        username: string,
+        requestBody: UserDto,
+    ): CancelablePromise<string> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/users/{username}/update-password',
+            path: {
+                'username': username,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param username
+     * @param requestBody
+     * @returns string OK
+     * @throws ApiError
+     */
+    public static updateUserFullName(
+        username: string,
+        requestBody: UserDto,
+    ): CancelablePromise<string> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/users/{username}/update-fullname',
+            path: {
+                'username': username,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param username
+     * @param requestBody
+     * @returns string OK
+     * @throws ApiError
+     */
+    public static updateUserEmail(
+        username: string,
+        requestBody: UserDto,
+    ): CancelablePromise<string> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/users/{username}/update-email',
+            path: {
+                'username': username,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
      * @param requestBody
      * @returns UserDto OK
      * @throws ApiError

@@ -45,7 +45,7 @@ const toast = toaster();
 </script>
 <template>
   <PageWrapper>
-    <QuizHero :url="quiz.data?.imageLink" />
+    <QuizHero :url="quiz.data?.imageLink as string" />
     <div class="content">
       <h1 class="roboto-bold title">{{ quiz.data?.title }}</h1>
       <span class="roboto-medium description">{{quiz.data?.description}}</span>
