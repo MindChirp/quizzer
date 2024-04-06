@@ -8,6 +8,7 @@ import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import Dropdown from "primevue/dropdown"
 
 import ModalComponent from '@/components/data/ModalComponent.vue'
 import ModalTitle from '@/components/data/ModalTitle.vue'
@@ -16,6 +17,7 @@ import ModalBody from '@/components/data/ModalBody.vue'
 import ModalHeader from '@/components/data/ModalHeader.vue'
 import ModalDescription from '@/components/data/ModalDescription.vue'
 import ModalButtons from '@/components/data/ModalButtons.vue'
+import DropdownComponent, { type OptionType } from '@/components/input/DropdownComponent.vue'
 
 const quizzes = useQuizzes();
 const search = ref<string>();
@@ -30,25 +32,6 @@ const goToQuiz = (quizId: string) => {
 </script>
 <template>
   <PageWrapper>
-
-
-    <ModalComponent :open="open" @close-trigger="() => open = !open">
-      <ModalHeader>
-        <ModalTitle>Hei på deg</ModalTitle>
-        <ModalDescription>Dette er en beskrivelse</ModalDescription>
-      </ModalHeader>
-      <ModalBody>
-        <FormKit type="text" label="Morra di" placeholder="Er mann" class="input"/>
-      </ModalBody>
-      <ModalButtons>
-        <ButtonComponent variant="secondary" @click="() => open = false">Cancel</ButtonComponent>
-        <ButtonComponent variant="primary" @click="() => open = false">Save changes</ButtonComponent>
-      </ModalButtons>
-    </ModalComponent>
-
-
-
-    <ButtonComponent @click="() => open = !open">Toggle</ButtonComponent>
     <div class="content">
       <DiscoverHero class="hero" style="margin-bottom: 2rem;"/>
       <div id="quizzes">
