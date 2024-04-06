@@ -106,7 +106,7 @@ const toast = toaster();
 }
 
 .play-button {
-  padding: 1rem;
+  padding: .5rem 0;
   width: 50%;
   margin: 2rem auto 0;
   font-size: 1.5rem;
