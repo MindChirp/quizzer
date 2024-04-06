@@ -1,115 +1,48 @@
 <template>
   <PageWrapper>
+    <ProfileModal :open="openFullName" @close="toggleFullNameModal" title="Change full name">
+      <FormKit type="form" @submit="updateFullName" submit-label="Change name">
+        <FormKit v-model="newFullName" validation="required|length:3" type="text" label="New full name" class="input" />
+      </FormKit>
+    </ProfileModal>
 
-    <ModalComponent :open="openFullName" @close-trigger="() => openFullName = !openFullName">
-      <ModalHeader>
-        <ModalTitle>Change full name</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
-        <FormKit v-model="newFullName" validation="required" type="text" label="New full name" class="input"/>
-      </ModalBody>
-      <ModalButtons>
-        <ButtonComponent variant="secondary" @click="() => openFullName = false">Cancel</ButtonComponent>
-        <ButtonComponent variant="primary" @click=updateFullName>Save changes</ButtonComponent>
-      </ModalButtons>
-    </ModalComponent>
+    <ProfileModal :open="openEmail" @close="toggleEmailModal" title="Change email" @save="updateEmail">
+      <FormKit type="form" @submit="updateEmail" submit-label="Change email">
+        <FormKit v-model="newEmail" validation="required|length:3" type="email" label="New full email" class="input" />
+      </FormKit>
+    </ProfileModal>
 
-    <ModalComponent :open="openEmail" @close-trigger="() => openEmail = !openEmail">
-      <ModalHeader>
-        <ModalTitle>Change email</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
-        <FormKit v-model="newEmail" validation="required" type="email" label="New email" class="input"/>
-      </ModalBody>
-      <ModalButtons>
-        <ButtonComponent variant="secondary" @click="() => openEmail = false">Cancel</ButtonComponent>
-        <ButtonComponent variant="primary" @click=updateEmail>Save changes</ButtonComponent>
-      </ModalButtons>
-    </ModalComponent>
-
-    <ModalComponent :open="openPassword" @close-trigger="() => openPassword = !openPassword">
-      <ModalHeader>
-        <ModalTitle>Change password</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
-        <FormKit v-model="newPassword" validation="required" type="password" label="New Password" class="input"/>
-        <FormKit v-model="confirmPassword" validation="required" type="password" label="Confirm Password" class="input"/>
-      </ModalBody>
-      <ModalButtons>
-        <ButtonComponent variant="secondary" @click="() => openPassword = false">Cancel</ButtonComponent>
-        <ButtonComponent variant="primary" @click=updatePassword>Save changes</ButtonComponent>
-      </ModalButtons>
-    </ModalComponent>
+    <ProfileModal :open="openPassword" @close="togglePasswordModal" title="Change password" @save="updatePassword">
+      <FormKit type="form" @submit="updatePassword" submit-label="Change password">
+        <FormKit v-model="newPassword" validation="required|length:3" type="password" label="New password" class="input" />
+        <FormKit v-model="confirmPassword" validation="required|length:3" type="password" label="Confirm new password" class="input" />
+      </FormKit>
+    </ProfileModal>
 
     <div class="container">
       <div class="profile">
         <div class="profile-picture">
-          <ProfilePicture disable-hover :full-name="user.data?.fullName" style="font-size: 4rem" >
-          </ProfilePicture>
+          <ProfilePicture disable-hover :full-name="user.data?.fullName" style="font-size: 4rem" />
         </div>
-        <div class="info-row">
-          <div class="label-wrapper">
-            <span class="label">Username</span>
-          </div>
-          <div class="data">
-            <span class="value">{{ user.data?.username }}</span>
-            <ButtonComponent size="icon" style="opacity: 0; pointer-events: none;">
-              ...
-            </ButtonComponent>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label-wrapper">
-            <span class="label">Full Name</span>
-          </div>
-
-          <div class="data">
-            <span class="value">{{ user.data?.fullName }}</span>
-            <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openFullName = !openFullName">···</ButtonComponent>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label-wrapper">
-            <span class="label">Email</span>
-          </div>
-
-          <div class="data">
-            <span class="value">{{ user.data?.email }}</span>
-            <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openEmail = !openEmail">···</ButtonComponent>
-          </div>
-
-        </div>
-
-        <div class="info-row">
-          <div class="label-wrapper">
-            <span class="label">Password</span>
-          </div>
-
-          <div class="data">
-            <span class="value">**********</span>
-            <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openPassword = !openPassword">···</ButtonComponent>
-          </div>
-        </div>
+        <InfoRowComponent label="Username" :value="user.data?.username"/>
+        <InfoRowComponent label="Full Name" :value="user.data?.fullName" @edit="toggleFullNameModal"/>
+        <InfoRowComponent label="Email" :value="user.data?.email" @edit="toggleEmailModal"/>
+        <InfoRowComponent label="Password" value="**********" @edit="togglePasswordModal"/>
       </div>
     </div>
   </PageWrapper>
 </template>
 
-
 <script setup lang="ts">
 import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useUser } from '@/stores/user.ts'
-import ButtonComponent from '@/components/input/ButtonComponent.vue'
-import ModalButtons from '@/components/data/ModalButtons.vue'
-import ModalTitle from '@/components/data/ModalTitle.vue'
-import ModalBody from '@/components/data/ModalBody.vue'
-import { FormKit } from '@formkit/vue'
-import ModalComponent from '@/components/data/ModalComponent.vue'
-import ModalHeader from '@/components/data/ModalHeader.vue'
 import { ref } from 'vue'
 import { UserControllerService } from '@/lib/api/services/UserControllerService.ts';
 import toaster from '@/stores/toaster.ts'
+import ProfileModal from '@/components/data/ProfileModal.vue'
+import InfoRowComponent from '@/components/data/InfoRowComponent.vue'
+import { FormKit } from '@formkit/vue'
 
 const openFullName = ref(false);
 const openEmail = ref(false);
@@ -126,6 +59,18 @@ user.get({username: userId})
 
 const toast = toaster();
 
+const toggleFullNameModal = () => {
+  openFullName.value = !openFullName.value;
+};
+
+const toggleEmailModal = () => {
+  openEmail.value = !openEmail.value;
+};
+
+const togglePasswordModal = () => {
+  openPassword.value = !openPassword.value;
+};
+
 const showPasswordMismatch = () => toast.error({
   title: "Could not update password!",
   description: "Passwords are not matching."
@@ -137,7 +82,6 @@ const updateFullName = async () => {
   const requestBody = {
     fullName: newFullName.value,
   };
-
   try {
     const response = await UserControllerService.updateUserFullName(user.data?.username as string, requestBody);
     console.log(response);
@@ -155,7 +99,6 @@ const updateEmail = async () => {
   const requestBody = {
     email: newEmail.value,
   };
-
   try {
     const response = await UserControllerService.updateUserEmail(user.data?.username as string, requestBody);
     console.log(response);
@@ -167,29 +110,29 @@ const updateEmail = async () => {
   }
 };
 
-const updatePassword = async () => {
+const updatePassword = async () =>
+  {
 
-  if (newPassword.value !== confirmPassword.value) {
+    if (newPassword.value !== confirmPassword.value) {
+      openPassword.value = false;
+      showPasswordMismatch();
+      return;
+    }
+
     openPassword.value = false;
-    showPasswordMismatch();
-    return;
+    const requestBody = {
+      password: newPassword.value,
+    };
+
+    try {
+      await UserControllerService.updateUserPassword(user.data?.username as string, requestBody)
+    } catch (error) {
+      console.error("Failed to update user's password:", error);
+    }
   }
-
-  openPassword.value = false;
-
-  const requestBody = {
-    password: newPassword.value,
-  };
-
-  try {
-    const response = await UserControllerService.updateUserPassword(user.data?.username as string, requestBody);
-  } catch (error) {
-    console.error("Failed to update user's password:", error);
-  }
-};
+;
 
 </script>
-
 <style scoped>
 
 .container {
@@ -218,45 +161,9 @@ const updatePassword = async () => {
   font-size: 1.3rem;
 }
 
-.info-row {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.label-wrapper {
-  width: 100%;
-  height: 100%;
-}
-
-.label {
-  width: fit-content;
-  background: var(--secondary-bg);
-  padding: .2rem .7rem;
-  border-radius: 3px;
-  color: var(--secondary-bg-text)
-}
-
-.data {
-  display: flex;
-  width: fit-content;
-  flex: 1;
-  white-space: nowrap;
-  gap: .5rem;
-  align-items: center;
-}
-
-.value {
-  font-weight: bold;
-  color: #0c66e4;
-  margin-bottom: 0;
-  text-align: right;
-}
-
 @media only screen and (max-width: 1000px) {
   .profile{
     font-size: 0.8rem;
   }
 }
-
 </style>
