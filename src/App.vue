@@ -3,7 +3,12 @@ import { RouterView, useRouter } from 'vue-router'
 import NavigationHeader from './components/navigation/NavigationHeader.vue'
 import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
 import ToasterComponent from '@/components/data/ToasterComponent.vue'
+import { useToken } from '@/stores/token.ts'
+import { OpenAPI } from '@/lib/api'
 const router = useRouter()
+
+const token = useToken();
+OpenAPI.TOKEN = token.token;
 
 const routeButtons: RouteButton[] = [
   {
@@ -13,6 +18,10 @@ const routeButtons: RouteButton[] = [
   {
     label: 'Discover',
     path: '/discover'
+  },
+  {
+    label: 'Profile',
+    path: '/profile'
   }
 ]
 </script>
