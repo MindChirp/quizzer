@@ -64,62 +64,6 @@ const showPasswordMismatch = () => toast.error({
   description: "Passwords are not matching."
 })
 
-const updateFullName = async () => {
-  openFullName.value = false;
-
-  const requestBody = {
-    fullName: newFullName.value,
-  };
-  try {
-    const response = await UserControllerService.updateUserFullName(user.data?.username as string, requestBody);
-    console.log(response);
-    user.get({
-      username: userId
-    })
-  } catch (error) {
-    console.error("Failed to update user's full name:", error);
-  }
-};
-
-const updateEmail = async () => {
-  openEmail.value = false;
-
-  const requestBody = {
-    email: newEmail.value,
-  };
-  try {
-    const response = await UserControllerService.updateUserEmail(user.data?.username as string, requestBody);
-    console.log(response);
-    user.get({
-      username: userId
-    })
-  } catch (error) {
-    console.error("Failed to update user's email:", error);
-  }
-};
-
-const updatePassword = async () =>
-  {
-
-    if (newPassword.value !== confirmPassword.value) {
-      openPassword.value = false;
-      showPasswordMismatch();
-      return;
-    }
-
-    openPassword.value = false;
-    const requestBody = {
-      password: newPassword.value,
-    };
-
-    try {
-      await UserControllerService.updateUserPassword(user.data?.username as string, requestBody)
-    } catch (error) {
-      console.error("Failed to update user's password:", error);
-    }
-  }
-;
-
 </script>
 <style scoped>
 
