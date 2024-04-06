@@ -5,6 +5,7 @@ import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import QuizDetailView from '@/views/QuizDetailView.vue'
+import { checkUserAuth, signOut } from '@/lib/utils/user.ts'
 
 // ????? This should be fixed in the future
 //const BASE_URL = import.meta.env.BASE_URL
@@ -47,12 +48,13 @@ const router = createRouter({
 
 
 router.beforeEach((to, from) => {
+  console.log(to.name);
   if (to.name == "login") return;
   // Check user authentication
-  // if (!isAuthenticated) {
-  //  signOut();
-  //  router.replace("/login")
-  // }
+  if (!checkUserAuth()) {
+    signOut();
+    router.replace("/login")
+  }
 });
 
 export default router
