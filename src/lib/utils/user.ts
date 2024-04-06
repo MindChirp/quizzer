@@ -3,9 +3,8 @@ export const getUserId = () => {
 }
 
 export const signOut = () => {
-  sessionStorage.removeItem("JWT")
-
-  localStorage.removeItem("username")
-
+  sessionStorage.removeItem("accessToken");
+  sessionStorage.removeItem("refreshToken");
+  localStorage.removeItem("username");
   location.reload();
 };

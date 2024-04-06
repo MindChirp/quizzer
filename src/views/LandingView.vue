@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import QuizzerLogo from '@/components/icons/QuizzerLogo.vue'
-import { useToken } from '@/stores/token.ts'
 import { useUser } from '@/stores/user.ts'
 
-//eksempel på hvordan hente ut info
-const token = useToken();
+//Profile picture will not show unless this is here
 const user = useUser();
+user.get({ username: localStorage.getItem('username') as string});
 
-console.log("Her henter jeg token : " + token.token);
-console.log("Her henter jeg user : " + user.get({ username: localStorage.getItem('username') as string }));
 
 </script>
 <template>

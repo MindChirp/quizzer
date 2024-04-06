@@ -23,4 +23,14 @@ export class TokenControllerService {
             mediaType: 'application/json',
         });
     }
+
+    public static refreshToken(refreshToken: string): CancelablePromise<TokenDto> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/token/refresh',
+            body: refreshToken,
+            mediaType: 'text/plain',
+        });
+    }
+
 }
