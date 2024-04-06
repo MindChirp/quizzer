@@ -18,7 +18,7 @@ defineProps<{
         <ButtonComponent variant="ghost" size="icon" title="Remove contributor" @click.prevent><X style="height: 1rem" /></ButtonComponent>
       </div>
     </div>
-    <ButtonComponent variant="primary" style="gap: .5rem; margin-top: .5rem; width: 100%;" @click.prevent><Plus style="height: 1rem" /> Add contributor</ButtonComponent>
+    <ButtonComponent variant="primary" style="margin-top: .5rem; width: 100%;" @click.prevent><Plus style="height: 1rem" /> Add contributor</ButtonComponent>
   </div>
 </template>
 <style scoped>

@@ -3,13 +3,15 @@ import type { QuizDetailsDto } from '@/lib/api'
 import { ref, watch } from 'vue'
 import DropdownComponent, { type OptionType } from '@/components/input/DropdownComponent.vue'
 import ContributorsCard from '@/components/data/ContributorsCard.vue'
-import DividerLine from '@/components/layout/DividerLine.vue'
 import CardComponent from '@/components/data/CardComponent.vue'
+import QuizQuestionsForm from '@/components/forms/QuizQuestionsForm.vue'
+import { useEditor } from '@/stores/quizEdit.ts'
 
 const props = defineProps<{
   quizData?: QuizDetailsDto
 }>()
 
+const quiz = useEditor();
 
 const labels = ref<OptionType[]>([{
   label: "Geography",
@@ -39,9 +41,7 @@ watch(props, () => {
     <div class="title-wrapper">
     <FormKit autofocus placeholder="Quiz title" type="text" style="text-align: center" name="title" class="title" :inner-class="{
       'inner-styling': true
-    }"
-
-    />
+    }" @change.prevent="(e) => quiz.data.title = (e.currentTarget as HTMLElement).value"/>
     </div>
 
     <div class="form-content">
@@ -58,7 +58,7 @@ watch(props, () => {
     </div>
     <div class="card questions">
       <span class="section-title roboto-medium">Questions</span>
-      <DividerLine />
+      <QuizQuestionsForm />
     </div>
   </FormKit>
 </template>
@@ -70,6 +70,7 @@ watch(props, () => {
 
 .section-title {
   font-size: 2rem;
+  margin: 0;
   color: var(--secondary-bg-text)
 }
 

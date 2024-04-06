@@ -16,7 +16,7 @@ const props = defineProps({
   title: String
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'save']);
 
 const close = () => emit('close');
 
