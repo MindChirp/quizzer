@@ -13,9 +13,12 @@ import ModalBody from '@/components/data/ModalBody.vue'
 import ModalHeader from '@/components/data/ModalHeader.vue'
 import ModalButtons from '@/components/data/ModalButtons.vue'
 import { signOut } from '@/lib/utils/user.ts'
+import { useRouter } from 'vue-router'
 
 const sidebarOpen = ref(false);
 const openSignOut = ref(false);
+
+const router = useRouter();
 
 export interface RouteButton {
   label: string,
@@ -32,6 +35,11 @@ defineProps<{
   currentRoute: string,
   routeButtons?: RouteButton[]
 }>()
+
+const signOutUser = () => {
+  signOut();
+  location.reload();
+}
 
 </script>
 <template>
@@ -68,7 +76,7 @@ defineProps<{
           </ModalHeader>
           <ModalBody>You are about to sign out!</ModalBody>
           <ModalButtons>
-            <ButtonComponent variant="primary" @click=signOut>Sign out</ButtonComponent>
+            <ButtonComponent variant="primary" @click=signOutUser>Sign out</ButtonComponent>
             <ButtonComponent variant="secondary" @click="() => openSignOut = false">Cancel</ButtonComponent>
           </ModalButtons>
         </ModalComponent>
