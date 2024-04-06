@@ -24,7 +24,6 @@ import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useUser } from '@/stores/user.ts'
 import { ref } from 'vue'
-import { UserControllerService } from '@/lib/api/services/UserControllerService.ts';
 import toaster from '@/stores/toaster.ts'
 import InfoRowComponent from '@/components/data/InfoRowComponent.vue'
 import ChangeEmailModal from '@/components/data/ChangeEmailModal.vue'
@@ -35,11 +34,6 @@ import InfoRowComponentWithButton from '@/components/data/InfoRowComponentWithBu
 const openFullName = ref(false);
 const openEmail = ref(false);
 const openPassword = ref(false);
-
-const newFullName = ref('');
-const newEmail = ref('');
-const newPassword = ref('');
-const confirmPassword = ref('');
 
 const user = useUser();
 const userId = localStorage.getItem("username") ?? "";

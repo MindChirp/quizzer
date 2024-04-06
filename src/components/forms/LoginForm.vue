@@ -18,7 +18,7 @@ const showError = () => toast.error({
 const loginUser = async (data: User) => {
 
   await token.get({ username: data.username as string, password: data.password as string });
-  if (sessionStorage.getItem("JWT")) {
+  if (localStorage.getItem("refreshToken") && sessionStorage.getItem("accessToken")) {
       router.push("/");
   } else {
     showError();
