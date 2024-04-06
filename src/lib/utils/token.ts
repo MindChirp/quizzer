@@ -1,5 +1,7 @@
 import { OpenAPI, TokenControllerService } from '@/lib/api'
 
+const exprityTimeMinutes = 9;
+
 function tokenNeedsRefresh(token:string) {
   if (!token) return true;
 
@@ -11,7 +13,7 @@ function tokenNeedsRefresh(token:string) {
     const expirationTime = decoded.exp;
 
     // If its less then 3 minutes until token expires
-    return currentTime + 180 >= expirationTime;
+    return currentTime + exprityTimeMinutes*60 >= expirationTime;
 
   } catch (error) {
     console.error("Error decoding token:", error);
