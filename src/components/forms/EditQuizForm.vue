@@ -4,10 +4,12 @@ import { ref, watch } from 'vue'
 import DropdownComponent, { type OptionType } from '@/components/input/DropdownComponent.vue'
 import ContributorsCard from '@/components/data/ContributorsCard.vue'
 import DividerLine from '@/components/layout/DividerLine.vue'
+import CardComponent from '@/components/data/CardComponent.vue'
 
 const props = defineProps<{
   quizData?: QuizDetailsDto
 }>()
+
 
 const labels = ref<OptionType[]>([{
   label: "Geography",
@@ -43,7 +45,7 @@ watch(props, () => {
     </div>
 
     <div class="form-content">
-      <div class="fields card">
+      <CardComponent class="fields">
         <span class="roboto-medium" style="font-size: 15px; margin-bottom: 1rem">Basic info</span>
         <FormKit type="text" placeholder="Description" :wrapper-class="{
           'full-width': true
@@ -51,7 +53,7 @@ watch(props, () => {
           'normal-shadow': true
         }" />
         <DropdownComponent placeholder="Search for categories" :options="labels" v-model="selected" style="width: 100%" />
-      </div>
+      </CardComponent>
       <ContributorsCard :users="[quizData.owner]" />
     </div>
     <div class="card questions">

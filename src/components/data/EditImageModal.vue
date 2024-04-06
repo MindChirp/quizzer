@@ -16,12 +16,12 @@ const props = defineProps({
   title: String
 });
 
-const emit = defineEmits(['close', 'save']);
+const emit = defineEmits(['close']);
 
 const close = () => emit('close');
 
-const submitForm = () => {
-  
+const submitForm = (data: {url: string}) => {
+  emit("save", data.url);
 }
 
 
@@ -34,10 +34,10 @@ const submitForm = () => {
     </ModalHeader>
     <FormKit type="form" submit-label="Change image source" :actions="false" @submit="submitForm">
       <ModalBody>
-        <FormKit name="fullName" validation="required|length:3" type="text" label="New full name" class="input" />
+        <FormKit name="url" validation="required" type="text" label="Image url" class="input" />
       </ModalBody>
       <ModalButtons>
-        <ButtonComponent type="submit" variant="primary">Change name</ButtonComponent>
+        <ButtonComponent type="submit" variant="primary">Set source</ButtonComponent>
         <ButtonComponent variant="secondary" @click.prevent="close" >Cancel</ButtonComponent>
       </ModalButtons>
     </FormKit>

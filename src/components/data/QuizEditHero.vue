@@ -4,10 +4,11 @@ import { EditIcon } from 'lucide-vue-next'
 defineProps<{
   url?: string
 }>()
+
 </script>
 <template>
   <div class="wrapper shadow-5" :style="`background-image: url('${url}')`">
-    <button class="wrapping-button">
+    <button class="wrapping-button" @click="$emit('changeImageSource')">
       <div class="shadow">
           <EditIcon class="icon" style="color: var(--secondary-bg)"/>
       </div>

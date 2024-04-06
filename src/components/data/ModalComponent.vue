@@ -51,9 +51,11 @@ withDefaults(defineProps<ModalProps>(), {
   }
 
   .modal-fg {
+    box-sizing: border-box;
     padding: 1rem;
     height: fit-content;
-    min-width: 500px;
+    min-width: min(500px, 100%);
+    max-width: 100vw;
     border-radius: 0.5rem;
     background: var(--default-bg);
     border: 2px var(--secondary-bg-text);
