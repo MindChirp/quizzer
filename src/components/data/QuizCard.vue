@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import type { QuizDto } from '@/lib/api'
+import type { QuizGeneralDto } from '@/lib/api'
 import TagComponent from '@/components/data/TagComponent.vue'
 
 defineProps<{
-  quiz: QuizDto
+  quiz: QuizGeneralDto
 }>();
 
 
@@ -15,6 +15,7 @@ defineProps<{
     <div class="text">
       <span class="title roboto-medium">{{quiz.title}}</span>
       <span class="description roboto-light">{{quiz.description}}</span>
+      <span>Questions: {{quiz.amountOfQuestions}}</span>
       <div class="labels">
         <TagComponent>Geography</TagComponent>
         <TagComponent>Politics</TagComponent>

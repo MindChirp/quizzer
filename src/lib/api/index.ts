@@ -10,14 +10,15 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 export type { LoginDto } from './models/LoginDto';
 export type { Pageable } from './models/Pageable';
 export type { PageableObject } from './models/PageableObject';
-export type { PageQuizDto } from './models/PageQuizDto';
+export type { PageQuizGeneralDto } from './models/PageQuizGeneralDto';
+export type { QuestionAnswersDto } from './models/QuestionAnswersDto';
 export type { QuestionDto } from './models/QuestionDto';
-export type { QuizDto } from './models/QuizDto';
+export type { QuizDetailsDto } from './models/QuizDetailsDto';
+export type { QuizGeneralDto } from './models/QuizGeneralDto';
 export type { SortObject } from './models/SortObject';
 export type { TokenDto } from './models/TokenDto';
 export type { UserDto } from './models/UserDto';
 
-export { QuestionControllerService } from './services/QuestionControllerService';
 export { QuizControllerService } from './services/QuizControllerService';
 export { TokenControllerService } from './services/TokenControllerService';
 export { UserControllerService } from './services/UserControllerService';

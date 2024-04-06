@@ -2,12 +2,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { QuestionAnswersDto } from './QuestionAnswersDto';
 export type QuestionDto = {
     questionId?: number;
     label?: string;
     imageLink?: string;
     position?: number;
-    alternatives?: string;
+    alternatives?: Array<QuestionAnswersDto>;
     quizId?: string;
 };
 

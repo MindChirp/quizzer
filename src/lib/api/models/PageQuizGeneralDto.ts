@@ -3,18 +3,18 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { PageableObject } from './PageableObject';
-import type { QuizDto } from './QuizDto';
+import type { QuizGeneralDto } from './QuizGeneralDto';
 import type { SortObject } from './SortObject';
-export type PageQuizDto = {
+export type PageQuizGeneralDto = {
     totalPages?: number;
     totalElements?: number;
     size?: number;
-    content?: Array<QuizDto>;
+    content?: Array<QuizGeneralDto>;
     number?: number;
     sort?: SortObject;
-    numberOfElements?: number;
     first?: boolean;
     last?: boolean;
+    numberOfElements?: number;
     pageable?: PageableObject;
     empty?: boolean;
 };
