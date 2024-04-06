@@ -11,7 +11,7 @@ export const useQuizzes = defineStore("quizzes", () => {
     try {
       const res = await QuizControllerService.getPageOfQuizzes({ page });
       error.value = undefined;
-      data.value = res.content;
+      data.value = res.content ?? [];
     } catch (err) {
       error.value = err as ApiError;
     }
@@ -25,3 +25,23 @@ export const useQuizzes = defineStore("quizzes", () => {
     get,
   }
 })
+
+export const useQuiz = defineStore('quiz', () => {
+  const data = ref<QuizDto>();
+  const error = ref<ApiError>();
+
+  async function get({ quizId }: {quizId: string}) {
+    try {
+      // Implement fetching logic
+      const res = await QuizControllerService.getQuiz(quizId);
+      error.value = undefined;
+      data.value = res;
+    } catch (err) {
+      error.value = err as ApiError;
+    }
+  }
+
+  return {
+    get, data, error
+  }
+});

@@ -7,15 +7,17 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
-export type { LoginDTO } from './models/LoginDTO';
+export type { LoginDto } from './models/LoginDto';
 export type { Pageable } from './models/Pageable';
+export type { PageableObject } from './models/PageableObject';
+export type { PageQuizDto } from './models/PageQuizDto';
 export type { QuestionDto } from './models/QuestionDto';
-export type { QuestionEntity } from './models/QuestionEntity';
 export type { QuizDto } from './models/QuizDto';
-export type { QuizEntity } from './models/QuizEntity';
+export type { SortObject } from './models/SortObject';
+export type { TokenDto } from './models/TokenDto';
 export type { UserDto } from './models/UserDto';
-export type { UserEntity } from './models/UserEntity';
 
 export { QuestionControllerService } from './services/QuestionControllerService';
 export { QuizControllerService } from './services/QuizControllerService';
+export { TokenControllerService } from './services/TokenControllerService';
 export { UserControllerService } from './services/UserControllerService';

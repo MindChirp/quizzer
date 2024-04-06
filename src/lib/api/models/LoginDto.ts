@@ -2,12 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { QuizEntity } from './QuizEntity';
-export type UserEntity = {
+export type LoginDto = {
     username?: string;
-    fullName?: string;
-    email?: string;
     password?: string;
-    quizzes?: Array<QuizEntity>;
 };
 

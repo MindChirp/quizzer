@@ -7,6 +7,7 @@ export type QuizDto = {
     quizId?: number;
     title?: string;
     description?: string;
+    imageLink?: string;
     owner?: UserDto;
 };
 
