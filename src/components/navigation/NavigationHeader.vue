@@ -12,6 +12,7 @@ import ModalTitle from '@/components/data/ModalTitle.vue'
 import ModalBody from '@/components/data/ModalBody.vue'
 import ModalHeader from '@/components/data/ModalHeader.vue'
 import ModalButtons from '@/components/data/ModalButtons.vue'
+import { signOut } from '@/lib/utils/user.ts'
 
 const sidebarOpen = ref(false);
 const openSignOut = ref(false);
@@ -31,17 +32,6 @@ defineProps<{
   currentRoute: string,
   routeButtons?: RouteButton[]
 }>()
-
-const signOut = () => {
-  //Clear token
-  sessionStorage.removeItem("JWT")
-
-  //Clear user
-  localStorage.removeItem("username")
-
-  location.reload();
-};
-
 
 </script>
 <template>
