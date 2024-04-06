@@ -6,10 +6,16 @@ import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SideBar from '@/components/navigation/SideBar.vue'
 import { Menu } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
-import toaster from '@/stores/toaster.ts'
 import useScroll from '@/utils/useScroll.ts'
+import ModalComponent from '@/components/data/ModalComponent.vue'
+import ModalTitle from '@/components/data/ModalTitle.vue'
+import ModalBody from '@/components/data/ModalBody.vue'
+import ModalHeader from '@/components/data/ModalHeader.vue'
+import ModalButtons from '@/components/data/ModalButtons.vue'
+import { signOut } from '@/lib/utils/user.ts'
 
 const sidebarOpen = ref(false);
+const openSignOut = ref(false);
 
 export interface RouteButton {
   label: string,
@@ -27,11 +33,6 @@ defineProps<{
   routeButtons?: RouteButton[]
 }>()
 
-const toasterStore = toaster()
-const error = () => toasterStore.default({
-  title: "Could not sign out",
-  description: "This is not implemented yet!",
-})
 </script>
 <template>
   <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
@@ -57,8 +58,21 @@ const error = () => toasterStore.default({
         </template>
       </div>
       <div class="user-section">
-        <ButtonComponent variant="ghost" @click="error">Sign out</ButtonComponent>
+
+        <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openSignOut = !openSignOut">Sign out</ButtonComponent>
         <UserSection />
+
+        <ModalComponent :open="openSignOut" @close-trigger="() => openSignOut = !openSignOut">
+          <ModalHeader>
+            <ModalTitle>Are you sure?</ModalTitle>
+          </ModalHeader>
+          <ModalBody>You are about to sign out!</ModalBody>
+          <ModalButtons>
+            <ButtonComponent variant="primary" @click=signOut>Sign out</ButtonComponent>
+            <ButtonComponent variant="secondary" @click="() => openSignOut = false">Cancel</ButtonComponent>
+          </ModalButtons>
+        </ModalComponent>
+
       </div>
     </div>
   </div>

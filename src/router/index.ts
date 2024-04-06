@@ -3,6 +3,7 @@ import LandingView from '@/views/LandingView.vue'
 import DiscoverView from '@/views/DiscoverView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 import QuizDetailView from '@/views/QuizDetailView.vue'
 
 // ????? This should be fixed in the future
@@ -30,6 +31,11 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterView
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView
     },
     {
       path: '/quiz/:quizId',

@@ -1,25 +1,34 @@
 import { defineStore } from "pinia";
-import { getJwtToken, getUserInfo } from '@/utils/httputils'
-export const useTokenStore = defineStore("token", {
-  state: () => ({
-    loggedInUser: null,
-  }),
+import { ref } from 'vue'
+import { OpenAPI, TokenControllerService } from '@/lib/api'
 
-  actions: {
+export const useToken = defineStore("token", () => {
+  const tokenRef = ref<string>(localStorage.getItem("token") as string);
 
-    async getTokenAndSaveInStore(username: string, password: string) {
-      try {
-        let response = await getJwtToken(username, password);
-        let token = response.data;
-        if (token) {
-          sessionStorage.setItem("JWT", token);
-          let userInfoResponse = await getUserInfo(username, token);
-          this.loggedInUser = userInfoResponse.data;
-        }
-      } catch (err) {
-        console.log(err);
+  const get = async ({ username, password }:
+                       {
+                         username: string,
+                         password: string
+                       }) => {
+    try {
+      const token = await TokenControllerService.generateToken({
+        username,
+        password
+      })
+      if (token?.token) {
+        console.log(token.token)
+        OpenAPI.TOKEN = token.token;
+        sessionStorage.setItem("JWT", token.token as string);
+        localStorage.setItem("username", username);
+        tokenRef.value = token.token;
       }
+    } catch (err) {
+      console.log(err);
     }
+  }
 
-  },
-});
+  return {
+    token: tokenRef, get
+  }
+
+})
