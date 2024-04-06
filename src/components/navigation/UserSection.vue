@@ -3,11 +3,7 @@ import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import { useUser } from '@/stores/user.ts'
 import router from '@/router/index.js'
 
-const username = localStorage.getItem("username") as string;
 const user = useUser();
-user.get({
-  username
-})
 
 const routToProfilePage = () => {
   router.push('/profile')
