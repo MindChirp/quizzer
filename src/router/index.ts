@@ -45,4 +45,14 @@ const router = createRouter({
   ]
 })
 
+
+router.beforeEach((to, from) => {
+  if (to.name == "login") return;
+  // Check user authentication
+  // if (!isAuthenticated) {
+  //  signOut();
+  //  router.replace("/login")
+  // }
+});
+
 export default router
