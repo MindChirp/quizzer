@@ -45,6 +45,7 @@ const toast = toaster();
 </script>
 <template>
   <PageWrapper>
+    <h1 v-if="quiz.error">{{quiz.error?.message}}</h1>
     <QuizHero :url="quiz.data?.imageLink as string" />
     <div class="content">
       <h1 class="roboto-bold title">{{ quiz.data?.title }}</h1>
