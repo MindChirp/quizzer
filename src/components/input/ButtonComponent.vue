@@ -17,7 +17,7 @@ withDefaults(defineProps<ButtonProps>(), {
 </script>
 <template>
   <button class="button roboto-medium" :class="[variant, size]" v-bind="$attrs">
-    <span><slot /></span>
+    <slot />
   </button>
 </template>
 

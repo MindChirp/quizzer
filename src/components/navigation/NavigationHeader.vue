@@ -94,6 +94,7 @@ defineProps<{
   backdrop-filter: blur(10px);
   border: 0px solid #ccc;
   border-bottom-width: 1px;
+  box-sizing: border-box;
   z-index: 100;
   transition: border-bottom-width 150ms ease-in-out;
 }
