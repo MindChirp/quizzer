@@ -4,7 +4,6 @@ import { useUser } from '@/stores/user.ts'
 import router from '@/router/index.js'
 
 const user = useUser();
-
 const routToProfilePage = () => {
   router.push('/profile')
 };

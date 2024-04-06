@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 import { ref } from 'vue'
 import { OpenAPI, TokenControllerService } from '@/lib/api'
 
-export const useToken = defineStore("token", () => {
-  const tokenRef = ref<string>(localStorage.getItem("token") as string);
+export const useToken = defineStore("accessToken", () => {
+  const accessTokenRef = ref<string>(sessionStorage.getItem("accessToken") as string);
 
   const get = async ({ username, password }:
                        {
@@ -11,16 +11,18 @@ export const useToken = defineStore("token", () => {
                          password: string
                        }) => {
     try {
-      const token = await TokenControllerService.generateToken({
+      const response = await TokenControllerService.generateToken({
         username,
         password
       })
-      if (token?.token) {
-        console.log(token.token)
-        OpenAPI.TOKEN = token.token;
-        sessionStorage.setItem("JWT", token.token as string);
+      if (response?.accessToken && response?.refreshToken) {
+        sessionStorage.setItem("accessToken", response.accessToken as string);
+        localStorage.setItem("refreshToken", response.refreshToken as string);
         localStorage.setItem("username", username);
-        tokenRef.value = token.token;
+        OpenAPI.TOKEN = response.accessToken;
+        accessTokenRef.value = response.accessToken;
+        console.log("access " + response.accessToken)
+        console.log("refresh " + response.refreshToken)
       }
     } catch (err) {
       console.log(err);
@@ -28,7 +30,6 @@ export const useToken = defineStore("token", () => {
   }
 
   return {
-    token: tokenRef, get
+    token: accessTokenRef, get
   }
-
 })
