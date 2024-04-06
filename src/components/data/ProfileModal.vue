@@ -7,6 +7,7 @@
       <slot></slot>
     </ModalBody>
     <ModalButtons>
+      <ButtonComponent variant="primary" @click="save">{{ title }}</ButtonComponent>
       <ButtonComponent variant="secondary" @click="close">Cancel</ButtonComponent>
     </ModalButtons>
   </ModalComponent>

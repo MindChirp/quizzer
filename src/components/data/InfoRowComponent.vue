@@ -5,7 +5,7 @@
     </div>
     <div class="data">
       <span class="value">{{ value }}</span>
-      <ButtonComponent variant="ghost" size="icon" @click="$emit('edit')">···</ButtonComponent>
+        <ButtonComponent class="button" variant="ghost" size="icon" @click="$emit('edit')">···</ButtonComponent>
     </div>
   </div>
 </template>
@@ -56,4 +56,8 @@ defineProps({
   text-align: right;
 }
 
+.button {
+  opacity: 0;
+  cursor: default;
+}
 </style>

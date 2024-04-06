@@ -1,33 +1,19 @@
 <template>
   <PageWrapper>
-    <ProfileModal :open="openFullName" @close="toggleFullNameModal" title="Change full name">
-      <FormKit type="form" @submit="updateFullName" submit-label="Change name">
-        <FormKit v-model="newFullName" validation="required|length:3" type="text" label="New full name" class="input" />
-      </FormKit>
-    </ProfileModal>
 
-    <ProfileModal :open="openEmail" @close="toggleEmailModal" title="Change email" @save="updateEmail">
-      <FormKit type="form" @submit="updateEmail" submit-label="Change email">
-        <FormKit v-model="newEmail" validation="required|length:3" type="email" label="New full email" class="input" />
-      </FormKit>
-    </ProfileModal>
-
-    <ProfileModal :open="openPassword" @close="togglePasswordModal" title="Change password" @save="updatePassword">
-      <FormKit type="form" @submit="updatePassword" submit-label="Change password">
-        <FormKit v-model="newPassword" validation="required|length:3" type="password" label="New password" class="input" />
-        <FormKit v-model="confirmPassword" validation="required|length:3" type="password" label="Confirm new password" class="input" />
-      </FormKit>
-    </ProfileModal>
+    <ChangeFullNameModal :open="openFullName" @close="toggleFullNameModal"/>
+    <ChangeEmailModal :open="openEmail" @close="toggleEmailModal"/>
+    <ChangePasswordModal :open="openPassword" @close="togglePasswordModal"/>
 
     <div class="container">
       <div class="profile">
         <div class="profile-picture">
           <ProfilePicture disable-hover :full-name="user.data?.fullName" style="font-size: 4rem" />
         </div>
-        <InfoRowComponent label="Username" :value="user.data?.username"/>
-        <InfoRowComponent label="Full Name" :value="user.data?.fullName" @edit="toggleFullNameModal"/>
-        <InfoRowComponent label="Email" :value="user.data?.email" @edit="toggleEmailModal"/>
-        <InfoRowComponent label="Password" value="**********" @edit="togglePasswordModal"/>
+        <InfoRowComponent label="Username" :value="user.data?.username" />
+        <info-row-component-with-button label="Full Name" :value="user.data?.fullName" @edit="toggleFullNameModal"/>
+        <info-row-component-with-button label="Email" :value="user.data?.email" @edit="toggleEmailModal"/>
+        <info-row-component-with-button label="Password" value="**********" @edit="togglePasswordModal"/>
       </div>
     </div>
   </PageWrapper>
@@ -40,9 +26,11 @@ import { useUser } from '@/stores/user.ts'
 import { ref } from 'vue'
 import { UserControllerService } from '@/lib/api/services/UserControllerService.ts';
 import toaster from '@/stores/toaster.ts'
-import ProfileModal from '@/components/data/ProfileModal.vue'
 import InfoRowComponent from '@/components/data/InfoRowComponent.vue'
-import { FormKit } from '@formkit/vue'
+import ChangeEmailModal from '@/components/data/ChangeEmailModal.vue'
+import ChangeFullNameModal from '@/components/data/ChangeFullNameModal.vue'
+import ChangePasswordModal from '@/components/data/ChangePasswordModal.vue'
+import InfoRowComponentWithButton from '@/components/data/InfoRowComponentWithButton.vue'
 
 const openFullName = ref(false);
 const openEmail = ref(false);
