@@ -8,8 +8,9 @@ import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import { computed } from 'vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import toaster from '@/stores/toaster.ts'
-import { Play, Info } from "lucide-vue-next"
+import { Play } from 'lucide-vue-next'
 import TagComponent from '@/components/data/TagComponent.vue'
+
 const route = useRoute();
 const quizId = route.params.quizId as string
 

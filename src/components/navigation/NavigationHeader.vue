@@ -88,7 +88,7 @@ defineProps<{
   position: fixed;
   top: 0;
   left: 0;
-  width: calc(100% - 2rem);
+  width: 100%;
   height: 3.5rem;
   background: color-mix(in srgb, var(--default-bg) 80%, transparent);
   backdrop-filter: blur(10px);
