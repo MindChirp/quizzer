@@ -4,11 +4,11 @@
 /* eslint-disable */
 import type { SortObject } from './SortObject';
 export type PageableObject = {
-    offset?: number;
-    sort?: SortObject;
-    pageSize?: number;
     pageNumber?: number;
+    pageSize?: number;
     unpaged?: boolean;
     paged?: boolean;
+    offset?: number;
+    sort?: SortObject;
 };
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { QuizDetailsDto } from '@/lib/api'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import DropdownComponent, { type OptionType } from '@/components/input/DropdownComponent.vue'
 import ContributorsCard from '@/components/data/ContributorsCard.vue'
 import CardComponent from '@/components/data/CardComponent.vue'
@@ -29,10 +29,27 @@ const labels = ref<OptionType[]>([{
     value: "sdsfjs4"}
 ]);
 
+const setTitle = (title: string) => {
+  if (!quiz.data) return;
+  quiz.data.title = title;
+}
+
 const selected = ref<OptionType[]>([])
 
 watch(props, () => {
   console.log(props.quizData)
+})
+
+const defaultCategories = computed(() => {
+  const array: OptionType[] = [];
+  quiz.data?.categories?.forEach(e => {
+    array.push({
+      label: e.categoryName ?? '',
+      value: e.categoryName ?? ''
+    })
+  })
+
+  return array;
 })
 
 </script>
@@ -41,7 +58,7 @@ watch(props, () => {
     <div class="title-wrapper">
     <FormKit autofocus placeholder="Quiz title" type="text" style="text-align: center" name="title" class="title" :inner-class="{
       'inner-styling': true
-    }" @change.prevent="(e) => quiz.data.title = (e.currentTarget as HTMLElement).value"/>
+    }" @change.prevent="(e: InputEvent) => setTitle((e.currentTarget as HTMLInputElement).value)"/>
     </div>
 
     <div class="form-content">
@@ -52,7 +69,7 @@ watch(props, () => {
         }" :inner-class="{
           'normal-shadow': true
         }" />
-        <DropdownComponent placeholder="Search for categories" :options="labels" v-model="selected" style="width: 100%" />
+        <DropdownComponent :default-values="defaultCategories" placeholder="Search for categories" :options="labels" v-model="selected" style="width: 100%" />
       </CardComponent>
       <ContributorsCard :users="[quizData.owner]" />
     </div>

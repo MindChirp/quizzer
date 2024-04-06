@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CategoryDto } from './CategoryDto';
 import type { QuestionDto } from './QuestionDto';
 import type { UserDto } from './UserDto';
 export type QuizDetailsDto = {
@@ -10,6 +11,7 @@ export type QuizDetailsDto = {
     description?: string;
     imageLink?: string;
     owner?: UserDto;
+    categories?: Array<CategoryDto>;
     questions?: Array<QuestionDto>;
 };
 

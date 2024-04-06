@@ -7,9 +7,10 @@ import { useQuiz } from '@/stores/quizzes.ts'
 import EditQuizForm from '@/components/forms/EditQuizForm.vue'
 import { ref, watch } from 'vue'
 import EditImageModal from '@/components/data/EditImageModal.vue'
-import { QuizControllerService, type QuizDetailsDto } from '@/lib/api'
+import { ApiError, QuizControllerService, type QuizDetailsDto } from '@/lib/api'
 import { useEditor } from '@/stores/quizEdit.ts'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import toaster from '@/stores/toaster.ts'
 
 const route = useRoute();
 const quizId = route.params.quizId as string
@@ -33,15 +34,27 @@ watch(quiz, () => {
 const setImageUrl = (value: string) => {
   imageModalOpen.value = false;
   editor.setPartial({
-    partial: {
       imageLink: value
-    }
   })
 }
 
-const saveChanges = () => {
+const toast = toaster();
+
+const saveChanges = async () => {
   // Code for saving the quiz details.
-  alert(`Quiz stats: \n - ${editor.data?.questions?.length} questions`)
+  if (!editor.data) return;
+  try {
+    const res = await QuizControllerService.updateQuiz(editor.data);
+    toast.success({
+      title: "Success!",
+      description: "Changes have been saved"
+    })
+  } catch (err) {
+    toast.error({
+      title: "Could not save",
+      description: "Something went wrong, and we could not save your quiz."
+    })
+  }
 }
 
 </script>

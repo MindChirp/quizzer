@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import TagComponent from '@/components/data/TagComponent.vue'
 
 export type OptionType = {
@@ -10,7 +10,8 @@ export type OptionType = {
 const props = withDefaults(defineProps<{
   options: OptionType[],
   placeholder?: string,
-  limit?: number
+  limit?: number,
+  defaultValues?: OptionType[]
 }>(), {
   limit: 5
 });
@@ -22,6 +23,8 @@ const selfDOM = ref<HTMLElement>();
 const selectedValues = defineModel<OptionType[]>({
   required: true
 });
+
+selectedValues.value = props.defaultValues ?? [];
 
 const filteredOptions = computed(() => {
   return props.options.filter((obj) =>

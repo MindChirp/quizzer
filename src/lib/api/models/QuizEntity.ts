@@ -2,15 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CategoryDto } from './CategoryDto';
-import type { UserDto } from './UserDto';
-export type QuizGeneralDto = {
+import type { CategoryEntity } from './CategoryEntity';
+import type { UserEntity } from './UserEntity';
+export type QuizEntity = {
     quizId?: number;
     title?: string;
     description?: string;
+    categories?: Array<CategoryEntity>;
     imageLink?: string;
-    amountOfQuestions?: number;
-    categories?: Array<CategoryDto>;
-    owner?: UserDto;
+    owner?: UserEntity;
 };
 

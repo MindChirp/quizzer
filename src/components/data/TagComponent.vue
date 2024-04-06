@@ -21,5 +21,6 @@
   font-size: .8rem;
   cursor: default;
   user-select: none;
+  text-transform: capitalize;
 }
 </style>

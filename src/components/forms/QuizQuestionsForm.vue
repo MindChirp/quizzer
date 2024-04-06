@@ -4,6 +4,7 @@ import CardComponent from '@/components/data/CardComponent.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import { Plus } from 'lucide-vue-next'
 import type { QuestionAnswersDto, QuestionDto } from '@/lib/api'
+import { nextTick } from 'vue'
 
 const quiz = useEditor();
 
@@ -13,13 +14,18 @@ const setQuestionTitle = (index: number, e: InputEvent) => {
   quiz.questions[index].label = value;
 }
 
+// Adds a question with an empty answer
 const addQuestion = () => {
-  quiz.questions?.push({} as Partial<QuestionDto>)
+  quiz.questions?.push({alternatives: [{}]} as Partial<QuestionDto>)
 }
 
-const addAnswer = (questionIndex: number) => {
-  if (!quiz.questions) return;
-  quiz.questions[questionIndex].alternatives?.push({});
+const addAnswer = async (questionIndex: number) => {
+  if (!quiz.data) return;
+  if (!quiz.data.questions) quiz.data.questions = [];
+  if (quiz.data.questions[questionIndex].alternatives == undefined) {
+    quiz.data.questions[questionIndex].alternatives = [];
+  }
+  quiz.data.questions[questionIndex].alternatives?.push({});
 }
 
 const updateAnswer = (questionIndex: number, answerIndex: number, e: InputEvent) => {

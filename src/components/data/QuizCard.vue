@@ -17,8 +17,7 @@ defineProps<{
       <span class="description roboto-light">{{quiz.description}}</span>
       <span>Questions: {{quiz.amountOfQuestions}}</span>
       <div class="labels">
-        <TagComponent>Geography</TagComponent>
-        <TagComponent>Politics</TagComponent>
+        <TagComponent v-for="(tag, n) in quiz.categories" :key="n">{{tag.categoryName}}</TagComponent>
       </div>
     </div>
     <div class="background" :style="`background-image: url('${quiz.imageLink}');`">

@@ -8,14 +8,14 @@ import type { SortObject } from './SortObject';
 export type PageQuizGeneralDto = {
     totalPages?: number;
     totalElements?: number;
-    size?: number;
-    content?: Array<QuizGeneralDto>;
-    number?: number;
-    sort?: SortObject;
     first?: boolean;
     last?: boolean;
     numberOfElements?: number;
     pageable?: PageableObject;
+    size?: number;
+    content?: Array<QuizGeneralDto>;
+    number?: number;
+    sort?: SortObject;
     empty?: boolean;
 };
 

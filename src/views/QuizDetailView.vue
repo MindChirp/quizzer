@@ -23,23 +23,18 @@ const owner = computed(() => {
   return quiz.data?.owner;
 })
 
-const tags: {tagname: string}[] = [
-  {
-    tagname: "Politics",
-  },
-  {
-    tagname: "War"
-  },
-  {
-    tagname: "Geography"
-  },
-  {
-    tagname: "Animals"
-  }
-]
+const tags = computed(() => {
+  const arr: {tagname: string}[] = [];
+  quiz.data?.categories?.forEach(e => {
+    arr.push({
+      tagname: e.categoryName ?? ''
+    })
+  })
+  return arr;
+})
 
 const modifiedTagList = computed(() => {
-  return tags.length > 2 ? [ ...tags.slice(0, 2), { tagname: `+${tags.length-2}` } ] : tags;
+  return tags.value.length > 2 ? [ ...tags.value.slice(0, 2), { tagname: `+${tags.value.length-2}` } ] : tags.value;
 })
 
 const toast = toaster();

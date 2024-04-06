@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { MessageDto } from '../models/MessageDto';
 import type { Pageable } from '../models/Pageable';
 import type { PageQuizGeneralDto } from '../models/PageQuizGeneralDto';
 import type { QuestionDto } from '../models/QuestionDto';
@@ -24,6 +25,21 @@ export class QuizControllerService {
             query: {
                 'pageable': pageable,
             },
+        });
+    }
+    /**
+     * @param requestBody
+     * @returns MessageDto OK
+     * @throws ApiError
+     */
+    public static updateQuiz(
+        requestBody: QuizDetailsDto,
+    ): CancelablePromise<MessageDto> {
+        return __request(OpenAPI, {
+            method: 'PUT',
+            url: '/api/quizzes',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
     /**
@@ -75,6 +91,25 @@ export class QuizControllerService {
             },
             body: requestBody,
             mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param searchQuery
+     * @param pageable
+     * @returns PageQuizGeneralDto OK
+     * @throws ApiError
+     */
+    public static getFilteredPageOfQuizzes(
+        searchQuery: string,
+        pageable: Pageable,
+    ): CancelablePromise<PageQuizGeneralDto> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/quizzes/filter',
+            query: {
+                'searchQuery': searchQuery,
+                'pageable': pageable,
+            },
         });
     }
 }
