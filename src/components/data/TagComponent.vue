@@ -19,5 +19,7 @@
   place-content: center;
   align-items: center;
   font-size: .8rem;
+  cursor: default;
+  user-select: none;
 }
 </style>

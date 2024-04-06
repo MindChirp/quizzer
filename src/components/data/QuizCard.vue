@@ -20,7 +20,7 @@ defineProps<{
         <TagComponent>Politics</TagComponent>
       </div>
     </div>
-    <div class="background">
+    <div class="background" :style="`background-image: url('${quiz.imageLink}');`">
       <div class="default-gradient gradient" />
       <div class="hover-gradient gradient" />
     </div>
@@ -32,11 +32,11 @@ defineProps<{
   background: var(--default-bg);
   border-radius: 0.5rem;
   cursor: pointer;
-  border: solid 2px var(--secondary-bg);
   overflow: hidden;
   flex-direction: row;
   position: relative;
   transition: all 150ms ease-in-out;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .text {
@@ -56,7 +56,6 @@ defineProps<{
 
 .background {
   & {
-    background-image: url("/mountain-landscape-2031539_1280.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

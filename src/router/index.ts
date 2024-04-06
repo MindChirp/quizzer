@@ -4,6 +4,7 @@ import DiscoverView from '@/views/DiscoverView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import QuizDetailView from '@/views/QuizDetailView.vue'
 
 // ????? This should be fixed in the future
 //const BASE_URL = import.meta.env.BASE_URL
@@ -35,6 +36,11 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: ProfileView
+    },
+    {
+      path: '/quiz/:quizId',
+      name: "Quiz detail",
+      component: QuizDetailView
     }
   ]
 })

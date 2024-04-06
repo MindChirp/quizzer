@@ -7,6 +7,8 @@ import { useQuizzes } from '@/stores/quizzes.ts'
 import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
 import ModalComponent from '@/components/data/ModalComponent.vue'
 import ModalTitle from '@/components/data/ModalTitle.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
@@ -17,7 +19,13 @@ import ModalButtons from '@/components/data/ModalButtons.vue'
 
 const quizzes = useQuizzes();
 const search = ref<string>();
-const open = ref(true);
+const open = ref(false);
+
+const router = useRouter();
+
+const goToQuiz = (quizId: string) => {
+  router.push(`/quiz/${quizId}`);
+}
 
 </script>
 <template>
@@ -52,9 +60,8 @@ const open = ref(true);
         </div>
         <DividerLine />
         <div class="grid">
-          <QuizCard v-for="(item, number) in quizzes.data" :key="number" :quiz="item" />
+            <QuizCard v-for="(item, number) in quizzes.data" :key="number" :quiz="item" @click="() => goToQuiz(item.quizId?.toString() ?? '')" />
         </div>
-
       </div>
     </div>
   </PageWrapper>
