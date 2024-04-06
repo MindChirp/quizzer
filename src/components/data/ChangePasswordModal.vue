@@ -27,6 +27,7 @@ import { FormKit } from '@formkit/vue'
 import { UserControllerService } from '@/lib/api'
 import { getUserId } from '@/lib/utils/user.ts'
 import { useUser } from '@/stores/user.ts'
+import toaster from '@/stores/toaster.ts'
 
 const user = useUser();
 
@@ -37,11 +38,17 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'save']);
 
+const toast = toaster();
+
+const showError = () => toast.error({
+  title: "Password mismatch!",
+  description: "Passwords dont match each-other!"
+})
 const close = () => emit('close');
 const submitForm = async (data: { password: string, confirmPassword: string }) => {
 
   if (data.password !== data.confirmPassword) {
-    console.log("PASSORD MISMATCH ARHGHGHGHGGH")
+    showError();
     return;
   }
 
