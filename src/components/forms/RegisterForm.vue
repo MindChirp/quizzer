@@ -45,7 +45,7 @@ const registerUser = (data:User) => {
       type="text"
       name="fullName"
       id="fullName"
-      validation="required"
+      validation="required|length:3"
       label="Full Name"
       placeholder="Steve Craft"
     />
@@ -54,7 +54,7 @@ const registerUser = (data:User) => {
       type="text"
       name="username"
       id="username"
-      validation="required"
+      validation="required|length:3"
       label="Username"
       placeholder="SteveCraft123"
     />
@@ -63,7 +63,7 @@ const registerUser = (data:User) => {
       type="email"
       name="email"
       id="email"
-      validation="required"
+      validation="required|length:3"
       label="Email"
       placeholder="SteveCraft@mail.com"
     />
@@ -72,7 +72,7 @@ const registerUser = (data:User) => {
       type="password"
       name="password"
       id="password"
-      validation="required"
+      validation="required|length:3"
       label="Password"
     />
   </FormKit>
