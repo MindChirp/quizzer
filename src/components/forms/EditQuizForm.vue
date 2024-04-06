@@ -1,17 +1,53 @@
 <script setup lang="ts">
-import type { QuizDto } from '@/lib/api'
+import type { QuizDetailsDto } from '@/lib/api'
+import { watch } from 'vue'
 
-defineProps<{
-  quizData?: QuizDto
+const props = defineProps<{
+  quizData?: QuizDetailsDto
 }>()
 
-</script>
-<template>
-  <FormKit type="form" :value="quizData" >
+watch(props, () => {
+  console.log(props.quizData)
+})
 
-    <FormKit type="text" name="title"/>
+</script>
+<template v-bind="$attrs">
+  <FormKit type="form" :value="quizData" v-if="quizData" :actions="false" class="title">
+    <div class="title-wrapper">
+    <FormKit autofocus placeholder="Quiz title" type="text" style="text-align: center" name="title" class="title" :inner-class="{
+      'inner-styling': true
+    }"/>
+    </div>
+
+    <FormKit type="text" label="Description" />
+
+    
   </FormKit>
 </template>
 <style scoped>
+.title-wrapper {
+  width: fit-content;
+  margin: auto;
+}
+</style>
+<style>
+  .inner-styling {
+    box-shadow: none !important;
+    border-width: 0 0 2px;
+    border-radius: 0 !important;
+    border-color: var(--secondary-bg);
+    border-style: solid;
+    font-size: 3rem;
+    padding: 0;
+  }
+
+  .inner-styling input {
+    padding: .5rem 0;
+    color: var(--default-bg-text);
+  }
+
+  .inner-styling.small {
+    font-size: 1rem;
+  }
 
 </style>

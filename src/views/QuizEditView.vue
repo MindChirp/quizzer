@@ -17,7 +17,7 @@ quiz.get({
 </script>
 <template>
   <PageWrapper>
-    <QuizEditHero :url="quiz.data?.imageLink"/>
+    <QuizEditHero :url="quiz.data?.imageLink" style="margin-bottom: 2rem"/>
     <EditQuizForm :quiz-data="quiz.data" />
   </PageWrapper>
 </template>
