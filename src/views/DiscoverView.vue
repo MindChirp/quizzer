@@ -8,16 +8,7 @@ import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Dropdown from "primevue/dropdown"
-
-import ModalComponent from '@/components/data/ModalComponent.vue'
-import ModalTitle from '@/components/data/ModalTitle.vue'
-import ButtonComponent from '@/components/input/ButtonComponent.vue'
-import ModalBody from '@/components/data/ModalBody.vue'
-import ModalHeader from '@/components/data/ModalHeader.vue'
-import ModalDescription from '@/components/data/ModalDescription.vue'
-import ModalButtons from '@/components/data/ModalButtons.vue'
-import DropdownComponent, { type OptionType } from '@/components/input/DropdownComponent.vue'
+import { type OptionType } from '@/components/input/DropdownComponent.vue'
 
 const quizzes = useQuizzes();
 const search = ref<string>();
