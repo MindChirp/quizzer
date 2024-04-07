@@ -68,18 +68,20 @@ const deleteAnswer = (questionIndex: number, answerIndex: number) => {
   gap: .5rem;
 }
 
-.answer {
+input.answer {
   background: var(--primary-bg);
   width: 100%;
   height: fit-content;
   min-height: 4rem;
   border-radius: .25rem;
   text-align: center;
-  cursor: pointer;
   transition: background 100ms ease-in-out;
   position: relative;
   border: none;
   color: var(--primary-bg-text);
+  overflow: hidden;
+  box-sizing: border-box;
+  outline: none;
 }
 
 .add-answer, .add-question {
@@ -90,14 +92,11 @@ const deleteAnswer = (questionIndex: number, answerIndex: number) => {
   width: 100%;
   height: fit-content;
   position: relative;
+  overflow: hidden;
 }
 
 .input-wrapper:hover .delete {
-  opacity: 1;
-}
-
-.delete:focus {
-  opacity: 1;
+  display: flex;
 }
 
 .delete {
@@ -106,14 +105,28 @@ const deleteAnswer = (questionIndex: number, answerIndex: number) => {
   top: 50%;
   transform: translate(0,-50%);
   border-radius: .5rem;
-  height: 3rem;
-  width: 3rem;
+  height: 2.5rem;
+  width: 2.5rem;
   background: var(--destructive-fg);
   border: none;
   color: white;
-  opacity: 0;
   cursor: pointer;
-  transition: background 100ms ease-in-out;
+  display: none;
+  transition: background 150ms ease-in-out;
+  animation: pop-in 100ms cubic-bezier(.17,.67,.22,1.37);
+  align-items: center;
+  place-content: center;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translate(0, calc(-50% + 1rem))
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
 }
 
 .delete:hover {
