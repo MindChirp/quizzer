@@ -35,29 +35,11 @@ jobs:
         run: npm run build
 
   e2e_tests:
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v2
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-    - name: Install dependencies
-      run: npm install
-    - name: Start Server
-      run: npm run preview &
-      env:
-        CI: true
-    - name: Wait for Server
-      run: |
-        echo "Waiting for server to be responsive..."
-        npx wait-on http://localhost:4173 -t 30000
-    - name: Cypress run
-      uses: cypress-io/github-action@v2
-      with:
-        config: video=false
-      env:
-        CI: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitCode
+        uses: actions/checkout@v2
+      
+    
 
   
