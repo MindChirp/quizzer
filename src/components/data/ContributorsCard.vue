@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { UserControllerService, type UserDto } from '@/lib/api'
+import { type UserDto } from '@/lib/api'
 import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
-import { X, Plus } from 'lucide-vue-next'
+import { Plus, X } from 'lucide-vue-next'
 import ModalComponent from '@/components/data/ModalComponent.vue'
 import ModalHeader from '@/components/data/ModalHeader.vue'
 import ModalTitle from '@/components/data/ModalTitle.vue'
