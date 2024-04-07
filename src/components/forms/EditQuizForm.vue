@@ -41,10 +41,6 @@ const defaultCategories = computed(() => {
 
 const selectedCategories = ref<OptionType[]>(defaultCategories.value)
 
-watch(props, () => {
-  console.log(props.quizData)
-})
-
 const updateCategories = (data: OptionType[]) => {
   selectedCategories.value = data;
   if (!quiz.data) return;

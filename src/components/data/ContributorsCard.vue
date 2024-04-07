@@ -33,6 +33,11 @@ watch(search, () => {
 
 const addUserAsCollaborator = (user: UserDto) => {
   open.value = false;
+  if (!props.users) {
+    emit('change', [user]);
+    return;
+  }
+
   emit('change', [...props.users, user]);
 }
 
