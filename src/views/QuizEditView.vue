@@ -52,18 +52,26 @@ const saveChanges = async () => {
   } catch (err) {
     toast.error({
       title: "Could not save",
-      description: "Something went wrong, and we could not save your quiz."
+      description: `Something went wrong, and we could not save your quiz. ${(err as ApiError).message}`
     })
   }
 }
 
 </script>
 <template>
-  <EditImageModal :open="imageModalOpen" @close="() => imageModalOpen = false" @save="setImageUrl" />
+
   <PageWrapper>
-    <QuizEditHero :url="quiz.data?.imageLink" style="margin-bottom: 2rem" @change-image-source="() => imageModalOpen = !imageModalOpen"/>
-    <EditQuizForm :quiz-data="quiz.data" />
-    <ButtonComponent style="width: 100%; margin-top: 1rem;" @click.prevent="saveChanges">Save changes</ButtonComponent>
+    <div v-if="quiz.error">
+      <h1>Could not load this quiz.</h1>
+    </div>
+    <template v-if="!quiz.error">
+      <FormKit type="form" :value="quiz.data" v-if="quiz.data" :actions="false" class="title" @submit="saveChanges">
+        <EditImageModal :open="imageModalOpen" @close="() => imageModalOpen = false" @save="setImageUrl" />
+        <QuizEditHero :url="quiz.data?.imageLink" style="margin-bottom: 2rem" @change-image-source="() => imageModalOpen = !imageModalOpen"/>
+        <EditQuizForm :quiz-data="quiz.data" />
+        <ButtonComponent style="width: 100%; margin-top: 1rem;">Save changes</ButtonComponent>
+      </FormKit>
+    </template>
   </PageWrapper>
 </template>
 <style scoped>

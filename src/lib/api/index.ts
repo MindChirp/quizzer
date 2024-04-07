@@ -15,7 +15,7 @@ export type { Pageable } from './models/Pageable';
 export type { PageableObject } from './models/PageableObject';
 export type { PageQuizGeneralDto } from './models/PageQuizGeneralDto';
 export type { QuestionAnswersDto } from './models/QuestionAnswersDto';
-export type { QuestionDto } from './models/QuestionDto';
+export { QuestionDto } from './models/QuestionDto';
 export type { QuizDetailsDto } from './models/QuizDetailsDto';
 export type { QuizEntity } from './models/QuizEntity';
 export type { QuizGeneralDto } from './models/QuizGeneralDto';

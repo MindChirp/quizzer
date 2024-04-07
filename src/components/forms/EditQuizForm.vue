@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import type { QuizDetailsDto } from '@/lib/api'
+import type { CategoryDto, QuizDetailsDto } from '@/lib/api'
 import { computed, ref, watch } from 'vue'
-import DropdownComponent, { type OptionType } from '@/components/input/DropdownComponent.vue'
+import DropdownComponent, { type OptionType } from '@/components/input/TagSelector.vue'
 import ContributorsCard from '@/components/data/ContributorsCard.vue'
 import CardComponent from '@/components/data/CardComponent.vue'
 import QuizQuestionsForm from '@/components/forms/QuizQuestionsForm.vue'
 import { useEditor } from '@/stores/quizEdit.ts'
+import { useCategories } from '@/stores/categories.ts'
 
 const props = defineProps<{
   quizData?: QuizDetailsDto
@@ -13,32 +14,18 @@ const props = defineProps<{
 
 const quiz = useEditor();
 
-const labels = ref<OptionType[]>([{
-  label: "Geography",
-  value: "ur mother"
-},
-  {label: "Politics",
-  value: "sdsfjs"},
-  {label: "Flags",
-    value: "sdsfjs1"},
-  {label: "Insects",
-    value: "sdsfjs2"},
-  {label: "Nature",
-    value: "sdsfjs3"},
-  {label: "Entertainment",
-    value: "sdsfjs4"}
-]);
-
 const setTitle = (title: string) => {
   if (!quiz.data) return;
   quiz.data.title = title;
 }
 
-const selected = ref<OptionType[]>([])
+const emit = defineEmits(['submit']);
 
-watch(props, () => {
-  console.log(props.quizData)
-})
+const setDescription = (desc: string) => {
+  if (!quiz.data) return;
+  quiz.data.description = desc;
+}
+
 
 const defaultCategories = computed(() => {
   const array: OptionType[] = [];
@@ -52,32 +39,70 @@ const defaultCategories = computed(() => {
   return array;
 })
 
+const selectedCategories = ref<OptionType[]>(defaultCategories.value)
+
+watch(props, () => {
+  console.log(props.quizData)
+})
+
+const updateCategories = (data: OptionType[]) => {
+  selectedCategories.value = data;
+  if (!quiz.data) return;
+  const objs: CategoryDto[] = [];
+  selectedCategories.value.forEach(cat => {
+    objs.push({
+      categoryName: cat.value,
+      quizzes: undefined
+    })
+  })
+
+  quiz.setPartial({
+    categories: objs
+  })
+}
+
+const categories = useCategories();
+const allCategories = computed(() => {
+  const array: OptionType[] = [];
+  categories.data.forEach(cat => {
+    array.push({
+      label: cat.categoryName ?? '',
+      value: cat.categoryName ?? ''
+    })
+  })
+  return array;
+})
+
+
 </script>
 <template v-bind="$attrs">
-  <FormKit type="form" :value="quizData" v-if="quizData" :actions="false" class="title">
     <div class="title-wrapper">
     <FormKit autofocus placeholder="Quiz title" type="text" style="text-align: center" name="title" class="title" :inner-class="{
       'inner-styling': true
-    }" @change.prevent="(e: InputEvent) => setTitle((e.currentTarget as HTMLInputElement).value)"/>
+    }" @change.prevent="(e: InputEvent) => setTitle((e.currentTarget as HTMLInputElement).value)" validation="required"/>
     </div>
 
     <div class="form-content">
       <CardComponent class="fields">
         <span class="roboto-medium" style="font-size: 15px; margin-bottom: 1rem">Basic info</span>
         <FormKit type="text" placeholder="Description" :wrapper-class="{
-          'full-width': true
-        }" :inner-class="{
-          'normal-shadow': true
-        }" />
-        <DropdownComponent :default-values="defaultCategories" placeholder="Search for categories" :options="labels" v-model="selected" style="width: 100%" />
+            'full-width': true
+          }" :inner-class="{
+            'normal-shadow': true
+          }"
+          @change.prevent="(e: InputEvent) => setDescription((e.currentTarget as HTMLInputElement).value)"
+          :value="quizData?.description"
+           validation="required"
+          name="description"
+        />
+        <DropdownComponent placeholder="Search for categories" :default-values="defaultCategories" :options="allCategories" style="width: 100%" @change="updateCategories"/>
       </CardComponent>
-      <ContributorsCard :users="[quizData.owner]" />
+      <ContributorsCard :users="[quizData?.owner]" />
     </div>
     <div class="card questions">
       <span class="section-title roboto-medium">Questions</span>
       <QuizQuestionsForm />
     </div>
-  </FormKit>
 </template>
 <style scoped>
 .form-content {

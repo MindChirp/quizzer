@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useQuiz } from '@/stores/quizzes.ts'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import QuizHero from '@/components/data/QuizHero.vue'
 import DividerLine from '@/components/layout/DividerLine.vue'
 import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import { computed } from 'vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import toaster from '@/stores/toaster.ts'
-import { Play } from 'lucide-vue-next'
+import { Edit, Play } from 'lucide-vue-next'
 import TagComponent from '@/components/data/TagComponent.vue'
+import { getUserId } from '@/lib/utils/user.ts'
 
 const route = useRoute();
 const quizId = route.params.quizId as string
+const router = useRouter();
 
 const quiz = useQuiz();
 quiz.get({
@@ -37,6 +39,10 @@ const modifiedTagList = computed(() => {
   return tags.value.length > 2 ? [ ...tags.value.slice(0, 2), { tagname: `+${tags.value.length-2}` } ] : tags.value;
 })
 
+const editQuiz = () => {
+  router.push(`/quiz/edit/${quizId}`);
+}
+
 const toast = toaster();
 </script>
 <template>
@@ -59,6 +65,7 @@ const toast = toaster();
         </div>
       </div>
       <ButtonComponent size="large" class="play-button shadow-5" @click="() => toast.success({title:'Advarsel', description: 'Du er stygg!! 😁🤣🤣😂😂😂🤪'})"><Play fill="white"/></ButtonComponent>
+      <ButtonComponent v-if="owner?.username === getUserId()" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
     </div>
   </PageWrapper>
 </template>
@@ -140,6 +147,11 @@ const toast = toaster();
 
 .stats .tags > span {
   height: fit-content;
+}
+
+.edit-button {
+  width: 50%;
+  margin: 1rem auto 0;
 }
 
 @media screen and (max-width: 1000px) {

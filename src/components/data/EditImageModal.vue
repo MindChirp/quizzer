@@ -34,7 +34,7 @@ const submitForm = (data: {url: string}) => {
     </ModalHeader>
     <FormKit type="form" submit-label="Change image source" :actions="false" @submit="submitForm">
       <ModalBody>
-        <FormKit name="url" validation="required" type="text" label="Image url" class="input" />
+        <FormKit name="url" type="text" label="Image url" class="input" />
       </ModalBody>
       <ModalButtons>
         <ButtonComponent type="submit" variant="primary">Set source</ButtonComponent>

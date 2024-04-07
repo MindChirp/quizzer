@@ -16,7 +16,7 @@ export const useCategories = defineStore("categories", () => {
     }
   }
 
-  get()
+  get();
 
   return {
     data,

@@ -8,7 +8,7 @@ import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { type OptionType } from '@/components/input/DropdownComponent.vue'
+import { type OptionType } from '@/components/input/TagSelector.vue'
 import { QuizControllerService } from '@/lib/api'
 
 const quizzes = useQuizzes();

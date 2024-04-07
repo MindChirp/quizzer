@@ -15,7 +15,7 @@ defineProps<{
     <div class="text">
       <span class="title roboto-medium">{{quiz.title}}</span>
       <span class="description roboto-light">{{quiz.description}}</span>
-      <span>Questions: {{quiz.amountOfQuestions}}</span>
+      <span>{{quiz.amountOfQuestions}} {{ quiz.amountOfQuestions != 1 ? 'Questions' : 'Question' }}</span>
       <div class="labels">
         <TagComponent v-for="(tag, n) in quiz.categories" :key="n">{{tag.categoryName}}</TagComponent>
       </div>
@@ -98,7 +98,7 @@ defineProps<{
 
 .labels {
   display: flex;
-  gap: 1rem;
+  gap: .5rem;
   margin-top: .5rem;
 }
 

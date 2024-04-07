@@ -20,11 +20,11 @@ const search = ref('');
 const open = ref(false);
 const selfDOM = ref<HTMLElement>();
 
-const selectedValues = defineModel<OptionType[]>({
-  required: true
-});
+const emit = defineEmits(['change']);
 
-selectedValues.value = props.defaultValues ?? [];
+const selectedValues = ref<OptionType[]>(props.defaultValues ?? []);
+
+emit('change', selectedValues.value)
 
 const filteredOptions = computed(() => {
   return props.options.filter((obj) =>
@@ -33,17 +33,17 @@ const filteredOptions = computed(() => {
     .slice(0, 5);
 })
 
-
 const handleInputKey = (e: KeyboardEvent) => {
   if (e.code == "Enter") {
     // Add the first element in the filteredOptions list to selectedValues
     selectItem(0);
+    e.preventDefault();
     return;
   }
 
   if (e.code == "Backspace" && !search.value) {
     // Delete the last selected value
-    selectedValues.value.pop();
+    removeLastItem();
     return;
   }
 
@@ -56,10 +56,16 @@ const handleInputKey = (e: KeyboardEvent) => {
   if (!open.value) open.value = true;
 }
 
+const removeLastItem = () => {
+  selectedValues.value.pop();
+  emit('change', selectedValues.value)
+}
+
 const selectItem = (index: number) => {
   if (!filteredOptions.value[index] || selectedValues.value?.length >= props.limit) return;
   selectedValues.value?.push(filteredOptions.value[index]);
   search.value = "";
+  emit('change', selectedValues.value);
 }
 
 const clickOutsideHandler = (e: Event) => {
@@ -143,6 +149,7 @@ input {
   overflow-y: auto;
   max-height: 200px;
   display: flex;
+  text-transform: capitalize;
 }
 
 .no-results {
