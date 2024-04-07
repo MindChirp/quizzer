@@ -21,7 +21,7 @@ export class UserControllerService {
     ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/api/users/{username}/update',
+            url: '/api/users/{username}',
             path: {
                 'username': username,
             },
