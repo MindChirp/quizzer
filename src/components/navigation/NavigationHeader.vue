@@ -4,7 +4,7 @@ import NavigationButton from '@/components/navigation/NavigationButton.vue'
 import UserSection from '@/components/navigation/UserSection.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import SideBar from '@/components/navigation/SideBar.vue'
-import { Menu } from 'lucide-vue-next'
+import { Menu, Plus } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 import useScroll from '@/lib/utils/useScroll.ts'
 import ModalComponent from '@/components/data/ModalComponent.vue'
@@ -16,7 +16,6 @@ import { signOut } from '@/lib/utils/user.ts'
 import { useRouter } from 'vue-router'
 
 const sidebarOpen = ref(false);
-const openSignOut = ref(false);
 
 const router = useRouter();
 
@@ -36,9 +35,9 @@ defineProps<{
   routeButtons?: RouteButton[]
 }>()
 
-const signOutUser = () => {
-  signOut();
-  location.reload();
+
+const createQuiz = () => {
+  router.push("/quiz/create");
 }
 
 </script>
@@ -66,21 +65,8 @@ const signOutUser = () => {
         </template>
       </div>
       <div class="user-section">
-
-        <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => openSignOut = !openSignOut">Sign out</ButtonComponent>
+        <ButtonComponent title="Create quiz" size="icon" style="padding: .2rem" @click="createQuiz"><Plus style="height: 1rem; width: 1rem"/></ButtonComponent>
         <UserSection />
-
-        <ModalComponent :open="openSignOut" @close-trigger="() => openSignOut = !openSignOut">
-          <ModalHeader>
-            <ModalTitle>Are you sure?</ModalTitle>
-          </ModalHeader>
-          <ModalBody>You are about to sign out!</ModalBody>
-          <ModalButtons>
-            <ButtonComponent variant="primary" @click=signOutUser>Sign out</ButtonComponent>
-            <ButtonComponent variant="secondary" @click="() => openSignOut = false">Cancel</ButtonComponent>
-          </ModalButtons>
-        </ModalComponent>
-
       </div>
     </div>
   </div>
@@ -102,6 +88,7 @@ const signOutUser = () => {
   backdrop-filter: blur(10px);
   border: 0px solid #ccc;
   border-bottom-width: 1px;
+  box-sizing: border-box;
   z-index: 100;
   transition: border-bottom-width 150ms ease-in-out;
 }

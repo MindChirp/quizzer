@@ -5,10 +5,17 @@ import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
 import ToasterComponent from '@/components/data/ToasterComponent.vue'
 import { useToken } from '@/stores/token.ts'
 import { OpenAPI } from '@/lib/api'
+import { useUser } from '@/stores/user.ts'
+import { getUserId } from '@/lib/utils/user.ts'
 const router = useRouter()
 
 const token = useToken();
 OpenAPI.TOKEN = token.token;
+
+const user = useUser();
+user.get({
+  username: getUserId() ?? ''
+})
 
 const routeButtons: RouteButton[] = [
   {

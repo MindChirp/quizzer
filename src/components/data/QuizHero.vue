@@ -4,7 +4,7 @@ defineProps<{
 }>()
 </script>
 <template>
-<div class="wrapper" :style="`background-image: url('${url})`">
+<div class="wrapper" :style="`background-image: url('${url}')`">
   <div class="gradient" />
 </div>
 </template>

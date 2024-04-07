@@ -25,7 +25,7 @@ export async function refreshTokenIfNeeded(token: string) {
   if (tokenNeedsRefresh(token)) {
     try {
       // Assuming refreshToken now returns a promise that resolves to the new tokens
-      const response = await TokenControllerService.refreshToken(token);
+      const response = await TokenControllerService.refreshAccessToken(token);
       const newAccessToken = response.accessToken;
 
       sessionStorage.setItem('accessToken', newAccessToken as string);

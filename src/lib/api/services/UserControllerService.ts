@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { LoginDto } from '../models/LoginDto';
+import type { MessageDto } from '../models/MessageDto';
 import type { UserDto } from '../models/UserDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -11,13 +12,13 @@ export class UserControllerService {
     /**
      * @param username
      * @param requestBody
-     * @returns string OK
+     * @returns MessageDto OK
      * @throws ApiError
      */
     public static updateUserPassword(
         username: string,
         requestBody: UserDto,
-    ): CancelablePromise<string> {
+    ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/users/{username}/update-password',
@@ -31,13 +32,13 @@ export class UserControllerService {
     /**
      * @param username
      * @param requestBody
-     * @returns string OK
+     * @returns MessageDto OK
      * @throws ApiError
      */
     public static updateUserFullName(
         username: string,
         requestBody: UserDto,
-    ): CancelablePromise<string> {
+    ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/users/{username}/update-fullname',
@@ -51,13 +52,13 @@ export class UserControllerService {
     /**
      * @param username
      * @param requestBody
-     * @returns string OK
+     * @returns MessageDto OK
      * @throws ApiError
      */
     public static updateUserEmail(
         username: string,
         requestBody: UserDto,
-    ): CancelablePromise<string> {
+    ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/users/{username}/update-email',
@@ -85,12 +86,12 @@ export class UserControllerService {
     }
     /**
      * @param requestBody
-     * @returns string OK
+     * @returns MessageDto OK
      * @throws ApiError
      */
     public static loginUser(
         requestBody: LoginDto,
-    ): CancelablePromise<string> {
+    ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/users/login',

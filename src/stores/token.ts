@@ -11,7 +11,7 @@ export const useToken = defineStore("accessToken", () => {
                          password: string
                        }) => {
     try {
-      const response = await TokenControllerService.generateToken({
+      const response = await TokenControllerService.authenticateUser({
         username,
         password
       })
