@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CategoryDto } from '../models/CategoryDto';
+import type { MessageDto } from '../models/MessageDto';
 import type { Pageable } from '../models/Pageable';
 import type { PageQuizGeneralDto } from '../models/PageQuizGeneralDto';
 import type { QuestionDto } from '../models/QuestionDto';
@@ -29,12 +30,12 @@ export class QuizControllerService {
     }
     /**
      * @param requestBody
-     * @returns string OK
+     * @returns MessageDto OK
      * @throws ApiError
      */
     public static updateQuiz(
         requestBody: QuizDetailsDto,
-    ): CancelablePromise<string> {
+    ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/quizzes',

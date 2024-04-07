@@ -2,10 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UserEntity = {
-    username?: string;
-    fullName?: string;
-    email?: string;
-    password?: string;
+export type MessageDto = {
+    message?: string;
 };
 

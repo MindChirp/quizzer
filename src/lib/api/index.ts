@@ -10,6 +10,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 export type { CategoryDto } from './models/CategoryDto';
 export type { CategoryEntity } from './models/CategoryEntity';
 export type { LoginDto } from './models/LoginDto';
+export type { MessageDto } from './models/MessageDto';
 export type { Pageable } from './models/Pageable';
 export type { PageableObject } from './models/PageableObject';
 export type { PageQuizGeneralDto } from './models/PageQuizGeneralDto';
