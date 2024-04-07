@@ -42,6 +42,16 @@ const deleteAnswer = (questionIndex: number, answerIndex: number) => {
   quiz.questions[questionIndex].alternatives = (quiz.questions[questionIndex].alternatives as QuestionAnswersDto[]).filter((e, _i) => _i != answerIndex)
 }
 
+const toggleCorrectness = (questionIndex: number, answerIndex: number) => {
+  if (!quiz.questions) return;
+  if (!quiz.questions[questionIndex]) return
+  if (quiz.questions[questionIndex].alternatives?.length == 0) return;
+  const item = quiz.questions[questionIndex].alternatives?.[answerIndex]
+
+  // @ts-ignore
+  quiz.questions[questionIndex].alternatives[answerIndex].isCorrect = !item?.isCorrect
+}
+
 </script>
 <template>
 <div style="margin-top: 1rem; display: flex; gap: .5rem; flex-direction: column">
@@ -51,13 +61,14 @@ const deleteAnswer = (questionIndex: number, answerIndex: number) => {
     <FormKit type="text" placeholder="What's your question?" :value="item.label" @change.prevent="(e: InputEvent) => setQuestionTitle(number, e)" validation="required" :name="`question-${number}`"/>
     <div class="answers">
       <div class="input-wrapper" v-for="(ans, n) in item.alternatives" :key="n">
-        <input class="answer roboto-medium" :value="ans.answer" @change.prevent="(e: Event) => updateAnswer(number, n, e as InputEvent)" placeholder="Type something"/>
+        <input class="answer roboto-medium" :class="{markedCorrect: ans.isCorrect}" :value="ans.answer" @change.prevent="(e: Event) => updateAnswer(number, n, e as InputEvent)" placeholder="Type something"/>
         <button class="delete" @click.prevent="() => deleteAnswer(number, n)"><Trash style="height: 1rem;"/></button>
+        <button class="toggle-correctness" @click.prevent="() => toggleCorrectness(number, n)" :title="`Mark as ${ans.isCorrect ? 'incorrect' : 'correct'}`">Set {{ ans.isCorrect ? 'incorrect' : 'correct' }}</button>
       </div>
     </div>
-    <ButtonComponent variant="ghost" class="add-answer" @click.prevent="() => addAnswer(number)"><Plus style="height: 1rem"/> Add answer</ButtonComponent>
+    <ButtonComponent variant="ghost" class="add-answer" @click.prevent="() => addAnswer(number)" title="Add answer"><Plus style="height: 1rem"/> Add answer</ButtonComponent>
   </CardComponent>
-  <ButtonComponent variant="secondary" class="add-question" @click.prevent="addQuestion"><Plus style="height: 1rem"/> Add question</ButtonComponent>
+  <ButtonComponent variant="secondary" class="add-question" @click.prevent="addQuestion" title="Add question"><Plus style="height: 1rem"/> Add question</ButtonComponent>
 </div>
 </template>
 <style scoped>
@@ -85,6 +96,12 @@ input.answer {
   outline: none;
 }
 
+input.answer.markedCorrect {
+  background: var(--success-fg);
+  color: var(--success-fg-text)
+}
+
+
 .add-answer, .add-question {
   margin-top: 1rem;
 }
@@ -96,11 +113,11 @@ input.answer {
   overflow: hidden;
 }
 
-.input-wrapper:hover .delete {
+.input-wrapper:hover .delete, .input-wrapper:hover .toggle-correctness {
   display: flex;
 }
 
-.delete {
+.delete, .toggle-correctness {
   position: absolute;
   right: .5rem;
   top: 50%;
@@ -117,6 +134,12 @@ input.answer {
   animation: pop-in 100ms cubic-bezier(.17,.67,.22,1.37);
   align-items: center;
   place-content: center;
+}
+.toggle-correctness {
+  left: .5rem;
+  background: var(--primary-fg);
+  right: auto;
+  width: fit-content;
 }
 
 @keyframes pop-in {

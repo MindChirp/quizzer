@@ -48,6 +48,13 @@ const playQuiz = () => {
   router.push(`/${ROUTES.QUIZ_PLAY.path}/${quizId}`)
 }
 
+const displayEditButton = computed(() => {
+  const isOwner = owner.value?.username === getUserId();
+  const isCollaborator = quiz.data?.collaborators?.find(e => e.username === getUserId());
+
+  return isOwner || isCollaborator;
+})
+
 const toast = toaster();
 </script>
 <template>
@@ -70,7 +77,7 @@ const toast = toaster();
         </div>
       </div>
       <ButtonComponent size="large" class="play-button shadow-5" @click="playQuiz"><Play fill="white"/></ButtonComponent>
-      <ButtonComponent v-if="owner?.username === getUserId()" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
+      <ButtonComponent v-if="displayEditButton" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
     </div>
   </PageWrapper>
 </template>

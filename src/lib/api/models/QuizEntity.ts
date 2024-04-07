@@ -10,6 +10,7 @@ export type QuizEntity = {
     description?: string;
     categories?: Array<CategoryEntity>;
     imageLink?: string;
+    collaborators?: Array<UserEntity>;
     owner?: UserEntity;
 };
 

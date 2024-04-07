@@ -14,6 +14,7 @@ export type { MessageDto } from './models/MessageDto';
 export type { Pageable } from './models/Pageable';
 export type { PageableObject } from './models/PageableObject';
 export type { PageQuizGeneralDto } from './models/PageQuizGeneralDto';
+export type { PageUserDto } from './models/PageUserDto';
 export type { QuestionAnswersDto } from './models/QuestionAnswersDto';
 export { QuestionDto } from './models/QuestionDto';
 export type { QuizDetailsDto } from './models/QuizDetailsDto';

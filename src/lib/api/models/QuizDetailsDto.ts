@@ -12,6 +12,7 @@ export type QuizDetailsDto = {
     imageLink?: string;
     owner?: UserDto;
     categories?: Array<CategoryDto>;
+    collaborators?: Array<UserDto>;
     questions?: Array<QuestionDto>;
 };
 

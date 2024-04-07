@@ -73,6 +73,11 @@ const allCategories = computed(() => {
   return array;
 })
 
+const setCollaborators = (users: UserDto[]) => {
+  if (!quiz.data) return;
+  quiz.data.collaborators = users;
+}
+
 
 </script>
 <template v-bind="$attrs">
@@ -97,7 +102,7 @@ const allCategories = computed(() => {
         />
         <DropdownComponent placeholder="Search for categories" :default-values="defaultCategories" :options="allCategories" style="width: 100%" @change="updateCategories"/>
       </CardComponent>
-      <ContributorsCard :users="[quizData?.owner as UserDto]" />
+      <ContributorsCard :users="quiz.data?.collaborators" @change="setCollaborators" />
     </div>
     <div class="card questions">
       <span class="section-title roboto-medium">Questions</span>
