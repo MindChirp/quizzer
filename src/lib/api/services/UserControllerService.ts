@@ -15,13 +15,13 @@ export class UserControllerService {
      * @returns MessageDto OK
      * @throws ApiError
      */
-    public static updateUserPassword(
+    public static updateUser(
         username: string,
         requestBody: UserDto,
     ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/users/{username}/update-password',
+            method: 'PATCH',
+            url: '/api/users/{username}/update',
             path: {
                 'username': username,
             },
@@ -29,46 +29,7 @@ export class UserControllerService {
             mediaType: 'application/json',
         });
     }
-    /**
-     * @param username
-     * @param requestBody
-     * @returns MessageDto OK
-     * @throws ApiError
-     */
-    public static updateUserFullName(
-        username: string,
-        requestBody: UserDto,
-    ): CancelablePromise<MessageDto> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/users/{username}/update-fullname',
-            path: {
-                'username': username,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-    /**
-     * @param username
-     * @param requestBody
-     * @returns MessageDto OK
-     * @throws ApiError
-     */
-    public static updateUserEmail(
-        username: string,
-        requestBody: UserDto,
-    ): CancelablePromise<MessageDto> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/users/{username}/update-email',
-            path: {
-                'username': username,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
+
     /**
      * @param requestBody
      * @returns UserDto OK
