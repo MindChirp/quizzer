@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CategoryDto, QuizDetailsDto } from '@/lib/api'
+import type { CategoryDto, QuizDetailsDto, UserDto } from '@/lib/api'
 import { computed, ref, watch } from 'vue'
 import DropdownComponent, { type OptionType } from '@/components/input/TagSelector.vue'
 import ContributorsCard from '@/components/data/ContributorsCard.vue'
@@ -97,7 +97,7 @@ const allCategories = computed(() => {
         />
         <DropdownComponent placeholder="Search for categories" :default-values="defaultCategories" :options="allCategories" style="width: 100%" @change="updateCategories"/>
       </CardComponent>
-      <ContributorsCard :users="[quizData?.owner]" />
+      <ContributorsCard :users="[quizData?.owner as UserDto]" />
     </div>
     <div class="card questions">
       <span class="section-title roboto-medium">Questions</span>
