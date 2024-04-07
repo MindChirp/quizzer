@@ -49,7 +49,7 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   console.log(to.name);
-  if (to.name == "login") return;
+  if (to.name == "login" || to.name =="register") return;
   // Check user authentication
   if (!checkUserAuth()) {
     signOut();
