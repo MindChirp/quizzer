@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import type { QuizDto } from '@/lib/api'
+import type { QuizGeneralDto } from '@/lib/api'
 import TagComponent from '@/components/data/TagComponent.vue'
 
 defineProps<{
-  quiz: QuizDto
+  quiz: QuizGeneralDto
 }>();
 
 
@@ -15,9 +15,9 @@ defineProps<{
     <div class="text">
       <span class="title roboto-medium">{{quiz.title}}</span>
       <span class="description roboto-light">{{quiz.description}}</span>
+      <span>{{quiz.amountOfQuestions}} {{ quiz.amountOfQuestions != 1 ? 'Questions' : 'Question' }}</span>
       <div class="labels">
-        <TagComponent>Geography</TagComponent>
-        <TagComponent>Politics</TagComponent>
+        <TagComponent v-for="(tag, n) in quiz.categories" :key="n">{{tag.categoryName}}</TagComponent>
       </div>
     </div>
     <div class="background" :style="`background-image: url('${quiz.imageLink}');`">
@@ -98,7 +98,7 @@ defineProps<{
 
 .labels {
   display: flex;
-  gap: 1rem;
+  gap: .5rem;
   margin-top: .5rem;
 }
 

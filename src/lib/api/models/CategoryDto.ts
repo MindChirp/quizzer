@@ -2,8 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type TokenDto = {
-    accessToken?: string
-    refreshToken?: string;
+import type { QuizEntity } from './QuizEntity';
+export type CategoryDto = {
+    categoryName?: string;
+    quizzes?: Array<QuizEntity>;
 };
 

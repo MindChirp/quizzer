@@ -17,7 +17,7 @@ withDefaults(defineProps<ButtonProps>(), {
 </script>
 <template>
   <button class="button roboto-medium" :class="[variant, size]" v-bind="$attrs">
-    <span><slot /></span>
+    <slot />
   </button>
 </template>
 
@@ -37,7 +37,9 @@ withDefaults(defineProps<ButtonProps>(), {
   width: fit-content;
   white-space: nowrap;
   box-sizing: border-box;
+  gap: .5rem;
 }
+
 
 .button:disabled {
   opacity: 0.5;

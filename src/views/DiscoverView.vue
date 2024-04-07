@@ -6,15 +6,22 @@ import DividerLine from '@/components/layout/DividerLine.vue'
 import { useQuizzes } from '@/stores/quizzes.ts'
 import QuizCard from '@/components/data/QuizCard.vue'
 import { FormKit } from '@formkit/vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { type OptionType } from '@/components/input/DropdownComponent.vue'
+import { type OptionType } from '@/components/input/TagSelector.vue'
+import { QuizControllerService } from '@/lib/api'
 
 const quizzes = useQuizzes();
 const search = ref<string>();
 const open = ref(false);
 
 const router = useRouter();
+
+watch(search, async () => {
+  quizzes.data = (await QuizControllerService.getFilteredPageOfQuizzes(search.value ?? '', {
+    page: 0
+  })).content ?? [];
+})
 
 const goToQuiz = (quizId: string) => {
   router.push(`/quiz/${quizId}`);

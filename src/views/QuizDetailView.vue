@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useQuiz } from '@/stores/quizzes.ts'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import QuizHero from '@/components/data/QuizHero.vue'
 import DividerLine from '@/components/layout/DividerLine.vue'
 import ProfilePicture from '@/components/icons/ProfilePicture.vue'
 import { computed } from 'vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import toaster from '@/stores/toaster.ts'
-import { Play } from 'lucide-vue-next'
+import { Edit, Play } from 'lucide-vue-next'
 import TagComponent from '@/components/data/TagComponent.vue'
+import { getUserId } from '@/lib/utils/user.ts'
 
 const route = useRoute();
 const quizId = route.params.quizId as string
+const router = useRouter();
 
 const quiz = useQuiz();
 quiz.get({
@@ -23,29 +25,29 @@ const owner = computed(() => {
   return quiz.data?.owner;
 })
 
-const tags: {tagname: string}[] = [
-  {
-    tagname: "Politics",
-  },
-  {
-    tagname: "War"
-  },
-  {
-    tagname: "Geography"
-  },
-  {
-    tagname: "Animals"
-  }
-]
+const tags = computed(() => {
+  const arr: {tagname: string}[] = [];
+  quiz.data?.categories?.forEach(e => {
+    arr.push({
+      tagname: e.categoryName ?? ''
+    })
+  })
+  return arr;
+})
 
 const modifiedTagList = computed(() => {
-  return tags.length > 2 ? [ ...tags.slice(0, 2), { tagname: `+${tags.length-2}` } ] : tags;
+  return tags.value.length > 2 ? [ ...tags.value.slice(0, 2), { tagname: `+${tags.value.length-2}` } ] : tags.value;
 })
+
+const editQuiz = () => {
+  router.push(`/quiz/edit/${quizId}`);
+}
 
 const toast = toaster();
 </script>
 <template>
   <PageWrapper>
+    <h1 v-if="quiz.error">{{quiz.error?.message}}</h1>
     <QuizHero :url="quiz.data?.imageLink as string" />
     <div class="content">
       <h1 class="roboto-bold title">{{ quiz.data?.title }}</h1>
@@ -56,13 +58,14 @@ const toast = toaster();
       </div>
       <DividerLine style="width: 50%; margin: 1rem auto 0;"/>
       <div class="stats">
-        <span>20 Questions</span>
+        <span>{{ quiz.data?.questions?.length }} {{ quiz.data?.questions?.length != 1 ? 'Questions' : 'Question' }}</span>
         <span>Different question types</span>
         <div class="tags">
           <TagComponent v-for="(tag, number) in modifiedTagList" :key="number" style="text-transform: capitalize">{{tag.tagname}}</TagComponent>
         </div>
       </div>
       <ButtonComponent size="large" class="play-button shadow-5" @click="() => toast.success({title:'Advarsel', description: 'Du er stygg!! 😁🤣🤣😂😂😂🤪'})"><Play fill="white"/></ButtonComponent>
+      <ButtonComponent v-if="owner?.username === getUserId()" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
     </div>
   </PageWrapper>
 </template>
@@ -144,6 +147,11 @@ const toast = toaster();
 
 .stats .tags > span {
   height: fit-content;
+}
+
+.edit-button {
+  width: 50%;
+  margin: 1rem auto 0;
 }
 
 @media screen and (max-width: 1000px) {

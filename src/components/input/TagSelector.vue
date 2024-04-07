@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import TagComponent from '@/components/data/TagComponent.vue'
 
 export type OptionType = {
@@ -7,38 +7,43 @@ export type OptionType = {
   value: string;
 }
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   options: OptionType[],
   placeholder?: string,
-}>();
+  limit?: number,
+  defaultValues?: OptionType[]
+}>(), {
+  limit: 5
+});
 
 const search = ref('');
 const open = ref(false);
 const selfDOM = ref<HTMLElement>();
 
-const selectedValues = defineModel<OptionType[]>({
-  required: true
-});
+const emit = defineEmits(['change']);
+
+const selectedValues = ref<OptionType[]>(props.defaultValues ?? []);
+
+emit('change', selectedValues.value)
 
 const filteredOptions = computed(() => {
   return props.options.filter((obj) =>
     obj.label.toLowerCase().includes(search.value?.toLowerCase() ?? '')
-    && !selectedValues.value.find(s => obj.label == s.label))
+    && !selectedValues.value.find(s => obj.value == s.value))
     .slice(0, 5);
 })
 
-
 const handleInputKey = (e: KeyboardEvent) => {
-
   if (e.code == "Enter") {
     // Add the first element in the filteredOptions list to selectedValues
     selectItem(0);
+    e.preventDefault();
     return;
   }
 
   if (e.code == "Backspace" && !search.value) {
     // Delete the last selected value
-    selectedValues.value.pop();
+    removeLastItem();
     return;
   }
 
@@ -51,10 +56,16 @@ const handleInputKey = (e: KeyboardEvent) => {
   if (!open.value) open.value = true;
 }
 
+const removeLastItem = () => {
+  selectedValues.value.pop();
+  emit('change', selectedValues.value)
+}
+
 const selectItem = (index: number) => {
-  if (!filteredOptions.value[index]) return;
+  if (!filteredOptions.value[index] || selectedValues.value?.length >= props.limit) return;
   selectedValues.value?.push(filteredOptions.value[index]);
   search.value = "";
+  emit('change', selectedValues.value);
 }
 
 const clickOutsideHandler = (e: Event) => {
@@ -82,7 +93,7 @@ onUnmounted(() => {
       <input :placeholder="placeholder" v-model="search" @keydown="handleInputKey" @focus="() => open = true"/>
     </div>
     <div class="options" v-if="open">
-      <button class="option" v-for="(option, number) in filteredOptions" :key="number" @click="() => selectItem(number)">{{option.label}}</button>
+      <a class="option" v-for="(option, number) in filteredOptions" :key="number" @click.prevent="() => selectItem(number)">{{option.label}}</a>
       <span v-if="filteredOptions.length == 0" class="no-results roboto-bold">No results found</span>
     </div>
   </div>
@@ -99,15 +110,23 @@ onUnmounted(() => {
   padding: 0 .5rem;
   border-radius: 6px;
   border: solid 1px var(--secondary-fg);
+  box-sizing: border-box;
+}
+
+.input:has(input:focus) {
+  border-color: var(--primary-fg);
+  border-width: 1px;
 }
 
 input {
-  padding: .5rem 0;
+  padding: 0.75rem 0;
+  font-size: 15px;
   border: 0;
   height: 100%;
   width: 100%;
   outline: none;
 }
+
 
 .labels {
   display: flex;
@@ -130,6 +149,7 @@ input {
   overflow-y: auto;
   max-height: 200px;
   display: flex;
+  text-transform: capitalize;
 }
 
 .no-results {
@@ -145,6 +165,7 @@ input {
   background: transparent;
   border: none;
   text-align: left;
+  box-sizing: border-box;
 }
 
 .option:first-of-type {
