@@ -10,25 +10,11 @@ import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import { ref, watch } from 'vue'
 
 const editor = useEditor();
-
-const quiz = useQuiz();
-quiz.data = {
-  categories: [],
-  questions: [],
-  title: '',
-  description: '',
-  imageLink: '',
-  owner: undefined,
-}
+editor.set({
+  quiz: {}
+})
 
 const imageModalOpen = ref(false);
-
-watch(quiz, () => {
-  if (!quiz.data) return;
-  editor.set({
-    quiz: quiz.data
-  })
-})
 
 const setImageUrl = (value: string) => {
   imageModalOpen.value = false;
@@ -43,17 +29,12 @@ const saveChanges = () => {
 </script>
 <template>
   <PageWrapper>
-    <div v-if="quiz.error">
-      <h1>Could not load this quiz.</h1>
-    </div>
-    <template v-if="!quiz.error">
-      <FormKit type="form" :value="quiz.data" v-if="quiz.data" :actions="false" class="title" @submit="saveChanges">
+      <FormKit type="form" :value="editor.data" v-if="editor.data" :actions="false" class="title" @submit="saveChanges">
         <EditImageModal :open="imageModalOpen" @close="() => imageModalOpen = false" @save="setImageUrl" />
-        <QuizEditHero :url="quiz.data?.imageLink" style="margin-bottom: 2rem" @change-image-source="() => imageModalOpen = !imageModalOpen"/>
-        <EditQuizForm :quiz-data="quiz.data" />
+        <QuizEditHero :url="editor.data?.imageLink" style="margin-bottom: 2rem" @change-image-source="() => imageModalOpen = !imageModalOpen"/>
+        <EditQuizForm :quiz-data="editor.data" />
         <ButtonComponent style="width: 100%; margin-top: 1rem;">Save changes</ButtonComponent>
       </FormKit>
-    </template>
   </PageWrapper>
 </template>
 <style scoped>
