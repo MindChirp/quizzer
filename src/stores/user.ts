@@ -14,9 +14,9 @@ export const useUser = defineStore('user', () => {
   const get = async ({ username }: {username: string}) => {
     OpenAPI.TOKEN = sessionStorage.getItem("accessToken") ?? '';
     try {
+      await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
       data.value = await UserControllerService.getUser(username);
 
-      refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
 
       error.value = undefined;
     } catch (err) {

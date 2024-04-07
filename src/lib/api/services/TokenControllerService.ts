@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { LoginDto } from '../models/LoginDto';
+import type { TokenDto } from '../models/TokenDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -24,12 +25,12 @@ export class TokenControllerService {
     }
     /**
      * @param requestBody
-     * @returns string OK
+     * @returns TokenDto OK
      * @throws ApiError
      */
     public static refreshAccessToken(
-        requestBody: string,
-    ): CancelablePromise<Record<string, string>> {
+        requestBody: TokenDto,
+    ): CancelablePromise<TokenDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/token/refresh',

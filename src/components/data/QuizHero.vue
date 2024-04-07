@@ -4,12 +4,12 @@ defineProps<{
 }>()
 </script>
 <template>
-<div class="wrapper" :style="`background-image: url('${url}')`">
+<div class="question-wrapper" :style="`background-image: url('${url}')`">
   <div class="gradient" />
 </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   top: 0;
   position: absolute;
   width: 100%;

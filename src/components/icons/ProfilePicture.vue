@@ -28,7 +28,7 @@ const colors = computed(() => {
 
 </script>
 <template>
-  <div class="wrapper">
+  <div class="question-wrapper">
   <div class="border" :style="colors.borderBackground" v-if="!disableHover"/>
   <div class="profile-picture" :style="[colors.backgroundColor]">
     <!-- User initials -->
@@ -38,7 +38,7 @@ const colors = computed(() => {
 </template>
 <style scoped>
 
-.wrapper {
+.question-wrapper {
   height: fit-content;
   width: fit-content;
   position: relative;
@@ -57,7 +57,7 @@ const colors = computed(() => {
 
 }
 
-.wrapper:has(.profile-picture:hover) .border {
+.question-wrapper:has(.profile-picture:hover) .border {
   transform: translate(-50%,-50%) scale(1.5);
 }
 

@@ -43,6 +43,10 @@ const editQuiz = () => {
   router.push(`/quiz/edit/${quizId}`);
 }
 
+const playQuiz = () => {
+  router.push(`/play/${quizId}`)
+}
+
 const toast = toaster();
 </script>
 <template>
@@ -64,7 +68,7 @@ const toast = toaster();
           <TagComponent v-for="(tag, number) in modifiedTagList" :key="number" style="text-transform: capitalize">{{tag.tagname}}</TagComponent>
         </div>
       </div>
-      <ButtonComponent size="large" class="play-button shadow-5" @click="() => toast.success({title:'Advarsel', description: 'Du er stygg!! 😁🤣🤣😂😂😂🤪'})"><Play fill="white"/></ButtonComponent>
+      <ButtonComponent size="large" class="play-button shadow-5" @click="playQuiz"><Play fill="white"/></ButtonComponent>
       <ButtonComponent v-if="owner?.username === getUserId()" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
     </div>
   </PageWrapper>
@@ -155,7 +159,7 @@ const toast = toaster();
 }
 
 @media screen and (max-width: 1000px) {
-  .play-button {
+  .play-button, .edit-button {
     width: 100%;
   }
 }

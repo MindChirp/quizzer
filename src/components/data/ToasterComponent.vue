@@ -14,7 +14,7 @@ const toastStore = toaster();
 
 <template>
   <Teleport to="body">
-    <div v-if="toastStore.toasts.length" class="wrapper">
+    <div v-if="toastStore.toasts.length" class="question-wrapper">
       <div
         v-for="toast in toastStore.toasts"
         :class="['inner', toastClassMap[toast.status]]"
@@ -41,7 +41,7 @@ const toastStore = toaster();
     }
   }
 
-  .wrapper {
+  .question-wrapper {
     position: fixed;
     bottom: 3%;
     right: 5%;
@@ -95,7 +95,7 @@ const toastStore = toaster();
   }
 
   @media screen and (max-width: 1000px) {
-    .wrapper {
+    .question-wrapper {
       top: 3%;
       bottom: unset;
       right: 50%;

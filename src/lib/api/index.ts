@@ -20,6 +20,7 @@ export type { QuizDetailsDto } from './models/QuizDetailsDto';
 export type { QuizEntity } from './models/QuizEntity';
 export type { QuizGeneralDto } from './models/QuizGeneralDto';
 export type { SortObject } from './models/SortObject';
+export type { TokenDto } from './models/TokenDto';
 export type { UserDto } from './models/UserDto';
 export type { UserEntity } from './models/UserEntity';
 

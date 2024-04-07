@@ -85,7 +85,7 @@ onUnmounted(() => {
 
 </script>
 <template>
-  <div class="wrapper" v-bind="$attrs" ref="selfDOM">
+  <div class="question-wrapper" v-bind="$attrs" ref="selfDOM">
     <div class="input">
       <div class="labels" v-if="selectedValues.length > 0">
         <TagComponent v-for="(value, number) in selectedValues" :key="number">{{value.label}}</TagComponent>
@@ -99,7 +99,7 @@ onUnmounted(() => {
   </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   width: fit-content;
   position: relative;
 }

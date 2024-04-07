@@ -2,14 +2,14 @@
 
 </script>
 <template>
-  <div class="wrapper">
+  <div class="question-wrapper">
     <span class="roboto-medium">
       <slot />
     </span>
   </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   background: var(--secondary-bg);
   color: var(--secondary-fg-text);
   padding: 0.1rem 0.4rem;

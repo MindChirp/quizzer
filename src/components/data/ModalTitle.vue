@@ -1,15 +1,15 @@
 <script setup lang="ts"></script>
 <template>
-<div class="wrapper">
+<div class="question-wrapper">
   <h2 class="roboto-medium"><slot /></h2>
 </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   width: 100%;
 }
 
-.wrapper h2 {
+.question-wrapper h2 {
   margin: 0;
 }
 </style>

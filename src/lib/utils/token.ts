@@ -12,8 +12,9 @@ function tokenNeedsRefresh(token:string) {
     const currentTime = Math.floor(Date.now() / 1000);
     const expirationTime = decoded.exp;
 
+
     // If its less then 3 minutes until token expires
-    return currentTime + exprityTimeMinutes*60 >= expirationTime;
+    return (currentTime + exprityTimeMinutes*60) >= expirationTime;
 
   } catch (error) {
     console.error("Error decoding token:", error);
@@ -25,9 +26,10 @@ export async function refreshTokenIfNeeded(token: string) {
   if (tokenNeedsRefresh(token)) {
     try {
       // Assuming refreshToken now returns a promise that resolves to the new tokens
-      const response = await TokenControllerService.refreshAccessToken(token);
-      const newAccessToken = response.accessToken;
-
+      const response = await TokenControllerService.refreshAccessToken({
+        token
+      });
+      const newAccessToken = response.token;
       sessionStorage.setItem('accessToken', newAccessToken as string);
       OpenAPI.TOKEN = newAccessToken;
 
