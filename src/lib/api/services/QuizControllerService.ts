@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MessageDto } from '../models/MessageDto';
+import type { CategoryDto } from '../models/CategoryDto';
 import type { Pageable } from '../models/Pageable';
 import type { PageQuizGeneralDto } from '../models/PageQuizGeneralDto';
 import type { QuestionDto } from '../models/QuestionDto';
@@ -29,12 +29,12 @@ export class QuizControllerService {
     }
     /**
      * @param requestBody
-     * @returns MessageDto OK
+     * @returns string OK
      * @throws ApiError
      */
     public static updateQuiz(
         requestBody: QuizDetailsDto,
-    ): CancelablePromise<MessageDto> {
+    ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/quizzes',
@@ -110,6 +110,16 @@ export class QuizControllerService {
                 'searchQuery': searchQuery,
                 'pageable': pageable,
             },
+        });
+    }
+    /**
+     * @returns CategoryDto OK
+     * @throws ApiError
+     */
+    public static getCategories(): CancelablePromise<Array<CategoryDto>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/quizzes/categories',
         });
     }
 }
