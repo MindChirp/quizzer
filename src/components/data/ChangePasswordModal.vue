@@ -53,7 +53,7 @@ const submitForm = async (data: { password: string, confirmPassword: string }) =
   }
 
   try {
-    await UserControllerService.updateUserPassword(getUserId() ?? '', {
+    await UserControllerService.updateUser(getUserId() ?? '', {
       password: data.password
     })
     user.get({username:getUserId() ?? ''});

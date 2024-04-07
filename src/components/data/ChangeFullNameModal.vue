@@ -40,7 +40,7 @@ const close = () => emit('close');
 
 const submitForm = async (data: { fullName: string }) => {
   try {
-    await UserControllerService.updateUserFullName(getUserId() ?? '', {
+    await UserControllerService.updateUser(getUserId() ?? '', {
       fullName: data.fullName
     })
     user.get({username:getUserId() ?? ''});

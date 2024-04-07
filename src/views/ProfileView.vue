@@ -20,7 +20,7 @@
         <div class="profile-picture">
           <ProfilePicture disable-hover :full-name="user.data?.fullName" style="font-size: 4rem" />
         </div>
-        <InfoRowComponentWithButton label="Username" :value="user.data?.username" />
+        <InfoRowComponent label="Username" :value="user.data?.username" />
         <InfoRowComponentWithButton label="Full Name" :value="user.data?.fullName" @edit="toggleFullNameModal"/>
         <InfoRowComponentWithButton label="Email" :value="user.data?.email" @edit="toggleEmailModal"/>
         <InfoRowComponentWithButton label="Password" value="**********" @edit="togglePasswordModal"/>
@@ -49,6 +49,7 @@ import ModalTitle from '@/components/data/ModalTitle.vue'
 import ModalBody from '@/components/data/ModalBody.vue'
 import { signOut } from '@/lib/utils/user.ts'
 import InfoRowComponentWithButton from '@/components/data/InfoRowComponentWithButton.vue'
+import InfoRowComponent from '@/components/data/InfoRowComponent.vue'
 
 const openSignOut = ref(false);
 const openFullName = ref(false);
