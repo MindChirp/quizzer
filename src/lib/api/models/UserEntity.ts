@@ -3,9 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type UserEntity = {
-    username?: string;
-    fullName?: string;
-    email?: string;
-    password?: string;
-};
-
+  username?: string
+  fullName?: string
+  email?: string
+  password?: string
+}
+export type TokenDto = {
+  accessToken?: string
+  refreshToken?: string
+}

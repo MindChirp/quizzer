@@ -6,6 +6,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import QuizDetailView from '@/views/QuizDetailView.vue'
 import QuizEditView from '@/views/QuizEditView.vue'
+import { checkUserAuth, signOut } from '@/lib/utils/user.ts'
 
 // ????? This should be fixed in the future
 //const BASE_URL = import.meta.env.BASE_URL
@@ -40,15 +41,25 @@ const router = createRouter({
     },
     {
       path: '/quiz/:quizId',
-      name: "Quiz detail",
+      name: 'Quiz detail',
       component: QuizDetailView
     },
     {
       path: '/quiz/edit/:quizId',
-      name: "Edit quiz",
+      name: 'Edit quiz',
       component: QuizEditView
     }
   ]
+})
+
+router.beforeEach((to, from) => {
+  console.log(to.name)
+  if (to.name == 'login') return
+  // Check user authentication
+  if (!checkUserAuth()) {
+    signOut()
+    router.replace('/login')
+  }
 })
 
 export default router
