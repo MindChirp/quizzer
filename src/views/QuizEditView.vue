@@ -64,10 +64,10 @@ const saveChanges = async () => {
     <div v-if="quiz.error">
       <h1>Could not load this quiz.</h1>
     </div>
-    <template v-if="!quiz.error">
+    <template v-if="!quiz.error && editor.data">
+      <EditImageModal :open="imageModalOpen" @close="() => imageModalOpen = false" @save="setImageUrl" />
       <FormKit type="form" :value="quiz.data" v-if="quiz.data" :actions="false" class="title" @submit="saveChanges">
-        <EditImageModal :open="imageModalOpen" @close="() => imageModalOpen = false" @save="setImageUrl" />
-        <QuizEditHero :url="quiz.data?.imageLink" style="margin-bottom: 2rem" @change-image-source="() => imageModalOpen = !imageModalOpen"/>
+        <QuizEditHero :url="editor.data.imageLink" style="margin-bottom: 2rem" @change-image-source="() => imageModalOpen = true"/>
         <EditQuizForm :quiz-data="quiz.data" />
         <ButtonComponent style="width: 100%; margin-top: 1rem;">Save changes</ButtonComponent>
       </FormKit>

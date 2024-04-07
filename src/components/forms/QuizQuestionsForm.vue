@@ -16,7 +16,9 @@ const setQuestionTitle = (index: number, e: InputEvent) => {
 
 // Adds a question with an empty answer
 const addQuestion = () => {
-  quiz.questions?.push({alternatives: [{}]} as Partial<QuestionDto>)
+  if (!quiz.data) return;
+  if (!quiz.data.questions) quiz.data.questions = [];
+  quiz.data.questions.push({alternatives: [{}]} as Partial<QuestionDto>)
 }
 
 const addAnswer = async (questionIndex: number) => {
