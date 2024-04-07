@@ -45,12 +45,9 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-      - name: Start Server
-        run: npm run preview & sleep 10
-      - name: Wait for Server
-        run: npx wait-on http://localhost:4173
-      - name: Run E2E tests
-        run: npx cypress run --e2e
+      - name: Start Server and Run Tests
+        run: npm run test:e2e
         env:
           CI: true
   
+    
