@@ -8,7 +8,9 @@ console.log(props.numberOfQuestions, props.currentNumber)
 </script>
 <template>
   <div class="question-wrapper">
-    <div class="strip" v-for="n in numberOfQuestions" :key="n" :class="{completed: n <= (currentNumber ?? 0)+1}" />
+    <div class="strip" v-for="n in numberOfQuestions" :key="n" :class="{completed: n <= (currentNumber ?? 0)+1}">
+      <div class="background" />
+    </div>
   </div>
 </template>
 <style scoped>
@@ -24,10 +26,17 @@ console.log(props.numberOfQuestions, props.currentNumber)
   height: 5px;
   border-radius: 3px;
   background: var(--primary-bg);
-
+  overflow: hidden;
 }
 
-.completed {
-  background: var(--primary-fg);
+.strip.completed .background {
+  width: 100%;
+}
+
+.strip .background {
+  width: 0;
+  height: 100%;
+  background-color: var(--primary-fg);
+  transition: width 500ms cubic-bezier(.55,0,.82,.16);
 }
 </style>

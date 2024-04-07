@@ -4,7 +4,6 @@ import CardComponent from '@/components/data/CardComponent.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import { Plus, Trash } from 'lucide-vue-next'
 import type { QuestionAnswersDto, QuestionDto } from '@/lib/api'
-import { nextTick } from 'vue'
 
 const quiz = useEditor();
 

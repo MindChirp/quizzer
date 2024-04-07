@@ -53,6 +53,8 @@ watch(quiz, () => {
   currentQuestion.value = quiz.data?.questions?.[0];
 })
 
+const selectedAnswers = ref<QuestionAnswersDto[]>([])
+
 const questionNumber = ref<number>(0);
 
 const quizFinished = ref(false);
@@ -64,6 +66,7 @@ const quizResults = ref<{
 }>();
 
 const handleChoice = (choice: QuestionAnswersDto) => {
+  selectedAnswers.value.push(choice);
   selectNextQuestion();
 }
 
