@@ -1,6 +1,11 @@
 <script setup lang="ts">
 
 import { CheckIcon, TimerIcon, TrophyIcon } from 'lucide-vue-next'
+import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const router = useRouter();
+const route = useRoute();
 
 withDefaults(defineProps<{
   time?: number,
@@ -11,6 +16,10 @@ withDefaults(defineProps<{
   score: 0,
   correctAnswers: 0
 })
+
+const goToQuizDetail = () => {
+  router.push(`/quiz/${route.params.quizId}`)
+}
 </script>
 <template>
   <div class="wrapper">
@@ -33,6 +42,7 @@ withDefaults(defineProps<{
           <span class="roboto-bold">{{ score }} Score</span>
         </div>
       </div>
+      <ButtonComponent style="width: 100%; margin-top: 1rem;" @click="goToQuizDetail">Go back to quiz page</ButtonComponent>
     </div>
   </div>
 </template>

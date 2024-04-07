@@ -11,9 +11,10 @@ import toaster from '@/stores/toaster.ts'
 import { Edit, Play } from 'lucide-vue-next'
 import TagComponent from '@/components/data/TagComponent.vue'
 import { getUserId } from '@/lib/utils/user.ts'
+import { ROUTES } from '@/router'
 
 const route = useRoute();
-const quizId = route.params.quizId as string
+const quizId = route.params[ROUTES.QUIZ_DETAIL.param] as string
 const router = useRouter();
 
 const quiz = useQuiz();
@@ -40,11 +41,11 @@ const modifiedTagList = computed(() => {
 })
 
 const editQuiz = () => {
-  router.push(`/quiz/edit/${quizId}`);
+  router.push(`/${ROUTES.QUIZ_EDIT.path}/${quizId}`);
 }
 
 const playQuiz = () => {
-  router.push(`/play/${quizId}`)
+  router.push(`/${ROUTES.QUIZ_PLAY.path}/${quizId}`)
 }
 
 const toast = toaster();
@@ -76,7 +77,7 @@ const toast = toaster();
 <style scoped>
 .content {
   color: var(--default-bg-text);
-  margin-top: 25rem;
+  margin-top: 15rem;
   animation: fade-in 500ms ease-in-out .25s both;
 }
 

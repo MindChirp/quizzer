@@ -33,9 +33,8 @@ watch(quiz, () => {
 
 const setImageUrl = (value: string) => {
   imageModalOpen.value = false;
-  editor.setPartial({
-      imageLink: value
-  })
+  if (!editor.data) return;
+  editor.data.imageLink = value;
 }
 
 const toast = toaster();

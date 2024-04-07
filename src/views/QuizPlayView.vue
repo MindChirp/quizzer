@@ -7,11 +7,12 @@ import type { QuestionAnswersDto, QuestionDto } from '@/lib/api'
 import MultipleChoice from '@/components/input/MultipleChoice.vue'
 import PlayProgression from '@/components/data/PlayProgression.vue'
 import QuizFinishedStats from '@/components/data/QuizFinishedStats.vue'
+import { ROUTES } from '@/router'
 
 const route = useRoute();
 const quiz = useQuiz();
 quiz.get({
-  quizId: route.params.quizId as string
+  quizId: route.params[ROUTES.QUIZ_PLAY.param] as string
 })
 
 /**
