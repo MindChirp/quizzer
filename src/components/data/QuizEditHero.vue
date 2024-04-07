@@ -8,7 +8,7 @@ defineProps<{
 </script>
 <template>
   <div class="wrapper shadow-5" :style="`background-image: url('${url}')`">
-    <button class="wrapping-button" @click="$emit('changeImageSource')">
+    <button class="wrapping-button" @click.prevent="$emit('changeImageSource')">
       <div class="shadow">
           <EditIcon class="icon" style="color: var(--secondary-bg)"/>
       </div>

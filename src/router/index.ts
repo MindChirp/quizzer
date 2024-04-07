@@ -7,6 +7,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import QuizDetailView from '@/views/QuizDetailView.vue'
 import QuizEditView from '@/views/QuizEditView.vue'
 import { checkUserAuth, signOut } from '@/lib/utils/user.ts'
+import QuizCreateView from '@/views/QuizCreateView.vue'
 
 // ????? This should be fixed in the future
 //const BASE_URL = import.meta.env.BASE_URL
@@ -48,6 +49,11 @@ const router = createRouter({
       path: '/quiz/edit/:quizId',
       name: 'Edit quiz',
       component: QuizEditView
+    },
+    {
+      path: '/quiz/create',
+      name: 'Create quiz',
+      component: QuizCreateView
     }
   ]
 })

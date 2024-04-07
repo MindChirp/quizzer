@@ -47,9 +47,9 @@ const deleteAnswer = (questionIndex: number, answerIndex: number) => {
   <span v-if="quiz.data?.questions?.length == 0">There are no questions.</span>
   <CardComponent v-for="(item, number) in quiz.data?.questions" :key="number" class="question-card">
     {{item.type}}
-    <FormKit type="text" placeholder="What's your question?" :value="item.label" @change.prevent="(e: InputEvent) => setQuestionTitle(number, e)" validation="required" name="Question"/>
+    <FormKit type="text" placeholder="What's your question?" :value="item.label" @change.prevent="(e: InputEvent) => setQuestionTitle(number, e)" validation="required" :name="`question-${number}`"/>
     <div class="answers">
-      <div class="input-wrapper" v-for="(ans, n) in item.alternatives" :key="n" >
+      <div class="input-wrapper" v-for="(ans, n) in item.alternatives" :key="n">
         <input class="answer roboto-medium" :value="ans.answer" @change.prevent="(e: Event) => updateAnswer(number, n, e as InputEvent)" placeholder="Type something"/>
         <button class="delete" @click.prevent="() => deleteAnswer(number, n)"><Trash style="height: 1rem;"/></button>
       </div>

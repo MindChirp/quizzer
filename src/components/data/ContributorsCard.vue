@@ -13,8 +13,8 @@ defineProps<{
     <span class="roboto-medium title">Contributors</span>
     <div class="list">
       <div class="user-item" v-for="(user, number) in users" :key="number">
-        <ProfilePicture :full-name="user.fullName" />
-        <span style="width: 100%">@{{user.username}}</span>
+        <ProfilePicture :full-name="user?.fullName" />
+        <span style="width: 100%">@{{user?.username}}</span>
         <ButtonComponent variant="ghost" size="icon" title="Remove contributor" @click.prevent><X style="height: 1rem" /></ButtonComponent>
       </div>
     </div>
