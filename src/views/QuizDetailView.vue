@@ -74,6 +74,7 @@ const toast = toaster();
         <span>Different question types</span>
         <div class="tags">
           <TagComponent v-for="(tag, number) in modifiedTagList" :key="number" style="text-transform: capitalize">{{tag.tagname}}</TagComponent>
+          <TagComponent v-if="modifiedTagList.length === 0" style="text-transform: capitalize">No tags</TagComponent>
         </div>
       </div>
       <ButtonComponent size="large" class="play-button shadow-5" @click="playQuiz"><Play fill="white"/></ButtonComponent>

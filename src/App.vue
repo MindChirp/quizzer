@@ -20,10 +20,6 @@ user.get({
 
 const routeButtons: RouteButton[] = [
   {
-    label: 'Home',
-    path: '/'
-  },
-  {
     label: 'Discover',
     path: '/discover'
   },
