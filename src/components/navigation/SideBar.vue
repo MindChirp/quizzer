@@ -39,7 +39,7 @@ const showProfile = () => {
 <template>
   <div class="sidebar shadow-5" :class="{open: open}">
     <div class="header">
-      <ButtonComponent size="icon" variant="ghost" style="flex: 0" @click="$emit('closeTrigger')"><X style="color: var(--default-bg-text)"/></ButtonComponent>
+      <ButtonComponent size="icon" variant="ghost" style="flex: 0" @click="$emit('close')"><X style="color: var(--default-bg-text)"/></ButtonComponent>
     </div>
     <div class="actions">
       <template v-for="(button, number) in routeButtons" :key="number">
