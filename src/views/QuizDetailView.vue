@@ -60,6 +60,10 @@ const displayEditButton = computed(() => {
 const scores = useScores();
 scores.get({page: 0});
 
+const filteredScores = computed(() => {
+  return scores.data?.filter(e => e.quiz?.quizId?.toString() === quizId)
+})
+
 </script>
 <template>
   <PageWrapper>
@@ -83,7 +87,7 @@ scores.get({page: 0});
       <ButtonComponent size="large" class="play-button shadow-5" @click="playQuiz"><Play fill="white"/></ButtonComponent>
       <ButtonComponent v-if="displayEditButton" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
 
-      <ScoreboardList :scores="scores.data ?? []"/>
+      <ScoreboardList :scores="filteredScores ?? []"/>
     </div>
   </PageWrapper>
 </template>
