@@ -35,8 +35,12 @@ const hideHeader = computed(() => {
 <template>
   <!-- Leave this alone, it should be here to enable the toaster function -->
   <ToasterComponent />
-  <NavigationHeader :current-route="router.currentRoute.value.path" :route-buttons="routeButtons" v-if="!hideHeader" />
-  <RouterView />
+  <header>
+    <NavigationHeader :current-route="router.currentRoute.value.path" :route-buttons="routeButtons" v-if="!hideHeader" />
+  </header>
+  <main>
+    <RouterView />
+  </main>
 </template>
 <style scoped></style>
 @/v1
