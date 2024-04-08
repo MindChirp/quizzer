@@ -42,14 +42,14 @@ const createQuiz = () => {
     <!-- Below is the header designated for small devices -->
     <div class="mobile-header">
       <ButtonComponent variant="ghost" size="icon" style="flex: 0" @click="() => sidebarOpen = !sidebarOpen"><Menu /></ButtonComponent>
-      <RouterLink to="/">
+      <RouterLink :to="`/${ROUTES.DISCOVER.path}`">
         <QuizzerLogo class="logo"/>
       </RouterLink>
     </div>
 
     <!-- Below is the usual desktop header -->
     <div class="header-content">
-      <RouterLink to="/" style="height: 60%;">
+      <RouterLink :to="`/${ROUTES.DISCOVER.path}`" style="height: 60%;">
         <QuizzerLogo style="height: 100%; width: auto;" />
       </RouterLink>
       <div class="buttons">
