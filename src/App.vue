@@ -5,15 +5,19 @@ import type { RouteButton } from '@/components/navigation/NavigationHeader.vue'
 import ToasterComponent from '@/components/data/ToasterComponent.vue'
 import { useUser } from '@/stores/user.ts'
 import { getUserId } from '@/lib/utils/user.ts'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { ignoreHeader } from '@/lib/utils/header.ts'
+import SupportButton from '@/components/input/SupportButton.vue'
 
 const router = useRouter()
 const route = useRoute();
 
 const user = useUser();
-user.get({
-  username: getUserId() ?? ''
+
+watch(route, () => {
+  user.get({
+    username: getUserId() ?? ''
+  })
 })
 
 const routeButtons: RouteButton[] = [
@@ -31,12 +35,18 @@ const hideHeader = computed(() => {
   const path = route.path.substring(1, route.path.length);
   return ignoreHeader(path ?? '');
 })
+
 </script>
 <template>
   <!-- Leave this alone, it should be here to enable the toaster function -->
   <ToasterComponent />
-  <NavigationHeader :current-route="router.currentRoute.value.path" :route-buttons="routeButtons" v-if="!hideHeader" />
-  <RouterView />
+  <header>
+    <NavigationHeader :current-route="router.currentRoute.value.path" :route-buttons="routeButtons" v-if="!hideHeader" />
+  </header>
+  <main>
+    <RouterView />
+  </main>
+  <SupportButton />
 </template>
 <style scoped></style>
 @/v1

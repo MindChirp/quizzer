@@ -60,7 +60,7 @@ const createQuiz = () => {
         </template>
       </div>
       <div class="user-section">
-        <ButtonComponent title="Create quiz" size="icon" style="padding: .2rem" @click="createQuiz"><Plus style="height: 1rem; width: 1rem"/></ButtonComponent>
+        <ButtonComponent title="Create quiz" size="small" @click="createQuiz">Create quiz</ButtonComponent>
         <UserSection />
       </div>
     </div>
