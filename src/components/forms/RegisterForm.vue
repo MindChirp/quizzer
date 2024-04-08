@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios'
 import router from '@/router'
 import { UserControllerService } from '@/lib/api'
 import toaster from '@/stores/toaster.ts'

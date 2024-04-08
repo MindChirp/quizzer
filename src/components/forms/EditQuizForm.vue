@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CategoryDto, QuizDetailsDto, UserDto } from '@/lib/api'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import DropdownComponent, { type OptionType } from '@/components/input/TagSelector.vue'
 import ContributorsCard from '@/components/data/ContributorsCard.vue'
 import CardComponent from '@/components/data/CardComponent.vue'

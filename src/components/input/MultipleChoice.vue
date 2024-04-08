@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { QuestionAnswersDto, QuestionDto } from '@/lib/api'
+import type { QuestionDto } from '@/lib/api'
 
 defineProps<{
   question?: QuestionDto

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { ApiError, type CategoryDto, QuizControllerService, type QuizGeneralDto } from '@/lib/api'
+import { ApiError, type CategoryDto, QuizControllerService } from '@/lib/api'
 
 export const useCategories = defineStore("categories", () => {
   const data = ref<CategoryDto[]>([]);
