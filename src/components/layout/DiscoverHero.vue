@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper shadow-5 roboto-bold">
+  <div class="question-wrapper shadow-5 roboto-bold">
     <h1 class="title">Want to learn something new?</h1>
   </div>
 </template>
@@ -9,7 +9,7 @@
 </script>
 
 <style scoped>
-.wrapper {
+.question-wrapper {
   margin: 0;
   height: 20rem;
   width: 100%;

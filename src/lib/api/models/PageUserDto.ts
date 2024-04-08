@@ -3,13 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { PageableObject } from './PageableObject';
-import type { QuizGeneralDto } from './QuizGeneralDto';
 import type { SortObject } from './SortObject';
-export type PageQuizGeneralDto = {
+import type { UserDto } from './UserDto';
+export type PageUserDto = {
     totalPages?: number;
     totalElements?: number;
     size?: number;
-    content?: Array<QuizGeneralDto>;
+    content?: Array<UserDto>;
     number?: number;
     sort?: SortObject;
     numberOfElements?: number;

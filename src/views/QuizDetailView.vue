@@ -11,9 +11,10 @@ import toaster from '@/stores/toaster.ts'
 import { Edit, Play } from 'lucide-vue-next'
 import TagComponent from '@/components/data/TagComponent.vue'
 import { getUserId } from '@/lib/utils/user.ts'
+import { ROUTES } from '@/router'
 
 const route = useRoute();
-const quizId = route.params.quizId as string
+const quizId = route.params[ROUTES.QUIZ_DETAIL.param] as string
 const router = useRouter();
 
 const quiz = useQuiz();
@@ -40,8 +41,19 @@ const modifiedTagList = computed(() => {
 })
 
 const editQuiz = () => {
-  router.push(`/quiz/edit/${quizId}`);
+  router.push(`/${ROUTES.QUIZ_EDIT.path}/${quizId}`);
 }
+
+const playQuiz = () => {
+  router.push(`/${ROUTES.QUIZ_PLAY.path}/${quizId}`)
+}
+
+const displayEditButton = computed(() => {
+  const isOwner = owner.value?.username === getUserId();
+  const isCollaborator = quiz.data?.collaborators?.find(e => e.username === getUserId());
+
+  return isOwner || isCollaborator;
+})
 
 const toast = toaster();
 </script>
@@ -64,15 +76,15 @@ const toast = toaster();
           <TagComponent v-for="(tag, number) in modifiedTagList" :key="number" style="text-transform: capitalize">{{tag.tagname}}</TagComponent>
         </div>
       </div>
-      <ButtonComponent size="large" class="play-button shadow-5" @click="() => toast.success({title:'Advarsel', description: 'Du er stygg!! 😁🤣🤣😂😂😂🤪'})"><Play fill="white"/></ButtonComponent>
-      <ButtonComponent v-if="owner?.username === getUserId()" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
+      <ButtonComponent size="large" class="play-button shadow-5" @click="playQuiz"><Play fill="white"/></ButtonComponent>
+      <ButtonComponent v-if="displayEditButton" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
     </div>
   </PageWrapper>
 </template>
 <style scoped>
 .content {
   color: var(--default-bg-text);
-  margin-top: 25rem;
+  margin-top: 15rem;
   animation: fade-in 500ms ease-in-out .25s both;
 }
 
@@ -155,7 +167,7 @@ const toast = toaster();
 }
 
 @media screen and (max-width: 1000px) {
-  .play-button {
+  .play-button, .edit-button {
     width: 100%;
   }
 }

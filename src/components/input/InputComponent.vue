@@ -28,7 +28,7 @@ const hasSlot = () => {
 }
 </script>
 <template>
-  <div class="wrapper">
+  <div class="question-wrapper">
     <div class="label">
       <label>{{ props.label }}</label>
     </div>
@@ -50,7 +50,7 @@ const hasSlot = () => {
   </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   position: relative;
   width: fit-content;
   height: fit-content;

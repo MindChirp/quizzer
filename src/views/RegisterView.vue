@@ -1,4 +1,4 @@
-<template>
+}<template>
   <PageWrapper>
     <div class="register-view">
       <RegisterComponent />

@@ -10,12 +10,12 @@ const routToProfilePage = () => {
 
 </script>
 <template>
-  <div class="wrapper">
+  <div class="question-wrapper">
     <ProfilePicture :full-name="user.data?.fullName" number-of-initials="2" @click="routToProfilePage"/>
   </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   width: fit-content;
   display: flex;
   align-items: center;

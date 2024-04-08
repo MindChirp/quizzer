@@ -2,12 +2,12 @@
 
 </script>
 <template>
-  <div class="wrapper" v-bind="$attrs">
+  <div class="question-wrapper" v-bind="$attrs">
     <slot></slot>
   </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   width: 80vw;
   height: fit-content;
   margin: auto;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .wrapper {
+  .question-wrapper {
     padding: 6rem 0;
   }
 }

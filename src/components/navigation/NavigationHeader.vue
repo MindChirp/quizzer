@@ -7,13 +7,8 @@ import SideBar from '@/components/navigation/SideBar.vue'
 import { Menu, Plus } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 import useScroll from '@/lib/utils/useScroll.ts'
-import ModalComponent from '@/components/data/ModalComponent.vue'
-import ModalTitle from '@/components/data/ModalTitle.vue'
-import ModalBody from '@/components/data/ModalBody.vue'
-import ModalHeader from '@/components/data/ModalHeader.vue'
-import ModalButtons from '@/components/data/ModalButtons.vue'
-import { signOut } from '@/lib/utils/user.ts'
 import { useRouter } from 'vue-router'
+import { ROUTES } from '@/router'
 
 const sidebarOpen = ref(false);
 
@@ -37,7 +32,7 @@ defineProps<{
 
 
 const createQuiz = () => {
-  router.push("/quiz/create");
+  router.push('/' + ROUTES.QUIZ_CREATE.path);
 }
 
 </script>

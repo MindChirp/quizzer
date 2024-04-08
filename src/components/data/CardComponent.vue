@@ -2,12 +2,12 @@
 
 </script>
 <template>
-  <div class="wrapper" v-bind="$attrs">
+  <div class="question-wrapper" v-bind="$attrs">
     <slot />
   </div>
 </template>
 <style scoped>
-.wrapper {
+.question-wrapper {
   padding: 1rem;
   border: 2px solid var(--secondary-bg);
   border-radius: .5rem;

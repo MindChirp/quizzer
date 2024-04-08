@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { nextTick, reactive, ref, shallowRef, toRefs } from 'vue'
+import { ref } from 'vue'
 import type { QuizDetailsDto, QuizGeneralDto } from '@/lib/api'
 import { ApiError, QuizControllerService } from '@/lib/api'
 

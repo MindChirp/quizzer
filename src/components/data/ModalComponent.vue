@@ -18,7 +18,7 @@ withDefaults(defineProps<ModalProps>(), {
 </script>
 <template>
   <Teleport to="body">
-    <div class="wrapper" :class="{open: open}" ref="element">
+    <div class="question-wrapper" :class="{open: open}" ref="element">
       <div class="modal-bg" @click="$emit('closeTrigger')"/>
       <div class="modal-fg">
         <slot />
@@ -27,7 +27,7 @@ withDefaults(defineProps<ModalProps>(), {
   </Teleport>
 </template>
 <style scoped>
-  .wrapper {
+  .question-wrapper {
     height: 100%;
     width: 100%;
     z-index: 200;
@@ -39,14 +39,14 @@ withDefaults(defineProps<ModalProps>(), {
     opacity: 0;
   }
 
-  .wrapper.open {
+  .question-wrapper.open {
     transform: translate(-50%,-50%) scale(1);
     opacity: 1;
     animation: display-none 250ms ease-in-out;
     display: block;
   }
 
-  .wrapper:not(.open) {
+  .question-wrapper:not(.open) {
     pointer-events: none;
   }
 

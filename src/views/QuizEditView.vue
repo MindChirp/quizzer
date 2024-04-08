@@ -7,7 +7,7 @@ import { useQuiz } from '@/stores/quizzes.ts'
 import EditQuizForm from '@/components/forms/EditQuizForm.vue'
 import { ref, watch } from 'vue'
 import EditImageModal from '@/components/data/EditImageModal.vue'
-import { ApiError, QuizControllerService, type QuizDetailsDto } from '@/lib/api'
+import { ApiError, QuizControllerService } from '@/lib/api'
 import { useEditor } from '@/stores/quizEdit.ts'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import toaster from '@/stores/toaster.ts'
@@ -33,9 +33,8 @@ watch(quiz, () => {
 
 const setImageUrl = (value: string) => {
   imageModalOpen.value = false;
-  editor.setPartial({
-      imageLink: value
-  })
+  if (!editor.data) return;
+  editor.data.imageLink = value;
 }
 
 const toast = toaster();

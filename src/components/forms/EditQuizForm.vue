@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CategoryDto, QuizDetailsDto, UserDto } from '@/lib/api'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import DropdownComponent, { type OptionType } from '@/components/input/TagSelector.vue'
 import ContributorsCard from '@/components/data/ContributorsCard.vue'
 import CardComponent from '@/components/data/CardComponent.vue'
@@ -41,10 +41,6 @@ const defaultCategories = computed(() => {
 
 const selectedCategories = ref<OptionType[]>(defaultCategories.value)
 
-watch(props, () => {
-  console.log(props.quizData)
-})
-
 const updateCategories = (data: OptionType[]) => {
   selectedCategories.value = data;
   if (!quiz.data) return;
@@ -73,6 +69,11 @@ const allCategories = computed(() => {
   return array;
 })
 
+const setCollaborators = (users: UserDto[]) => {
+  if (!quiz.data) return;
+  quiz.data.collaborators = users;
+}
+
 
 </script>
 <template v-bind="$attrs">
@@ -97,7 +98,7 @@ const allCategories = computed(() => {
         />
         <DropdownComponent placeholder="Search for categories" :default-values="defaultCategories" :options="allCategories" style="width: 100%" @change="updateCategories"/>
       </CardComponent>
-      <ContributorsCard :users="[quizData?.owner as UserDto]" />
+      <ContributorsCard :users="quiz.data?.collaborators" @change="setCollaborators" />
     </div>
     <div class="card questions">
       <span class="section-title roboto-medium">Questions</span>

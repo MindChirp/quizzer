@@ -6,7 +6,7 @@ import type { CategoryDto } from '../models/CategoryDto';
 import type { MessageDto } from '../models/MessageDto';
 import type { Pageable } from '../models/Pageable';
 import type { PageQuizGeneralDto } from '../models/PageQuizGeneralDto';
-import type { QuestionDto } from '../models/QuestionDto';
+import type { QuizAttemptDto } from '../models/QuizAttemptDto';
 import type { QuizDetailsDto } from '../models/QuizDetailsDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -45,12 +45,12 @@ export class QuizControllerService {
     }
     /**
      * @param requestBody
-     * @returns QuizDetailsDto OK
+     * @returns MessageDto OK
      * @throws ApiError
      */
     public static createQuiz(
         requestBody: QuizDetailsDto,
-    ): CancelablePromise<QuizDetailsDto> {
+    ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/quizzes',
@@ -77,15 +77,15 @@ export class QuizControllerService {
     /**
      * @param quizId
      * @param requestBody
-     * @returns any OK
+     * @returns QuizAttemptDto OK
      * @throws ApiError
      */
-    public static addQuestionToQuiz(
+    public static submitAttempt(
         quizId: string,
-        requestBody: QuestionDto,
-    ): CancelablePromise<Record<string, any>> {
+        requestBody: QuizAttemptDto,
+    ): CancelablePromise<QuizAttemptDto> {
         return __request(OpenAPI, {
-            method: 'PATCH',
+            method: 'POST',
             url: '/api/quizzes/{quizId}',
             path: {
                 'quizId': quizId,

@@ -10,6 +10,7 @@ import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { type OptionType } from '@/components/input/TagSelector.vue'
 import { QuizControllerService } from '@/lib/api'
+import { ROUTES } from '@/router'
 
 const quizzes = useQuizzes();
 const search = ref<string>();
@@ -24,7 +25,7 @@ watch(search, async () => {
 })
 
 const goToQuiz = (quizId: string) => {
-  router.push(`/quiz/${quizId}`);
+  router.push(`/${ROUTES.QUIZ_DETAIL.path}/${quizId}`);
 }
 
 </script>
