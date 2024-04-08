@@ -10,11 +10,6 @@ const element = ref<HTMLElement>();
 withDefaults(defineProps<ModalProps>(), {
   open: false
 })
-
-
-
-
-
 </script>
 <template>
   <Teleport to="body">
