@@ -12,6 +12,8 @@ import { Edit, Play } from 'lucide-vue-next'
 import TagComponent from '@/components/data/TagComponent.vue'
 import { getUserId } from '@/lib/utils/user.ts'
 import { ROUTES } from '@/router'
+import ScoreboardList from '@/components/data/ScoreboardList.vue'
+import { useScores } from '@/stores/score.ts'
 
 const route = useRoute();
 const quizId = route.params[ROUTES.QUIZ_DETAIL.param] as string
@@ -55,7 +57,8 @@ const displayEditButton = computed(() => {
   return isOwner || isCollaborator;
 })
 
-const toast = toaster();
+const scores = useScores();
+
 </script>
 <template>
   <PageWrapper>
@@ -78,6 +81,8 @@ const toast = toaster();
       </div>
       <ButtonComponent size="large" class="play-button shadow-5" @click="playQuiz"><Play fill="white"/></ButtonComponent>
       <ButtonComponent v-if="displayEditButton" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
+
+      <ScoreboardList :scores="scores.data"/>
     </div>
   </PageWrapper>
 </template>
