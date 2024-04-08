@@ -45,7 +45,7 @@ defineProps<{
 }
 
 .scoreboard .row span {
-  width: 100%;
+  width: 9rem;
   display: flex;
   align-items: center;
   justify-content: center;
