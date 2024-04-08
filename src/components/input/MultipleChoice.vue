@@ -2,14 +2,14 @@
 import type { QuestionAnswersDto, QuestionDto } from '@/lib/api'
 
 defineProps<{
-  choices?: QuestionAnswersDto[]
+  question?: QuestionDto
 }>()
 
 const emit = defineEmits(['click'])
 </script>
 <template>
-  <div class="question-wrapper" v-if="choices">
-    <button class="option" v-for="(choice, n) in choices" :key="n" @click="() => emit('click', choice)">
+  <div class="question-wrapper" v-if="question?.alternatives">
+    <button class="option" v-for="(choice, n) in question.alternatives" :key="n" @click="() => emit('click', {...choice, questionId: question?.questionId})">
       <span class="roboto-medium">{{choice.answer}}</span>
     </button>
   </div>

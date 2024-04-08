@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CategoryEntity } from './CategoryEntity';
+import type { QuestionEntity } from './QuestionEntity';
 import type { UserEntity } from './UserEntity';
 export type QuizEntity = {
     quizId?: number;
@@ -12,5 +13,6 @@ export type QuizEntity = {
     imageLink?: string;
     collaborators?: Array<UserEntity>;
     owner?: UserEntity;
+    questions?: Array<QuestionEntity>;
 };
 

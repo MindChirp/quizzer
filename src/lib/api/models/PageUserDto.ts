@@ -12,9 +12,9 @@ export type PageUserDto = {
     content?: Array<UserDto>;
     number?: number;
     sort?: SortObject;
+    numberOfElements?: number;
     first?: boolean;
     last?: boolean;
-    numberOfElements?: number;
     pageable?: PageableObject;
     empty?: boolean;
 };

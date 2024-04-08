@@ -26,7 +26,7 @@ const addAnswer = async (questionIndex: number) => {
   if (quiz.data.questions[questionIndex].alternatives == undefined) {
     quiz.data.questions[questionIndex].alternatives = [];
   }
-  quiz.data.questions[questionIndex].alternatives?.push({});
+  quiz.data.questions[questionIndex].alternatives?.push({isCorrect: false});
 }
 
 const updateAnswer = (questionIndex: number, answerIndex: number, e: InputEvent) => {

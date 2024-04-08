@@ -3,7 +3,7 @@ import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useRoute } from 'vue-router'
 import { useQuiz } from '@/stores/quizzes.ts'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import type { QuestionAnswersDto, QuestionDto } from '@/lib/api'
+import { type QuestionAnswersDto, type QuestionAttemptDto, type QuestionDto, QuizControllerService } from '@/lib/api'
 import MultipleChoice from '@/components/input/MultipleChoice.vue'
 import PlayProgression from '@/components/data/PlayProgression.vue'
 import QuizFinishedStats from '@/components/data/QuizFinishedStats.vue'
@@ -54,7 +54,11 @@ watch(quiz, () => {
   currentQuestion.value = quiz.data?.questions?.[0];
 })
 
-const selectedAnswers = ref<QuestionAnswersDto[]>([])
+export type QuestionAnswerWithId = {
+  questionId: number
+} & QuestionAnswersDto
+
+const selectedAnswers = ref<QuestionAnswerWithId[]>([])
 
 const questionNumber = ref<number>(0);
 
@@ -66,7 +70,7 @@ const quizResults = ref<{
   correctAnswers: number
 }>();
 
-const handleChoice = (choice: QuestionAnswersDto) => {
+const handleChoice = (choice: QuestionAnswerWithId) => {
   selectedAnswers.value.push(choice);
   selectNextQuestion();
 }
@@ -81,14 +85,28 @@ const selectNextQuestion = () => {
   currentQuestion.value = quiz.data?.questions?.[questionNumber.value];
 }
 
-const finishQuiz = () => {
+const finishQuiz = async () => {
   quizFinished.value = true;
   // Stop the timer
   clearInterval(interval);
+
+  const formatted: QuestionAttemptDto[] = [];
+  selectedAnswers.value.forEach(e => {
+    formatted.push({
+      questionId: e.questionId,
+      answerLabel: e.answer
+    })
+  })
+
+  const results = await QuizControllerService.submitAttempt(route.params[ROUTES.QUIZ_PLAY.param] as string, {
+    duration: timer.value,
+    questionAttempts: formatted
+  })
+
   quizResults.value = {
-    score: 10000,
+    score: Math.round((results.score ?? 0)*1000 / timer.value),
     time: timer.value,
-    correctAnswers: 3
+    correctAnswers: results.score ?? 0
   }
 }
 
@@ -100,7 +118,7 @@ const finishQuiz = () => {
       <div class="question-wrapper" v-if="!quizFinished">
         <PlayProgression :current-number="questionNumber" :number-of-questions="quiz.data.questions?.length" />
         <h1 class="question-title">{{ currentQuestion?.label }}</h1>
-        <MultipleChoice :choices="currentQuestion?.alternatives" @click="handleChoice"/>
+        <MultipleChoice :question="currentQuestion" @click="handleChoice"/>
       </div>
 
       <div class="score-wrapper" v-if="quizFinished">
