@@ -35,7 +35,7 @@ const goToQuiz = (quizId: string) => {
       <DiscoverHero class="hero" style="margin-bottom: 2rem;"/>
       <div id="quizzes">
         <div class="title">
-          <h2 class="roboto-medium section-title" style="text-transform: capitalize;">Curated quizzes</h2>
+          <h2 class="roboto-medium section-title" style="text-transform: capitalize;">Discover quizzes</h2>
           <div class="filters">
             <FormKit type="text" suffix-icon="search" placeholder="Look for anything ✨" @input="e => search = e"/>
           </div>
