@@ -58,6 +58,7 @@ const displayEditButton = computed(() => {
 })
 
 const scores = useScores();
+scores.get({page: 0});
 
 </script>
 <template>
@@ -83,7 +84,7 @@ const scores = useScores();
       <ButtonComponent size="large" class="play-button shadow-5" @click="playQuiz"><Play fill="white"/></ButtonComponent>
       <ButtonComponent v-if="displayEditButton" size="large" variant="secondary" class="edit-button" @click="editQuiz"><Edit style="height: 1rem"/> Edit quiz</ButtonComponent>
 
-      <ScoreboardList :scores="scores.data"/>
+      <ScoreboardList :scores="scores.data ?? []"/>
     </div>
   </PageWrapper>
 </template>
