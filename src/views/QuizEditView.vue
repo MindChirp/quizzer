@@ -43,7 +43,8 @@ const saveChanges = async () => {
   // Code for saving the quiz details.
   if (!editor.data) return;
   try {
-    const res = await QuizControllerService.updateQuiz(editor.data);
+    await QuizControllerService.deleteQuiz(quiz.data);
+    await QuizControllerService.createQuiz(editor.data);
     toast.success({
       title: "Success!",
       description: "Changes have been saved"

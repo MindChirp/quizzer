@@ -45,14 +45,29 @@ export class QuizControllerService {
     }
     /**
      * @param requestBody
-     * @returns QuizDetailsDto OK
+     * @returns MessageDto OK
      * @throws ApiError
      */
     public static createQuiz(
         requestBody: QuizDetailsDto,
-    ): CancelablePromise<QuizDetailsDto> {
+    ): CancelablePromise<MessageDto> {
         return __request(OpenAPI, {
             method: 'POST',
+            url: '/api/quizzes',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * @param requestBody
+     * @returns MessageDto OK
+     * @throws ApiError
+     */
+    public static deleteQuiz(
+        requestBody: QuizDetailsDto,
+    ): CancelablePromise<MessageDto> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
             url: '/api/quizzes',
             body: requestBody,
             mediaType: 'application/json',

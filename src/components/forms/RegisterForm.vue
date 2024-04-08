@@ -32,7 +32,6 @@ const registerUser = (data:User) => {
     showSuccess();
     router.push(`/${ROUTES.LOGIN.path}`);
   } catch (err) {
-    console.log("There was an error: ", err)
     showError();
   }
 }

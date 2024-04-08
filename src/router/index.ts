@@ -12,13 +12,21 @@ import PlayQuizView from '@/views/QuizPlayView.vue'
 import { refreshTokenIfNeeded } from '@/lib/utils/token.ts'
 import { OpenAPI } from '@/lib/api'
 import type { ApiRequestOptions } from '@/lib/api/core/ApiRequestOptions.ts'
+import toaster from '@/stores/toaster.ts'
 
 // ????? This should be fixed in the future
 //const BASE_URL = import.meta.env.BASE_URL
 
 const getToken = async (options: ApiRequestOptions) => {
   if (options.url === "/api/token/refresh") return ''
-  await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
+  const stillValid = await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
+  if (!stillValid && location.pathname != "/login") {
+    toaster().error({
+      title: "Session expired",
+      description: "You have been signed out"
+    })
+    location.reload()
+  }
   return sessionStorage.getItem("accessToken") ?? '';
 }
 OpenAPI.TOKEN = getToken;
