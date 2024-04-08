@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import type { PageUserDto, UserDto } from '@/lib/api'
-import { ApiError, OpenAPI, UserControllerService } from '@/lib/api'
-import { refreshTokenIfNeeded } from '@/lib/utils/token.ts'
+import { ApiError, UserControllerService } from '@/lib/api'
 
 
 export const useUser = defineStore('user', () => {
@@ -12,12 +11,8 @@ export const useUser = defineStore('user', () => {
 
 
   const get = async ({ username }: {username: string}) => {
-    OpenAPI.TOKEN = sessionStorage.getItem("accessToken") ?? '';
     try {
-      await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
       data.value = await UserControllerService.getUser(username);
-
-
       error.value = undefined;
     } catch (err) {
       error.value = err as ApiError;
@@ -29,6 +24,11 @@ export const useUser = defineStore('user', () => {
   }
 })
 
+
+/**
+ * Used for fetching a list of users, given a search query.
+ * If it is empty, all users will be fetched.
+ */
 export const useUsers = defineStore('users', () => {
   const data = ref<PageUserDto>();
   const error = ref<ApiError>();
@@ -39,9 +39,7 @@ export const useUsers = defineStore('users', () => {
 
 
   const get = async ({ search }: {search: string}) => {
-    OpenAPI.TOKEN = sessionStorage.getItem("accessToken") ?? '';
     try {
-      await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
       data.value = await UserControllerService.searchUsers(search, {
         page: 0
       });

@@ -2,19 +2,27 @@
 
 import PageWrapper from '@/components/layout/PageWrapper.vue'
 import { useEditor } from '@/stores/quizEdit.ts'
-import { useQuiz } from '@/stores/quizzes.ts'
+import { useQuiz, useQuizzes } from '@/stores/quizzes.ts'
 import EditImageModal from '@/components/data/EditImageModal.vue'
 import QuizEditHero from '@/components/data/QuizEditHero.vue'
 import EditQuizForm from '@/components/forms/EditQuizForm.vue'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import { ref, watch } from 'vue'
+import { QuizControllerService } from '@/lib/api'
+import toaster from '@/stores/toaster.ts'
+import { useRouter } from 'vue-router'
+import { ROUTES } from '@/router'
 
 const editor = useEditor();
 editor.set({
   quiz: {}
 })
 
+const allQuizzes = useQuizzes();
+
 const imageModalOpen = ref(false);
+
+const router = useRouter();
 
 const setImageUrl = (value: string) => {
   imageModalOpen.value = false;
@@ -22,8 +30,29 @@ const setImageUrl = (value: string) => {
   editor.data.imageLink = value;
 }
 
-const saveChanges = () => {
+const toast = toaster();
+
+const saveChanges = async () => {
+  if (!editor.data) return;
   // Post quiz to backend
+  try {
+    const createdQuiz = await QuizControllerService.createQuiz(editor.data)
+    toast.success({
+      title: "Success!",
+      description: "The quiz has been created, and can now be played."
+    })
+
+    // Refetch all quizzes
+    allQuizzes.get({page: 0});
+
+    router.push(`/${ROUTES.QUIZ_DETAIL.path}/${createdQuiz.quizId}`)
+
+  } catch (err) {
+    toast.error({
+      title: "An error occurred",
+      description: "We could not create your quiz."
+    })
+  }
 }
 
 </script>

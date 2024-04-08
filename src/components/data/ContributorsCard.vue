@@ -54,7 +54,7 @@ const filteredSearchData = computed(() => {
 
 </script>
 <template>
-  <ModalComponent :open="open">
+  <ModalComponent :open="open" @close-trigger="() => open = false">
     <ModalHeader>
       <ModalTitle>Add collaborator</ModalTitle>
       <ModalDescription>The people you add have full editing access</ModalDescription>
@@ -64,7 +64,7 @@ const filteredSearchData = computed(() => {
       <div class="results">
         <button class="user-result" v-for="(user, n) in filteredSearchData" :key="n" @click.prevent="() => addUserAsCollaborator(user)">
           <ProfilePicture :full-name="user.fullName" disable-hover />
-          <span class="roboto-medium" style="width: 100%; text-align: left">{{user.fullName}}</span>
+          <span class="roboto-medium" style="width: 100%; text-align: left">{{ user.fullName }}</span>
           <Plus style="color: var(--primary-fg);"/>
         </button>
       </div>
@@ -79,6 +79,7 @@ const filteredSearchData = computed(() => {
         <span style="width: 100%">@{{user?.username}}</span>
         <ButtonComponent variant="ghost" size="icon" title="Remove contributor" @click.prevent="() => removeUserAsCollaborator(user)"><X style="height: 1rem" /></ButtonComponent>
       </div>
+      <span v-if="users?.length == 0" style="color: var(--secondary-bg-text)" class="roboto-light">Get started by adding a contributor</span>
     </div>
     <ButtonComponent variant="primary" style="margin-top: .5rem; width: 100%;" @click.prevent="() => open = true"><Plus style="height: 1rem" /> Add contributor</ButtonComponent>
   </div>

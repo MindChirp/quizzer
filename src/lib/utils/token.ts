@@ -1,6 +1,6 @@
-import { OpenAPI, TokenControllerService } from '@/lib/api'
+import { TokenControllerService } from '@/lib/api'
 
-const exprityTimeMinutes = 9;
+const expiryTimeMinutes = 1;
 
 function tokenNeedsRefresh(token:string) {
   if (!token) return true;
@@ -14,7 +14,7 @@ function tokenNeedsRefresh(token:string) {
 
 
     // If its less then 3 minutes until token expires
-    return (currentTime + exprityTimeMinutes*60) >= expirationTime;
+    return (currentTime + expiryTimeMinutes*60) >= expirationTime;
 
   } catch (error) {
     console.error("Error decoding token:", error);
@@ -31,7 +31,6 @@ export async function refreshTokenIfNeeded(token: string) {
       });
       const newAccessToken = response.token;
       sessionStorage.setItem('accessToken', newAccessToken as string);
-      OpenAPI.TOKEN = newAccessToken;
 
       console.log("Token refreshed successfully.");
     } catch (err) {

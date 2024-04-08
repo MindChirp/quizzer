@@ -1,11 +1,9 @@
 <script setup lang="ts">
 
-import { useToken } from '@/stores/token.ts'
 import router from '@/router'
 import type { UserDto } from '@/lib/api'
 import toaster from '@/stores/toaster.ts'
-
-const token = useToken();
+import { setTokensWithUserCredentials } from '@/lib/utils/user.ts'
 
 type User = Pick<UserDto, "username" | "password">
 
@@ -15,14 +13,13 @@ const showError = () => toast.error({
   title: "Log in failed!",
   description: "Wrong username or password."
 })
-const loginUser = async (data: User) => {
 
-  await token.get({ username: data.username as string, password: data.password as string });
-  if (localStorage.getItem("refreshToken") && sessionStorage.getItem("accessToken")) {
-      router.push("/");
-  } else {
-    showError();
-  }
+const loginUser = async (data: User) => {
+  setTokensWithUserCredentials(data.username ?? '', data.password ?? '')
+    .then(() => {
+      router.replace("/");
+    })
+    .catch(showError)
 }
 
 </script>

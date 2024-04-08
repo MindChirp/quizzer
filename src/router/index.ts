@@ -9,10 +9,19 @@ import QuizEditView from '@/views/QuizEditView.vue'
 import { checkUserAuth, signOut } from '@/lib/utils/user.ts'
 import QuizCreateView from '@/views/QuizCreateView.vue'
 import PlayQuizView from '@/views/QuizPlayView.vue'
+import { refreshTokenIfNeeded } from '@/lib/utils/token.ts'
+import { OpenAPI } from '@/lib/api'
+import type { ApiRequestOptions } from '@/lib/api/core/ApiRequestOptions.ts'
 
 // ????? This should be fixed in the future
 //const BASE_URL = import.meta.env.BASE_URL
 
+const getToken = async (options: ApiRequestOptions) => {
+  if (options.url === "/api/token/refresh") return ''
+  await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
+  return sessionStorage.getItem("accessToken") ?? '';
+}
+OpenAPI.TOKEN = getToken;
 
 export const ROUTES = {
   LANDING: { path: '' },
