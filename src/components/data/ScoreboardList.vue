@@ -2,29 +2,20 @@
 import type { SavedQuizAttemptDto } from '@/lib/api'
 import { CheckIcon, TimerIcon, TrophyIcon } from 'lucide-vue-next'
 import { scoreFormula } from '../../lib/utils/score.ts'
-import { computed } from 'vue'
 
 const props = defineProps<{
   scores: SavedQuizAttemptDto[]
 }>();
 
-const sorted = computed(() => {
-  const copy = props.scores;
-  copy.sort((a, b) => scoreFormula(a.score ?? 0, a.duration ?? 0) > scoreFormula(b.score
-   ?? 0, b.duration ?? 0))
-
-  return copy;
-})
-
 </script>
 <template>
   <div class="scoreboard" v-bind="$attrs">
-    <div class="row" v-for="(score, n) in sorted" :key="n">
-      <span><TrophyIcon style="height: 1rem"/>{{scoreFormula(score.score ?? 0, score.duration ?? 0)}}</span>
+    <div class="row" v-for="(score, n) in scores" :key="n">
+      <span><TrophyIcon style="height: 1rem"/>{{scoreFormula(score.scores ?? 0, score.duration ?? 0)}}</span>
       <span><CheckIcon style="height: 1rem"/>{{score.score}}</span>
       <span><TimerIcon style="height: 1rem"/>{{score.duration}}</span>
     </div>
-    <span v-if="sorted.length === 0" class="roboto-medium" style="text-align: center">There are no scores</span>
+    <span v-if="scores.length === 0" class="roboto-medium" style="text-align: center">There are no scores</span>
   </div>
 </template>
 <style scoped>
