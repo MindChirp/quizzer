@@ -12,7 +12,8 @@ const redirect = () => {
 </template>
 <style scoped>
 .button {
-  position: absolute;
+  position: fixed;
+  backdrop-filter: blur(5px);
   bottom: 1rem;
   right: 1rem;
   width: 3rem;

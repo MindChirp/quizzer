@@ -4,7 +4,7 @@ withDefaults(defineProps<{selected?: boolean}>(), {
 })
 </script>
 <template>
-<button class="button" :class="{selected: selected}" v-bind="$attrs">
+<button class="button roboto-medium" :class="{selected: selected}" v-bind="$attrs">
   <slot></slot>
 </button>
 </template>
@@ -19,10 +19,13 @@ withDefaults(defineProps<{selected?: boolean}>(), {
   padding: 1rem;
   position: relative;
   transition: all 100ms ease-in-out;
+  font-size: 1rem;
+  color: var(--default-bg-text);
 }
 
 .button.selected {
   background: #0c66e433;
+  color: var(--primary-bg-text);
 }
 
 .button::after {

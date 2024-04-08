@@ -37,7 +37,7 @@ const createQuiz = () => {
 
 </script>
 <template>
-  <SideBar :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
+  <SideBar @close="() => sidebarOpen = false" :open="sidebarOpen" @close-trigger="() => sidebarOpen = !sidebarOpen" :route-buttons="routeButtons" :current-route="currentRoute"/>
   <div id="wrapper" :class="{hideBorder: hideBorder}">
     <!-- Below is the header designated for small devices -->
     <div class="mobile-header">
