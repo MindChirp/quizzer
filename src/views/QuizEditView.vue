@@ -7,7 +7,7 @@ import { useQuiz } from '@/stores/quizzes.ts'
 import EditQuizForm from '@/components/forms/EditQuizForm.vue'
 import { ref, watch } from 'vue'
 import EditImageModal from '@/components/data/EditImageModal.vue'
-import { ApiError, QuizControllerService } from '@/lib/api'
+import { ApiError, QuizControllerService, type QuizDetailsDto } from '@/lib/api'
 import { useEditor } from '@/stores/quizEdit.ts'
 import ButtonComponent from '@/components/input/ButtonComponent.vue'
 import toaster from '@/stores/toaster.ts'
@@ -43,7 +43,8 @@ const saveChanges = async () => {
   // Code for saving the quiz details.
   if (!editor.data) return;
   try {
-    const res = await QuizControllerService.updateQuiz(editor.data);
+    await QuizControllerService.deleteQuiz(quiz.data as QuizDetailsDto);
+    await QuizControllerService.createQuiz(editor.data);
     toast.success({
       title: "Success!",
       description: "Changes have been saved"

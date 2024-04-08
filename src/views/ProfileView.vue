@@ -92,7 +92,7 @@ const signOutUser = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: fit-content;
   box-sizing: border-box;
 }
 
@@ -118,6 +118,8 @@ const signOutUser = () => {
 @media only screen and (max-width: 1000px) {
   .profile{
     font-size: 0.8rem;
+    width: 100%;
+
   }
 }
 </style>

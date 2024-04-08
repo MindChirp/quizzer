@@ -59,7 +59,10 @@ const submitForm = async (data: { password: string, confirmPassword: string }) =
     user.get({username:getUserId() ?? ''});
     close();
   } catch (err) {
-    console.log(err)
+    toaster().error({
+      title: "Something went wrong",
+      description: "Could not update user."
+    })
   }
 }
 </script>

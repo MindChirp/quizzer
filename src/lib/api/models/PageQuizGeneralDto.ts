@@ -12,9 +12,9 @@ export type PageQuizGeneralDto = {
     content?: Array<QuizGeneralDto>;
     number?: number;
     sort?: SortObject;
-    numberOfElements?: number;
     first?: boolean;
     last?: boolean;
+    numberOfElements?: number;
     pageable?: PageableObject;
     empty?: boolean;
 };

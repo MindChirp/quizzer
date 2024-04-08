@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { MessageCircle } from 'lucide-vue-next'
-import { useRouter } from 'vue-router'
-const router = useRouter();
 
 const redirect = () => {
   window.open("mailto:support@support.com");

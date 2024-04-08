@@ -18,6 +18,7 @@
 @media screen and (max-width: 1000px) {
   .question-wrapper {
     padding: 6rem 0;
+    width: 90vw;
   }
 }
 </style>

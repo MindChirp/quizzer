@@ -1,4 +1,6 @@
 import { TokenControllerService } from '@/lib/api'
+import { signOut } from '@/lib/utils/user.ts'
+import toaster from '@/stores/toaster.ts'
 
 // Refresh token if there is at most N minutes remaining
 const expiryTimeMinutes = 1;
@@ -32,13 +34,15 @@ export async function refreshTokenIfNeeded(token: string) {
       });
       const newAccessToken = response.token;
       sessionStorage.setItem('accessToken', newAccessToken as string);
-
       console.log("Token refreshed successfully.");
+      return true;
     } catch (err) {
-      console.error("Error refreshing token:", err);
+      signOut();
+      return false;
     }
   } else {
     console.log("Token does not need to be refreshed.");
+    return true;
   }
 }
 

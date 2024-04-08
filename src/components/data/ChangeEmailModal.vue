@@ -26,6 +26,7 @@ import { FormKit } from '@formkit/vue'
 import { UserControllerService } from '@/lib/api'
 import { getUserId } from '@/lib/utils/user.ts'
 import { useUser } from '@/stores/user.ts'
+import toaster from '@/stores/toaster.ts'
 
 const user = useUser();
 
@@ -47,7 +48,10 @@ const submitForm = async (data: { email: string }) => {
     user.get({username:getUserId() ?? ''});
     close();
   } catch (err) {
-    console.log(err)
+    toaster().error({
+      title: "Something went wrong",
+      description: "Could not update user."
+    })
   }
 }
 

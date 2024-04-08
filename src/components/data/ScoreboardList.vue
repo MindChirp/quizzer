@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { SavedQuizAttemptDto } from '@/lib/api'
-import { TrophyIcon, CheckIcon, TimerIcon } from 'lucide-vue-next'
+import { CheckIcon, TimerIcon, TrophyIcon } from 'lucide-vue-next'
 import { scoreFormula } from '../../lib/utils/score.ts'
 
-defineProps<{
+const props = defineProps<{
   scores: SavedQuizAttemptDto[]
 }>();
+
 </script>
 <template>
   <div class="scoreboard" v-bind="$attrs">

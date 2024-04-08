@@ -25,8 +25,6 @@ export const setTokensWithUserCredentials = async (username: string, password: s
       sessionStorage.setItem("accessToken", response.accessToken as string);
       localStorage.setItem("refreshToken", response.refreshToken as string);
       localStorage.setItem("username", username);
-      console.log("access " + response.accessToken)
-      console.log("refresh " + response.refreshToken)
     }
   } catch (err) {
     console.log(err);
