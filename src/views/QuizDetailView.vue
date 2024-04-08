@@ -75,7 +75,6 @@ scores.get({page: 0});
       <DividerLine style="width: 50%; margin: 1rem auto 0;"/>
       <div class="stats">
         <span>{{ quiz.data?.questions?.length }} {{ quiz.data?.questions?.length != 1 ? 'Questions' : 'Question' }}</span>
-        <span>Different question types</span>
         <div class="tags">
           <TagComponent v-for="(tag, number) in modifiedTagList" :key="number" style="text-transform: capitalize">{{tag.tagname}}</TagComponent>
           <TagComponent v-if="modifiedTagList.length === 0" style="text-transform: capitalize">No tags</TagComponent>
