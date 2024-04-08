@@ -1,5 +1,6 @@
 import { TokenControllerService } from '@/lib/api'
 
+// Refresh token if there is at most N minutes remaining
 const expiryTimeMinutes = 1;
 
 function tokenNeedsRefresh(token:string) {

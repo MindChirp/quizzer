@@ -39,7 +39,7 @@ const intervalHandler = () => {
 }
 
 onMounted(() => {
-  interval = setInterval(intervalHandler, timerTickTimeSeconds*1000)
+  interval = setInterval(intervalHandler, timerTickTimeSeconds*1000) as unknown as number
 })
 
 onUnmounted(() => {
