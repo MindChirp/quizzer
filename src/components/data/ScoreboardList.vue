@@ -14,6 +14,7 @@ defineProps<{
       <span><CheckIcon style="height: 1rem"/>{{score.score}}</span>
       <span><TimerIcon style="height: 1rem"/>{{score.duration}}</span>
     </div>
+    <span v-if="scores.length === 0" class="roboto-medium" style="text-align: center">There are no scores</span>
   </div>
 </template>
 <style scoped>
