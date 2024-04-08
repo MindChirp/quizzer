@@ -98,7 +98,7 @@ const setCollaborators = (users: UserDto[]) => {
         />
         <DropdownComponent placeholder="Search for categories" :default-values="defaultCategories" :options="allCategories" style="width: 100%" @change="updateCategories"/>
       </CardComponent>
-      <ContributorsCard :users="quiz.data?.collaborators" @change="setCollaborators" />
+      <ContributorsCard :users="quiz.data?.collaborators as UserDto[]" @change="setCollaborators" />
     </div>
     <div class="card questions">
       <span class="section-title roboto-medium">Questions</span>
