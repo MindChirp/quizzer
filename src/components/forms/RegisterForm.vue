@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import router from '@/router'
+import { ROUTES } from '@/router'
 import { UserControllerService } from '@/lib/api'
 import toaster from '@/stores/toaster.ts'
+import CardComponent from '@/components/data/CardComponent.vue'
+import ButtonComponent from '@/components/input/ButtonComponent.vue'
+import { useRouter } from 'vue-router'
 
 interface User {
   username: string;
@@ -11,6 +14,7 @@ interface User {
 }
 
 const toast = toaster();
+const router = useRouter();
 const showSuccess = () => toast.success({
   title: "Congratulations!",
   description: "The account has been created!"
@@ -26,57 +30,92 @@ const registerUser = (data:User) => {
   try {
     UserControllerService.createUser(data)
     showSuccess();
-    router.push("/login");
+    router.push(`/${ROUTES.LOGIN.path}`);
   } catch (err) {
     console.log("There was an error: ", err)
     showError();
   }
 }
+
+const logIn = () => {
+  router.push(`/${ROUTES.LOGIN.path}`)
+}
 </script>
 <template>
-
-  <FormKit
-    type="form"
-    @submit="registerUser"
-    submit-label="Register"
-  >
-    <FormKit
-      type="text"
-      name="fullName"
-      id="fullName"
-      validation="required|length:3"
-      label="Full Name"
-      placeholder="Steve Craft"
-    />
+  <CardComponent style="min-width: 25rem; max-width: 100vw; box-sizing: border-box">
 
     <FormKit
-      type="text"
-      name="username"
-      id="username"
-      validation="required|length:3"
-      label="Username"
-      placeholder="SteveCraft123"
-    />
+      type="form"
+      @submit="registerUser"
+      :actions="false"
+    >
+      <FormKit
+        type="text"
+        name="fullName"
+        id="fullName"
+        validation="required|length:3"
+        label="Full Name"
+        placeholder="Steve Craft"
+      />
 
-    <FormKit
-      type="email"
-      name="email"
-      id="email"
-      validation="required|length:3"
-      label="Email"
-      placeholder="SteveCraft@mail.com"
-    />
+      <FormKit
+        type="text"
+        name="username"
+        id="username"
+        validation="required|length:3"
+        label="Username"
+        placeholder="SteveCraft123"
+      />
 
-    <FormKit
-      type="password"
-      name="password"
-      id="password"
-      validation="required|length:3"
-      label="Password"
-    />
-  </FormKit>
-  <p>Do you already have a user? <router-link to="/login">Log in here!</router-link></p>
+      <FormKit
+        type="email"
+        name="email"
+        id="email"
+        validation="required|length:3"
+        label="Email"
+        placeholder="SteveCraft@mail.com"
+      />
+
+      <FormKit
+        type="password"
+        name="password"
+        id="password"
+        validation="required|length:3"
+        label="Password"
+      />
+      <ButtonComponent style="width: 100%;">Register user</ButtonComponent>
+    </FormKit>
+    <div class="roboto-medium divider">
+      <span>OR</span>
+    </div>
+    <ButtonComponent variant="secondary" style="width: 100%" @click="logIn">Sign in</ButtonComponent>
+  </CardComponent>
 </template>
 <style scoped>
+.divider {
+  background: white;
+  text-align: center;
+  display: block;
+  position: relative;
+  z-index: 2;
+  margin: .5rem auto;
+}
 
+.divider span {
+  background: white;
+  padding: .5rem;
+  color: var(--secondary-bg-text)
+}
+
+.divider::before {
+  content: "";
+  background: var(--secondary-bg);
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+  z-index: -2;
+}
 </style>

@@ -38,11 +38,13 @@ export const ROUTES = {
 const router = createRouter({
   history: createWebHistory('/'),
   routes: [
+    /*
     {
       path: '/' + ROUTES.LANDING.path,
       name: 'landing',
       component: LandingView
-    },
+    },*/
+
     {
       path: '/' + ROUTES.DISCOVER.path,
       name: 'Discover',

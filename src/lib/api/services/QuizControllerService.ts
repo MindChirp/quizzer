@@ -45,12 +45,12 @@ export class QuizControllerService {
     }
     /**
      * @param requestBody
-     * @returns MessageDto OK
+     * @returns QuizDetailsDto OK
      * @throws ApiError
      */
     public static createQuiz(
         requestBody: QuizDetailsDto,
-    ): CancelablePromise<MessageDto> {
+    ): CancelablePromise<QuizDetailsDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/quizzes',
