@@ -11,7 +11,7 @@ const props = defineProps<{
 <template>
   <div class="scoreboard" v-bind="$attrs">
     <div class="row" v-for="(score, n) in scores" :key="n">
-      <span><TrophyIcon style="height: 1rem"/>{{scoreFormula(score.scores ?? 0, score.duration ?? 0)}}</span>
+      <span><TrophyIcon style="height: 1rem"/>{{scoreFormula(score.score ?? 0, score.duration ?? 0)}}</span>
       <span><CheckIcon style="height: 1rem"/>{{score.score}}</span>
       <span><TimerIcon style="height: 1rem"/>{{score.duration}}</span>
     </div>

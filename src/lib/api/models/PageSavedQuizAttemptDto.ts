@@ -12,9 +12,9 @@ export type PageSavedQuizAttemptDto = {
     content?: Array<SavedQuizAttemptDto>;
     number?: number;
     sort?: SortObject;
-    numberOfElements?: number;
     first?: boolean;
     last?: boolean;
+    numberOfElements?: number;
     pageable?: PageableObject;
     empty?: boolean;
 };
