@@ -18,9 +18,9 @@ import toaster from '@/stores/toaster.ts'
 //const BASE_URL = import.meta.env.BASE_URL
 
 const getToken = async (options: ApiRequestOptions) => {
-  if (options.url === '/api/token/refresh') return ''
-  const stillValid = await refreshTokenIfNeeded(sessionStorage.getItem('accessToken') ?? '')
-  if (!stillValid && location.pathname != '/login' && location.pathname != '/register') {
+  if (options.url === "/api/token/refresh") return ''
+  const stillValid = await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
+  if (!stillValid && location.pathname != "/login" && location.pathname != "/register") {
     toaster().error({
       title: 'Session expired',
       description: 'You have been signed out'
