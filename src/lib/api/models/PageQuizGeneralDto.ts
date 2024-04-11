@@ -6,8 +6,8 @@ import type { PageableObject } from './PageableObject';
 import type { QuizGeneralDto } from './QuizGeneralDto';
 import type { SortObject } from './SortObject';
 export type PageQuizGeneralDto = {
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<QuizGeneralDto>;
     number?: number;

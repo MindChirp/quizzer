@@ -18,18 +18,18 @@ import toaster from '@/stores/toaster.ts'
 //const BASE_URL = import.meta.env.BASE_URL
 
 const getToken = async (options: ApiRequestOptions) => {
-  if (options.url === "/api/token/refresh") return ''
-  const stillValid = await refreshTokenIfNeeded(sessionStorage.getItem("accessToken") ?? '');
-  if (!stillValid && location.pathname != "/login") {
+  if (options.url === '/api/token/refresh') return ''
+  const stillValid = await refreshTokenIfNeeded(sessionStorage.getItem('accessToken') ?? '')
+  if (!stillValid && location.pathname != '/login' && location.pathname != '/register') {
     toaster().error({
-      title: "Session expired",
-      description: "You have been signed out"
+      title: 'Session expired',
+      description: 'You have been signed out'
     })
     location.reload()
   }
-  return sessionStorage.getItem("accessToken") ?? '';
+  return sessionStorage.getItem('accessToken') ?? ''
 }
-OpenAPI.TOKEN = getToken;
+OpenAPI.TOKEN = getToken
 
 export const ROUTES = {
   LANDING: { path: '' },
@@ -91,18 +91,18 @@ const router = createRouter({
     {
       path: `/${ROUTES.QUIZ_PLAY.path}/:${ROUTES.QUIZ_PLAY.param}`,
       name: 'Play quiz',
-      component: PlayQuizView,
+      component: PlayQuizView
     }
   ]
 })
 
 router.beforeEach((to, from) => {
   if (to.name == ROUTES.LOGIN.path) return
-  if (to.name == ROUTES.REGISTER.path) return;
+  if (to.name == ROUTES.REGISTER.path) return
   // Check user authentication
   if (!checkUserAuth()) {
     signOut()
-    router.replace('/' + ROUTES.LOGIN.path);
+    router.replace('/' + ROUTES.LOGIN.path)
   }
 })
 

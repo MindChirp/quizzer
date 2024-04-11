@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 import QuizEditHero from '@/components/data/QuizEditHero.vue'
 import { useQuiz } from '@/stores/quizzes.ts'
 import EditQuizForm from '@/components/forms/EditQuizForm.vue'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import EditImageModal from '@/components/data/EditImageModal.vue'
 import { ApiError, QuizControllerService, type QuizDetailsDto } from '@/lib/api'
 import { useEditor } from '@/stores/quizEdit.ts'
@@ -43,8 +43,7 @@ const saveChanges = async () => {
   // Code for saving the quiz details.
   if (!editor.data) return;
   try {
-    await QuizControllerService.deleteQuiz(quiz.data as QuizDetailsDto);
-    await QuizControllerService.createQuiz(editor.data);
+    await QuizControllerService.updateQuiz(editor.data);
     toast.success({
       title: "Success!",
       description: "Changes have been saved"

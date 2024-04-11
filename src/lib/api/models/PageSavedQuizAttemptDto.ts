@@ -6,8 +6,8 @@ import type { PageableObject } from './PageableObject';
 import type { SavedQuizAttemptDto } from './SavedQuizAttemptDto';
 import type { SortObject } from './SortObject';
 export type PageSavedQuizAttemptDto = {
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<SavedQuizAttemptDto>;
     number?: number;
